@@ -1,0 +1,23 @@
+@import "template/mixins";
+@import "template/settings";
+@import "fonts";
+$mainFont: 'SourceSansPro', sans-serif;
+$mainFontSize: 30px;
+$mainColor: #141414;
+$headingFont: 'Tinos', Impact, serif;
+$headingFontWeight: 700;
+$headingColor: #141414;
+$headingTextShadow: none;
+$headingTextTransform: none;
+$backgroundColor: #ffffff;
+$linkColor: #383838;
+$linkColorHover: lighten($linkColor, 20%);
+$selectionBackgroundColor: rgba(0, 0, 0, 0.99); // Change text colors against dark slide backgrounds
+@import "template/theme"; // Custom overrides
+@import "elements";
+@import "layout";
+@import "fragments";
+@import "misc";
+@import "colors";
+.katex { font-size: 1em !important;
+    opacity: 1;} 
