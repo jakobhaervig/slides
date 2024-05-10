@@ -5,7 +5,7 @@ Reveal.initialize({
     minScale: 0.2,
     maxScale: 2.0,
     center: true,
-    slideNumber: slide => {return [ 'Topic '+Reveal.getIndices( slide ).h+','+Reveal.getIndices( slide ).v]},
+    slideNumber: slide => {return [ 'Slide '+Reveal.getIndices( slide ).h+','+Reveal.getIndices( slide ).v]},
     history: true,
     pdfSeparateFragments: false,
     fragments: true,
