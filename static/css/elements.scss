@@ -25,6 +25,8 @@ h5,
 h6,
 p {
     text-align: left;
+    display: flex;
+    align-items: center;
 }
 
 .reveal p {

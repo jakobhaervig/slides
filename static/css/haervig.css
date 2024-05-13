@@ -172,6 +172,8 @@
   text-transform: var(--r-heading-text-transform);
   text-shadow: var(--r-heading-text-shadow);
   word-wrap: break-word;
+  display: flex;
+  align-items: center;
 }
 
 .reveal h1 {
