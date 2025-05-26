@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        
+            <link rel="icon" href="https://jakobhaervig.com/cdn/favicon/favicon.ico">
+        
+
+        <link rel="stylesheet" href="../assets/reveal-js/dist/reveal.css" />
+
+        
+            <link rel="stylesheet" href="https://jakobhaervig.com/cdn/styles/reveal-js/slides.css" />
+        
+        
+            <link rel="stylesheet" href="../assets/vs.css" />
+        
+
+        
+            
+        
+            
+        
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown
+                
+                    data-separator="^\s*---\s*$"
+                
+                    data-separator-vertical="^\s*-v-\s*$"
+                
+                    data-separator-notes="^Notes?:"
+                
+                >
+                    <textarea data-template>
+                        # Introduction
+
+**Goal:** Install OpenFOAM on Windows using WSL (Windows Subsystem for Linux). 
+
+---
+
+## Prerequisites
+
+### Step 1: Install WSL
+
+Install WSL using the [official guide](https://learn.microsoft.com/en-gb/windows/wsl/install#install-wsl-command). *Note:* Only the step &#34;Install WSL Command&#34; is needed.
+
+---
+
+## Prerequisites
+
+### Step 2: Enable required Windows features
+
+Enable required Windows Features (go to Control Panel &gt; Programs and Features &gt; Turn Windows features on or off.):
+
+![alt text](turn_windows_features_on_or_off.png)
+
+Then enable:
+ - *Virtual Machine Platform*
+ - *Windows Subsystem for Linux*
+
+![alt text](install_windows_features.png)
+
+---
+
+## Prerequisites
+
+### Step 3: Install Ubuntu
+
+Go to Microsoft Store and install *Ubuntu*:
+
+![alt text](install_ubuntu.png)
+
+Open Ubuntu and choose a username and password. *Note:* that the password remains hidden when you enter it, which is fine.
+If the error &#34;WslRegisterDistribution failed with error: 0x80370114&#34; is returned, also enable the feature &#34;Windows Hypervisor Platfrom&#34; in step **1c)**.
+
+---
+
+## Prerequisites
+
+### Step 3: Install Ubuntu
+                    </textarea>
+                </section>
+            </div>
+        </div>
+        <script src="../assets/reveal-js/dist/reveal.js"></script>
+        <script src="../assets/reveal-js/plugin/highlight/highlight.js"></script>
+        <script src="../assets/reveal-js/plugin/markdown/markdown.js"></script>
+        <script src="../assets/reveal-js/plugin/math/math.js"></script>
+        <script src="../assets/reveal-js/plugin/notes/notes.js"></script>
+        <script src="../assets/reveal-js/plugin/search/search.js"></script>
+        <script src="../assets/reveal-js/plugin/zoom/zoom.js"></script>
+
+        
+            
+                
+                    
+                        <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin/plugin/mermaid/mermaid.min.js"></script>
+                    
+                
+            
+                
+                    
+                        <script src="https://cdn.jsdelivr.net/npm/reveal-plantuml/dist/reveal-plantuml.min.js"></script>
+                    
+                
+            
+        
+        <script>
+            Reveal.initialize({
+                
+                    
+                        history: true,
+                    
+                        slideNumber: "c/t",
+                    
+                        height: 1080,
+                    
+                        width: 1920,
+                    
+                        transition: "fade",
+                    
+                
+                plugins: [
+                    RevealHighlight,
+                    RevealMarkdown,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+
+                    
+                        
+                            
+                                RevealMermaid,
+                            
+                        
+                            
+                        
+                    
+                ],
+            });
+        </script>
+        <a href="https://jakobhaervig.com/slides" target="_blank"
+        style="
+            position: fixed; 
+            left: 2ch; 
+            bottom: 2ch; 
+            z-index: 1000; 
+            font-family: 'Montserrat', Arial, sans-serif; 
+            font-size: 0.5vw; 
+            font-weight: bold; 
+            color:rgb(0, 0, 0); 
+            text-shadow: 1px 1px 4px #fff;
+            text-decoration: none;
+        ">
+        To slidedeck overview
+        </a>
+    </body>
+</html>
