@@ -32,24 +32,26 @@ Click the OpenFOAM extension and copy the lines.
     }
 ```
 
-Then open the ``settings.json`` file by going File -> Preferences -> Settings. Then search for ``json`` and edit the ``settings.json`` file and add the lines:
-
---- 
+---
 
 ### Step 2 continued: Associate OpenFOAM files types
+
+Then open the ``settings.json`` file by going File -> Preferences -> Settings. Then search for ``json`` and edit the ``settings.json`` file and add the lines:
 
 <div class="multicolumn">
 
 <div>
 
-![](settings_json.png)
+
 
 </div>
 
 <div>
 
-![](settings_json2.png)
+![](json.png)
 
 </div>
 
 </div>
+
+---
