@@ -2,17 +2,16 @@ index:
   title: Jakob Hærvig's Slidedecks
   favicon: https://jakobhaervig.com/cdn/favicon/favicon.ico
   theme: https://jakobhaervig.com/cdn/styles/reveal-js/index.css
-  template: https://jakobhaervig.com/cdn/styles/reveal-js/index.html.jinja
+  template: docs/index.html.jinja
 
 slides:
-
   highlight_theme: vs
   separator: ^\s*---\s*$
   separator_vertical: ^\s*-v-\s*$
   separator_notes: "^Notes?:"
   favicon: https://jakobhaervig.com/cdn/favicon/favicon.ico
   theme: https://jakobhaervig.com/cdn/styles/reveal-js/slides.css
-  template: https://jakobhaervig.com/cdn/styles/reveal-js/slides.html.jinja
+  template: docs/slides.html.jinja
 
 revealjs:
   height: 1080
