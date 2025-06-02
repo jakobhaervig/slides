@@ -1,5 +1,5 @@
 ---
-title: "OpenFOAM - Parametric workflow using Salome, Python and OpenFOAM"
+title: "OpenFOAM - Parametric workflow with Salome and Python"
 ---
 
 # Introduction
