@@ -2,51 +2,54 @@
 title: "OpenFOAM - Installation using WSL (Windows Subsystem of Linux)"
 ---
 
-# Introduction
-
-**Goal:** Install OpenFOAM on Windows using WSL (Windows Subsystem for Linux). 
+# OpenFOAM
+##### Installation using WSL (Windows Subsystem of Linux)
 
 ---
 
 ### Step 1:
 
-Install WSL using the [official guide](https://learn.microsoft.com/en-gb/windows/wsl/install#install-wsl-command). *Note:* Only the step "Install WSL Command" is needed.
+Linux primarily runs on Unix-based systems (such as Ubuntu). We will install Ubuntu on our Windows system using WSL (Windows Subsystem for Linux).
+
+**Install WSL by following the step "Install WSL Command" in the [official guide](https://learn.microsoft.com/en-gb/windows/wsl/install#install-wsl-command).**
 
 
 ---
 
 ### Step 2:
 
-Enable required Windows Features (go to Control Panel > Programs and Features > Turn Windows features on or off.):
+Before installing Ubuntu, we need to set enable of couple of Windows features. These can assessed in via Control Panel > Programs and Features > Turn Windows features on or off:
 
-![alt text](turn_windows_features_on_or_off.png)
+![alt text](img/turn_windows_features_on_or_off.png)
 
-Then enable:
- - *Virtual Machine Platform*
- - *Windows Subsystem for Linux*
+**Enable Virtual Machine Platform and Windows Subsystem for Linux**
 
-![alt text](install_windows_features.png)
+![alt text](img/install_windows_features.png)
 
 ---
 
 ### Step 3:
 
-Go to Microsoft Store and install *Ubuntu*:
+Using Microsoft Store search for Ubuntu. You will see numerous versions. The version simply called "Ubuntu" represents the latest version available, which is recommended for this guide.
 
-![alt text](install_ubuntu.png)
+![alt text](img/install_ubuntu.png)
+
+**Choose a Ubuntu version and install it**
 
 ---
 
 ### Step 4:
 
-Open Ubuntu and choose a username and password. *Note:* that the password remains hidden when you enter it, which is fine.
+Open Ubuntu and you will be prompted to choose a username and password.
+
+**Choose a Ubuntu username and password (note: that the password remains hidden when you enter it, which is fine)**
 
 
 If the error "WslRegisterDistribution failed with error: 0x80370114" is returned, also enable the feature "Windows Hypervisor Platfrom" in [Step 2](#step-2).
 
-To verify everything is working, open the Ubuntu app to get a terminal similar to this:
+**Verify that everything is working by opening the Ubuntu app. You should get a terminal like this:**
 
-![alt text](ubuntu_terminal.png)
+![alt text](img/ubuntu_terminal.png)
 
 ---
 

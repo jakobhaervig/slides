@@ -2,14 +2,16 @@
 title: "OpenFOAM - Install and adjust Visual Studio Code for OpenFOAM usage"
 ---
 
-# Introduction
-
-**Goal:** Install Visual Studio Code and adjust settings for easier OpenFOAM workflow.
+# OpenFOAM
+##### Install and adjust Visual Studio Code for OpenFOAM usage
 
 ---
 
 ### Step 1: Install Visual Studio Code
-First, download and install the text editor [Visual Studio Code](https://code.visualstudio.com).
+
+We will be using Visual Studio Code (VS Code), which is a lightweight, extendable text editor. By adding extensions it integrates nicely with OpenFOAM.
+
+**Download and install the text editor [Visual Studio Code](https://code.visualstudio.com)**
 
 ---
 

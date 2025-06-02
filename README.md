@@ -2,21 +2,30 @@
 
 Build slides using markdown, whilst adhering to the principles learned from the [How to avoid death By PowerPoint](https://www.youtube.com/watch?v=Iwpi1Lm6dFo) TEDx Talk.
 
-You can see the slides of this repository as a demo at https://hogenttin.github.io/hogent-markdown-slides/ . Play with it to see what it can do!
-
 ## Basic usage
 
 ### Installation
 
-1. Install [python](https://www.python.org/downloads/).
-2. (optional) Create a [python environment](https://docs.python.org/3/library/venv.html). E.g. for Linux:
+
+1. Create a Conda environment
 
     ```bash
-    python -m venv venv
-    source ./venv/bin/activate
+    conda create --name <my-env>
     ```
 
-3. Install [mkslides](https://pypi.org/project/mkslides/):
+2. Activate the environment
+
+    ```bash
+    conda activate mkslides
+    ```
+
+4. Install pip in the environment
+
+    ```bash
+    conda install pip
+    ```
+
+5. Install [mkslides](https://pypi.org/project/mkslides/):
 
     ```bash
     pip install mkslides
