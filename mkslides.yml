@@ -2,7 +2,7 @@ index:
   title: Jakob Hærvig's Slidedecks
   favicon: https://jakobhaervig.com/cdn/favicon/favicon.ico
   theme: https://jakobhaervig.com/cdn/styles/reveal-js/index.css
-  template: docs/index.html.jinja
+  template: docs/index.jinja
 
 slides:
   highlight_theme: vs
@@ -11,7 +11,7 @@ slides:
   separator_notes: "^Notes?:"
   favicon: https://jakobhaervig.com/cdn/favicon/favicon.ico
   theme: https://jakobhaervig.com/cdn/styles/reveal-js/slides.css
-  template: docs/slides.html.jinja
+  template: docs/slides.jinja
 
 revealjs:
   height: 1080
