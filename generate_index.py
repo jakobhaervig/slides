@@ -1,4 +1,5 @@
 import os
+import time
 
 # Base directory and output file
 base_dir = "."
@@ -19,8 +20,14 @@ for folder in sorted(os.listdir(base_dir)):
             file_path = os.path.join(folder, file).replace("\\", "/")
             # Use folder name + filename (without .html) as title
             title = f"{file[:-5].replace('-', ' ').title()}"
+
+            # Converting the time in seconds to a timestamp
+            m_ti = time.ctime(os.path.getmtime(file_path))
+            t_obj = time.strptime(m_ti)
+            T_stamp = time.strftime("%Y-%m-%d %H:%M:%S", t_obj)
+
             download_link = file_path+"?print-pdf"
-            slide_files.append((folder.replace('-', ' ').title(), title, file_path, download_link))
+            slide_files.append((folder.replace('-', ' ').title(), title, file_path, download_link, T_stamp))
 
 # Generate main index.html
 with open(output_file, "w") as f:
@@ -34,7 +41,7 @@ with open(output_file, "w") as f:
 <!-- Reveal.js CSS -->
 <link rel="stylesheet" href="reveal.js/dist/reset.css">
 <link rel="stylesheet" href="reveal.js/dist/reveal.css">
-<link rel="stylesheet" href="reveal.js/dist/theme/white.css">
+<link rel="stylesheet" href="custom/theme/haervig.css">
 </head>
 <body>
 <div class="reveal">
@@ -45,13 +52,14 @@ with open(output_file, "w") as f:
             <tr>
             <th><b>Slide deck</b></th>
             <th><b>Title</b></th>
-            <th colspan="3"><b>Links</b></th>
+            <th><b>Links</b></th>
+            <th><b>Last modified</b></th>
             </tr>
         </thead>
         <tbody>
 """)
-    for folder,title, path, download_link in slide_files:
-        f.write(f'<tr><td>{folder}</td><td>{title}</td><td><a href="{path}">Slides</a></td><td><a href="{download_link}">Download PDF</a></td></tr>\n')
+    for folder,title, path, download_link, modified in slide_files:
+        f.write(f'<tr><td>{folder}</td><td><a href="{path}">{title}</a></td><td><a href="{download_link}">PDF</a></td><td>{modified}</td></tr>\n')
 
 
     f.write("""

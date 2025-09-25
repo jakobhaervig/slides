@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 325.0526 475.4085">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #231f20;
+      }
+
+      .cls-3 {
+        fill: #d1d3d4;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="_0_fig" data-name="0_fig">
+    <polyline class="cls-3" points="89.8499 420.2878 89.8499 475.4085 324.5526 475.4085 324.5526 475.4085 324.5526 475.4085 324.5526 475.4085 324.5526 .0608 89.16 .0608"/>
+    <rect class="cls-1" x="89.16" y="158.6292" width="81.4325" height="158.1292"/>
+    <rect class="cls-1" x="89.16" y=".5" width="81.4325" height="158.1292"/>
+    <rect class="cls-1" x="89.16" y="316.7584" width="81.4325" height="158.1292"/>
+    <rect class="cls-1" x="170.5925" y="158.6292" width="153.9601" height="158.1292"/>
+  </g>
+  <g id="_2_dots" data-name="2_dots">
+    <circle class="cls-2" cx="90.6659" cy="394.9863" r="4.8638"/>
+    <circle class="cls-2" cx="91.3631" cy="237.6938" r="4.8638"/>
+    <circle class="cls-2" cx="249.1057" cy="237.6938" r="4.8638"/>
+    <circle class="cls-2" cx="91.0871" cy="79.1253" r="4.8638"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_2_dots" data-name="2_dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483.9435 464.2793">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="43.619" cy="430.9881" r="3.0758"/>
+  <circle class="cls-1" cx="144.0216" cy="430.9881" r="3.0758"/>
+  <circle class="cls-1" cx="243.944" cy="430.9881" r="3.0758"/>
+  <circle class="cls-1" cx="343.6995" cy="430.9881" r="3.0758"/>
+  <circle class="cls-1" cx="443.7363" cy="430.9881" r="3.0758"/>
+  <circle class="cls-1" cx="43.619" cy="331.9528" r="3.0758"/>
+  <circle class="cls-1" cx="144.0216" cy="330.7103" r="3.0758"/>
+  <circle class="cls-1" cx="243.7695" cy="330.7103" r="3.0758"/>
+  <circle class="cls-1" cx="343.6995" cy="330.7103" r="3.0758"/>
+  <circle class="cls-1" cx="443.7363" cy="330.7103" r="3.0758"/>
+  <circle class="cls-1" cx="443.92" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="43.8854" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="144.288" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="244.2104" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="343.9659" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="444.0027" cy="231.2394" r="3.0758"/>
+  <circle class="cls-1" cx="43.8854" cy="132.2041" r="3.0758"/>
+  <circle class="cls-1" cx="144.288" cy="130.9616" r="3.0758"/>
+  <circle class="cls-1" cx="244.0359" cy="130.9616" r="3.0758"/>
+  <circle class="cls-1" cx="343.9659" cy="130.9616" r="3.0758"/>
+  <circle class="cls-1" cx="444.0027" cy="130.9616" r="3.0758"/>
+  <circle class="cls-1" cx="43.528" cy="32.6649" r="3.0758"/>
+  <circle class="cls-1" cx="143.9306" cy="31.4224" r="3.0758"/>
+  <circle class="cls-1" cx="243.6785" cy="31.4224" r="3.0758"/>
+  <circle class="cls-1" cx="343.6086" cy="31.4224" r="3.0758"/>
+  <circle class="cls-1" cx="443.6453" cy="31.4224" r="3.0758"/>
+</svg>

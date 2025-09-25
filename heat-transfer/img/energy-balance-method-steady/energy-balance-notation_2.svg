@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_2_dots" data-name="2_dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.0689 478.4845">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: #a7a9ac;
+      }
+    </style>
+  </defs>
+  <line class="cls-2" x1="69.6245" y1="245.4457" x2="315.6911" y2="245.4457"/>
+  <line class="cls-2" x1="111.0161" y1="245.5498" x2="369.8758" y2="245.5498"/>
+  <circle class="cls-1" cx="69.6245" cy="245.4457" r="3.0758"/>
+  <circle class="cls-1" cx="219.4336" cy="245.5165" r="3.0758"/>
+  <circle class="cls-1" cx="269.9597" cy="245.5498" r="3.0758"/>
+  <circle class="cls-1" cx="369.8758" cy="245.5498" r="3.0758"/>
+  <circle class="cls-1" cx="169.8915" cy="245.5165" r="3.0758"/>
+  <circle class="cls-1" cx="319.9178" cy="245.5498" r="3.0758"/>
+  <circle class="cls-1" cx="119.6233" cy="245.5165" r="3.0758"/>
+</svg>

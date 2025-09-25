@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Jakob Hærvig">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="../../custom/theme/haervig.css">
+    <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Some simple solutions</h2>
+          <div class="container">
+            <div class="col">
+              <p><em>No analytical solution</em> due to non-linearities ($\partial u/\partial x$)</p>
+              <ul>
+                  <li class="fragment">Each problem must be <em>considered individually</em></li>
+              </ul>
+            </div>
+
+            <div class="col">
+              <em>x-direction:</em>
+              $$ 
+              \rho \left( \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} + v \frac{\partial u}{\partial y} + w \frac{\partial u}{\partial z} \right) = -\frac{\partial p}{\partial x} + \mu \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) + \rho g_x
+              $$
+
+              <em>y-direction:</em>
+              $$ 
+              \rho \left( \frac{\partial v}{\partial t} + u \frac{\partial v}{\partial x} + v \frac{\partial v}{\partial y} + w \frac{\partial v}{\partial z} \right) = -\frac{\partial p}{\partial y} + \mu \left( \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} + \frac{\partial^2 v}{\partial z^2} \right) + \rho g_y
+              $$
+
+              <em>z-direction:</em>
+              $$ 
+              \rho \left( \frac{\partial w}{\partial t} + u \frac{\partial w}{\partial x} + v \frac{\partial w}{\partial y} + w \frac{\partial w}{\partial z} \right) = -\frac{\partial p}{\partial z} + \mu \left( \frac{\partial^2 w}{\partial x^2} + \frac{\partial^2 w}{\partial y^2} + \frac{\partial^2 w}{\partial z^2} \right) + \rho g_z
+              $$
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2> Flow between plates</h2>
+          <div class="container">
+            <div class="col">
+              <p><em>Steady</em>, <em>fully developed</em>, <em>laminar flow</em> between two <em>infinite plates</em></p>
+              <ul>
+                  <li class="fragment" data-fragment-index="1">Velocity only in $x$-direction:
+                    <ul>
+                      <li><em>then, </em>$u=u(y)$, $v=w=0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="2">Steady flow: 
+                    <ul>
+                      <li><em>then, </em> $\partial u/\partial t = \partial v/\partial t = \partial w/\partial t = 0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="3">By continuity equation: $\partial u/\partial x + \partial v/\partial y + \partial w/\partial z = 0$
+                    <ul>
+                      <li><em>then,</em> $\partial u/\partial x=0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="4">No gravity in $x$ and $z$ directions:
+                    <ul>
+                      <li><em>then,</em> $g_x = g_z = 0$</li>
+                    </ul>
+                  </li>
+              </ul>
+
+              <p class="fragment" data-fragment-index="5">Navier-Stokes equations <em>reduce</em> to:</p>
+              <p class="singleline-math fragment" data-fragment-index="5">
+                <span><em>$x:~$</em>\( 0 = -\dfrac{\partial p}{\partial x} + \mu \dfrac{\partial^2 u}{\partial y^2}\)</span>,<span><em>$~~~y:~$</em>\( 0 = -\dfrac{\partial p}{\partial y} + \rho g_y \)</span>,<span><em>$~~~z:~$</em>\( 0 = -\dfrac{\partial p}{\partial z}\)</span>
+              </p>
+            </div>
+
+            <div class="col">
+              <img src="img/fig6-31a.jpg" height="300"/>
+
+              <h4><em>$x$</em>-direction:</h4>
+              <p class="singleline-math">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial u}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="3">\( u \dfrac{\partial u}{\partial x} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v \dfrac{\partial u}{\partial y} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( w \dfrac{\partial u}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial x} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 u}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 u}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 u}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="4">\( \rho g_x \)</span>
+              </p>
+
+              <h4><em>$y$</em>-direction:</h4>
+              <p class="singleline-math">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial v}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( u \dfrac{\partial v}{\partial x} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v \dfrac{\partial v}{\partial y} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( w \dfrac{\partial v}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial y} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 v}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 v}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 v}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span>\( \rho g_y \)</span>
+              </p>
+
+              <h4><em>$z$</em>-direction:</h4>
+              <p class="singleline-math">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial w}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( u \dfrac{\partial w}{\partial x} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v \dfrac{\partial w}{\partial y} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( w \dfrac{\partial w}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial z} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 w}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 w}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 w}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="4">\( \rho g_z \)</span>
+              </p>
+
+            </div>
+        </section>
+
+
+      </div>
+    </div>
+
+    <script type="module" src="../../main.js"></script>
+  </body>
+</html>

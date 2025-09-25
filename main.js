@@ -14,11 +14,27 @@ Reveal.initialize({
     width: 1920,
     height: 1080,
     hash: true,
+    center: false,
+    progress: true,
     slideNumber: true,
-    transition: 'slide',
-    plugins: [Markdown, Highlight, Math, Notes, Search, Zoom],
+    transition: 'fade', // none/fade/slide/convex/concave/zoom
+    transitionSpeed: 'fast', // default/fast/slow
+    plugins: [Markdown, Highlight, Math.KaTeX, Math.KaTeX, Notes, Search, Zoom],
     history: true,
     pdfSeparateFragments: false,
     fragments: true,
     fragmentInURL: true,
+    katex: {
+        trust: true,
+        strict: false,
+        version: 'latest',
+        delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+        
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+  },
 });

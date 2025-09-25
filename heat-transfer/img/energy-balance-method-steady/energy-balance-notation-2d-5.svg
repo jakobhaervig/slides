@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_5_elements" data-name="5_elements" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483.9435 464.2793">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <line class="cls-1" x1="93.9121" y1="29.939" x2="93.9121" y2="431.4325"/>
+  <line class="cls-1" x1="193.9832" y1="29.939" x2="193.9832" y2="431.4325"/>
+  <line class="cls-1" x1="294.0407" y1="30.1302" x2="294.0407" y2="431.6238"/>
+  <line class="cls-1" x1="393.6519" y1="30.1302" x2="393.6519" y2="431.6238"/>
+  <line class="cls-1" x1="444.3334" y1="81.8133" x2="42.8399" y2="81.8133"/>
+  <line class="cls-1" x1="444.3334" y1="180.9311" x2="42.8399" y2="180.9311"/>
+  <line class="cls-1" x1="443.92" y1="279.0219" x2="43.4636" y2="279.0219"/>
+  <line class="cls-1" x1="444.3334" y1="382.7107" x2="42.8399" y2="382.7107"/>
+</svg>

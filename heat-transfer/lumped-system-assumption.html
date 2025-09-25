@@ -16,10 +16,38 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          Hello World
-        </section>
-        <section>
-          Hello World
+          <h3>What is the lumped system assumption and why?</h3>
+          <div class="grid">
+            <div class="col-6">
+              <ul>
+                <li>Most heat transfer problems are complex because temperature varies in both with time and space</li>
+                <ul>
+                  <li class="fragment" data-fragment-index="1">In <b class='definition'>lumped systems</b>, temperature <b class='definition'>only varies with time and not space</b></li>
+                </ul>
+              <div class="singleline-ca">
+                <p class="fragment" data-fragment-index="2">$$T=f(x,y,z,t)$$</p>
+                <p class="fragment" data-fragment-index="3">$$~\longrightarrow T=f(t)$$</p>
+              </div>
+              </ul>
+              <ul>
+                <li class="fragment" data-fragment-index="5">Applying the lumped system assumption <b class='definition'>significantly simplifies</b> the analysis</li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <div class="fragment" data-fragment-index="4">
+                <img src="img/lumped-system-analysis/lumped-roast-beef.png" height="300">
+              </div>
+              <div class="fragment" data-fragment-index="4">
+                A roast beef (not lumped system)
+              </div>
+              <div class="fragment" data-fragment-index="4">
+                <img src="img/lumped-system-analysis/lumped-copper-ball.png" height="300">
+                <div class="fragment" data-fragment-index="4">
+                  A copper ball (lumped system)
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_3_implicit" data-name="3_implicit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 309.1884 267.224">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5250a2;
+        stroke-width: 0px;
+      }
+    </style>
+    <symbol id="Arrow_2" data-name="Arrow 2" viewBox="0 0 16.9922 94.3916">
+      <polygon class="cls-1" points="16.9922 69.0312 8.4639 94.3916 0 69.0312 5.0664 69.0312 5.0664 0 11.1836 0 11.1836 69.0312 16.9922 69.0312"/>
+    </symbol>
+  </defs>
+  <use width="16.9922" height="94.3916" transform="translate(230.6212 87.713) rotate(90) scale(.6516 .7435)" xlink:href="#Arrow_2"/>
+  <use width="16.9922" height="94.3916" transform="translate(61.8472 98.7846) rotate(-90) scale(.6516 .7468)" xlink:href="#Arrow_2"/>
+  <use width="16.9922" height="94.3916" transform="translate(150.9172 173.0069) rotate(-180) scale(.6516 .7518)" xlink:href="#Arrow_2"/>
+</svg>
