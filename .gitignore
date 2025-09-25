@@ -1,0 +1,15 @@
+node_modules/
+package-lock.json
+artifacts/
+build/
+*.zip
+*_data/
+*.aup
+*.mov
+*.pdf
+*.cropped.mp4
+media/audio/**/fragments
+*.ipynb_checkpoints
+*.ipynb
+.sass-cache
+**/.DS_Store
