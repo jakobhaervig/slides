@@ -7,17 +7,20 @@ output_file = "index.html"
 # Folders to ignore
 ignore_folders = ["reveal.js", "__pycache__"]
 
-# Find all slide decks
-slide_decks = []
+# Find all HTML files in subfolders
+slide_files = []
 for folder in sorted(os.listdir(base_dir)):
     folder_path = os.path.join(base_dir, folder)
-    index_path = os.path.join(folder_path, "index.html")
-    if folder in ignore_folders:
+    if folder in ignore_folders or not os.path.isdir(folder_path):
         continue
-    if os.path.isdir(folder_path) and os.path.exists(index_path):
-        title = folder.replace("-", " ").title()
-        download_link = index_path+"?print-pdf"
-        slide_decks.append((title, os.path.join(folder, "index.html").replace("\\","/"), download_link))
+
+    for file in sorted(os.listdir(folder_path)):
+        if file.endswith(".html"):
+            file_path = os.path.join(folder, file).replace("\\", "/")
+            # Use folder name + filename (without .html) as title
+            title = f"{file[:-5].replace('-', ' ').title()}"
+            download_link = file_path+"?print-pdf"
+            slide_files.append((folder.replace('-', ' ').title(), title, file_path, download_link))
 
 # Generate main index.html
 with open(output_file, "w") as f:
@@ -40,14 +43,15 @@ with open(output_file, "w") as f:
       <table border="1" cellpadding="2" cellspacing="0">
         <thead>
             <tr>
-            <th><b>Slidedeck title</b></th>
+            <th><b>Slide deck</b></th>
+            <th><b>Title</b></th>
             <th colspan="3"><b>Links</b></th>
             </tr>
         </thead>
         <tbody>
 """)
-    for title, path, download_link in slide_decks:
-        f.write(f'<tr><td>{title}</td><td><a href="{path}">Slides</a></td><td><a href="{download_link}">Download PDF</a></td></tr>\n')
+    for folder,title, path, download_link in slide_files:
+        f.write(f'<tr><td>{folder}</td><td>{title}</td><td><a href="{path}">Slides</a></td><td><a href="{download_link}">Download PDF</a></td></tr>\n')
 
 
     f.write("""
@@ -65,4 +69,4 @@ with open(output_file, "w") as f:
 </html>
 """)
 
-print(f"Generated {output_file} with {len(slide_decks)} slide decks.")
+print(f"Generated {output_file} with {len(slide_files)} slide decks.")
