@@ -19,6 +19,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   /* CUSTOM COLORS */
   --haervig-blue: #211a52;
   --haervig-gray: #54616e;
+  --haervig-light-gray: #bebebeae;
   --haervig-orange-dark: #bb5b17;
   --haervig-orange-light: #df8e2e;
   --haervig-blue-dark: #007fa3;
@@ -30,6 +31,13 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --haervig-brown-dark: #a16547;
   --haervig-brown-light: #cc8b66;
   /* END CUSTOM COLORS */
+
+  /* CUSTOM VARS */
+  --smaller-left-padding: 10px;
+  --small-left-padding: 20px;
+  --medium-left-padding: 30px;
+
+  /* END CUSTOM VARS */
   --r-block-margin: 20px;
   --r-heading-margin: 30px 0px 0px 0px;
   --r-heading-font: Source Sans Pro, Helvetica, sans-serif;
@@ -55,8 +63,6 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 
 /* CUSTOM THEME BASED ON WHITE */
-
-/* Layout for two columns */
 .container{
     display: flex;
     text-align: left;
@@ -78,9 +84,34 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
     font-size: 0.9em;
 }
 
-/* Classes for different sized fragmented equations */
 .singleline-math{
   font-size: 0.8em !important;
+}
+
+.smaller-left-padding{
+  padding-left: var(--smaller-left-padding);
+} 
+
+.small-left-padding{
+  padding-left: var(--small-left-padding);
+}
+
+.medium-left-padding{
+  padding-left: var(--medium-left-padding);
+}
+
+.highlight {
+  background: var(--haervig-light-gray);
+  padding: 1em;
+  border-radius: 0.3em;
+}
+
+.smaller-font{
+  font-size: 0.6em;
+}
+
+.small-font{
+  font-size: 0.8em;
 }
 
 /* END CUSTOM THEME BASED ON WHITE */

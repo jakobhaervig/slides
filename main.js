@@ -18,8 +18,9 @@ Reveal.initialize({
     progress: true,
     slideNumber: true,
     transition: 'fade', // none/fade/slide/convex/concave/zoom
-    transitionSpeed: 'fast', // default/fast/slow
-    plugins: [Markdown, Highlight, Math.KaTeX, Math.KaTeX, Notes, Search, Zoom],
+    backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+    transitionSpeed: 'default', // default/fast/slow
+    plugins: [Markdown, Highlight, Math.KaTeX, Notes, Search, Zoom, RevealChalkboard, RevealCustomControls],
     history: true,
     pdfSeparateFragments: false,
     fragments: true,
@@ -36,5 +37,16 @@ Reveal.initialize({
         
         ],
         ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-  },
+    },
+  	chalkboard: { 
+		src: null,
+    pen:  [ 'crosshair'],
+		readOnly: undefined, 
+		toggleNotesButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
+		transition: 800,
+		theme: "whiteboard",
+		color: [ 'rgba(0,0,255,1)', 'rgba(0, 0, 0, 0)' ],
+		background: [ 'rgba(127, 127, 127, 0)'],
+		pen:  [ 'url(reveal.js-plugins/chalkboard/img/boardmarker.png), auto', 'url(reveal.js-plugins/chalkboard/img/chalk.png), auto' ],
+	},
 });
