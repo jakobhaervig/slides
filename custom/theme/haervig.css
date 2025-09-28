@@ -52,6 +52,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-heading2-size: 1.6em;
   --r-heading3-size: 1.3em;
   --r-heading4-size: 1em;
+  --r-heading5-size: 0.8em;
   --r-code-font: monospace;
   --r-link-color: var(--haervig-orange-light);
   --r-link-color-dark: var(--haervig-orange-dark);
@@ -112,6 +113,30 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 
 .small-font{
   font-size: 0.8em;
+}
+
+.bottom-1 {
+     padding-bottom: 1em;
+}
+
+.bottom-2 {
+     padding-bottom: 2em;
+}
+
+.bottom-3 {
+     padding-bottom: 3em;
+}
+
+.bottom-4 {
+     padding-bottom: 4em;
+}
+
+.bottom-5 {
+     padding-bottom: 5em;
+}
+
+.bottom-6 {
+     padding-bottom: 6em;
 }
 
 /* END CUSTOM THEME BASED ON WHITE */
@@ -188,6 +213,10 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 
 .reveal h4 {
   font-size: var(--r-heading4-size);
+}
+
+.reveal h5 {
+  font-size: var(--r-heading5-size);
 }
 
 .reveal h1 {
