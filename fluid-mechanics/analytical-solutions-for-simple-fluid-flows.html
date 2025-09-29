@@ -36,7 +36,7 @@
               <p class="fragment">Analytical solutions for <em> only a few problems</em></p>
               <ul>
                   <li class="fragment"><em>Simple geometries</em>: Flow between two plates or in a tube</em></li>
-                  <li class="fragment"><em>Simple flows</em>: Steady and laminar flows</li>
+                  <li class="fragment"><em>Simple flows</em>: Steady, laminar and fully-developed flows</li>
             </div>
 
             <div class="col">
@@ -71,6 +71,114 @@
               <img class="fragment" data-fragment-index="4" src="img/applications-analytical-solutions5.jpg" width="900"/>
             </div>
           </div>
+        </section>
+
+      <section>
+          <h2> Current research uses <em>Poiseuille flow</em> for verification of CFD</h2>
+            <div class="container">
+            <div class="col">
+              <p>CO$_2$ diffuses into the fiber and is captured</p>
+              <ul class="bottom-3">
+                <li > Really (!) long fibres ($ l/D\approx12000$)</li>
+                <li> Steady, laminar, fully-developed flow is a <em>very good</em> assumption</li>
+                <li> Prescribed boundary condition</li>
+              </ul>
+
+
+              <p ></p>
+              <p class="fragment" data-fragment-index="3"> <em>Results</em>: Code verification results</p>
+              <img class="fragment" data-fragment-index="3" src="img/hollow-fiber-results.png" width="800"/>
+            
+            </div>
+
+            <div class="col">
+              <p> <em>Figure</em>: Hollow fibre membrane</p>
+              <img class="code-padding"src="img/hollow-fiber-polymeric.png" width="800"/>
+              <p class="smaller-font">Bazhenov, S. D., Bildyukevich, A. V., & Volkov, A. V. (2018). Gas-Liquid Hollow Fiber Membrane Contactors for Different Applications. Fibers, 6(4), 76. https://doi.org/10.3390/fib6040076</p>
+
+              <p> <em>Code</em>: Inlet boundary condition in OpenFOAM</p>
+              <pre><code data-line-numbers="1-20|22-29|56" data-fragment-index="0-2">
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.com
+    \\  /    A nd           | Version:  2506
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    inlet
+    {
+        type    codedFixedValue;
+        value   $internalField;  // dummy, gets overwritten by code
+
+        name    parabolicInlet;
+
+        code
+        #{
+            const scalar Uavg = 3.84e-05;  // Max velocity
+            const vectorField& faceCentres = patch().Cf(); 
+            static bool firstTime = true;
+            static scalar R = -GREAT;
+
+            vectorField& field = *this;
+
+            if (firstTime)
+            {  
+                const pointField& points = patch().patch().points();
+
+                forAll(points, i)
+                {
+                    R = max(R, points[i].x());
+                }
+                firstTime = false;
+            }
+
+            forAll(field, i)
+            {
+                scalar x = faceCentres[i].x();
+                scalar z = faceCentres[i].z();
+                scalar r = sqrt(x*x + z*z);
+                scalar Uy = 2*Uavg * (1.0 - r*r/R/R);
+                field[i] = vector(0, Uy, 0);
+            }
+        #};
+    }
+    upper_inner
+    {
+        type            zeroGradient;
+        value           $internalField;
+    }
+    farfield
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    "wedge.*"
+    {
+        type            wedge;
+    }
+}
+
+
+// ************************************************************************* //
+
+              </code></pre>
+            </div>
+                
         </section>
 
         <section>
@@ -282,6 +390,153 @@
                 <span>\( P = -\dfrac{b^2}{2\mu U} \left( \dfrac{\partial p}{\partial x} \right) \)</span>
             </div>
           </div>
+        </section>
+
+        <section>
+          <h2> Flow in a <em>circular pipe</em> (aka Poiseuille flow)</h2>
+          <div class="container">
+            <div class="col">
+              <p><em>Steady</em>, <em>fully developed</em>, <em>laminar flow</em> in a circular pipe</p>
+              <ul>
+                  <li class="fragment" data-fragment-index="1">Velocity only in $z$-direction:
+                    <ul>
+                      <li><em>then, </em>$v_z = v_z(r)$, $v_\theta=v_r=0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="2">Steady flow: 
+                    <ul>
+                      <li><em>then, </em> $\partial u/\partial t = \partial v/\partial t = \partial w/\partial t = 0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="3">By continuity equation: $\dfrac{1}{r}\dfrac{\partial (r v_r)}{\partial r} + \dfrac{1}{r} \dfrac{\partial v_\theta}{\partial \theta} + \dfrac{\partial v_z}{\partial z} = 0$
+                    <ul>
+                      <li><em>then,</em> $\partial v_z/\partial z=0$</li>
+                    </ul>
+                  </li>
+
+                  <li class="fragment" data-fragment-index="4">No gravity in $z$ direction:
+                    <ul>
+                      <li><em>then,</em> $g_z 0$</li>
+                    </ul>
+                  </li>
+              </ul>
+
+              <p class="fragment" data-fragment-index="5">Navier-Stokes equations <em>reduce</em> to:</p>
+              <p class="singleline-math fragment" data-fragment-index="5">
+                <span><em>$z:~$</em>\( 0 = -\dfrac{\partial p}{\partial z} + \mu \dfrac{1}{r}\dfrac{\partial}{\partial r} \left(r \dfrac{\partial v_z}{\partial r} \right)\)</span>,<span><em>$~~~r:~$</em>\( 0 = \rho g_r - \dfrac{\partial p}{\partial r} \)</span>,<span><em>$~~~\theta:~$</em>\( 0 = \rho g_\theta -\dfrac{\partial p}{\partial \theta}\)</span>
+              </p>
+
+              <p class="fragment" data-fragment-index="6" ><em>Integration</em>, applying<em> boundary condtions</em> and <em>find $C_1$</em> and <em>$C_2$</em>:</p>
+              <p class="singleline-math fragment  bottom-2" data-fragment-index="6">
+                <span>\( v_z(r) = \dfrac{1}{4\mu}-\left(\dfrac{\partial p}{\partial z}\right)\left(r^2-R^2\right)\)</span>
+              </p>
+
+              <p class="singleline-math fragment small-left-padding bottom-1" data-fragment-index="7">
+                <span class="highlight fragment" data-fragment-index="7">
+                  <span>\( v_{max} = 2 V \)</span>
+                </span>
+              </p>
+              <p class="singleline-math fragment small-left-padding " data-fragment-index="8">
+                <span class="highlight fragment" data-fragment-index="8">
+                  <span>\( \dfrac{v_z}{v_{max}} = 1- \dfrac{r^2}{R^2} \)</span>
+                </span>
+              </p>
+
+            </div>
+
+            <div class="col">
+              <img src="img/fig6-34.jpg" height="300"/>
+
+              <h4><em>$z$</em>-direction:</h4>
+              <p class="singleline-math-smaller-font">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial v_z}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v_r \dfrac{\partial v_z}{\partial r} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_\theta}{r} \dfrac{\partial v_z}{\partial \theta} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="3">\( v_z \dfrac{\partial v_z}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial z} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{1}{r}\dfrac{\partial }{\partial r} \bigg( r \dfrac{\partial v_z}{\partial r} \bigg) \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{1}{r^2}\dfrac{\partial^2 v_z}{\partial \theta^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="3">\( \dfrac{\partial^2 v_z}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="4">\( \rho g_z \)</span>
+              </p>
+
+              <h4><em>$r$</em>-direction:</h4>
+              <p class="singleline-math-smaller-font">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial v_r}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v_r \dfrac{\partial v_r}{\partial r} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_\theta}{r} \dfrac{\partial v_r}{\partial \theta} \)</span>
+                <span">\( - \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_\theta^2}{r} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v_z \dfrac{\partial v_\theta}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial r} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{1}{r}\dfrac{\partial }{\partial r} \bigg( r \dfrac{\partial v_r}{\partial r} \bigg) \)</span>
+                <span>\( - \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_r}{r^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{1}{r^2}\dfrac{\partial^2 v_r}{\partial \theta^2} \)</span>
+                <span>\( - \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{2}{r^2}\dfrac{\partial v_r}{\partial \theta} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 v_z}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="4">\( \rho g_r \)</span>
+              </p>
+
+              <h4><em>$\theta$</em>-direction:</h4>
+              <p class="singleline-math-smaller-font">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="2">\( \dfrac{\partial v_\theta}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v_r \dfrac{\partial v_\theta}{\partial r} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_\theta}{r} \dfrac{\partial v_\theta}{\partial \theta} \)</span>
+                <span">\( - \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_r v_\theta}{r} \)</span>
+                <span">\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( v_z \dfrac{\partial v_\theta}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{1}{r}\dfrac{\partial p}{\partial \theta} \)</span>
+                <span>\( + \)</span>
+                <span">\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{1}{r}\dfrac{\partial }{\partial r} \bigg( r \dfrac{\partial v_\theta}{\partial r} \bigg) \)</span>
+                <span>\( - \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{v_\theta}{r^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{1}{r^2}\dfrac{\partial^2 v_\theta}{\partial \theta^2} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{2}{r^2}\dfrac{\partial v_r}{\partial \theta} \)</span>
+                <span>\( + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="1">\( \dfrac{\partial^2 v_\theta}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span class="fragment semi-fade-out" data-fragment-index="4">\( \rho g_\theta \)</span>
+              </p>
+
+            </div>
         </section>
 
         <section>

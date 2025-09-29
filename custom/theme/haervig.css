@@ -89,6 +89,10 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   font-size: 0.8em !important;
 }
 
+.singleline-math-smaller-font{
+  font-size: 0.55em !important;
+}
+
 .smaller-left-padding{
   padding-left: var(--smaller-left-padding);
 } 
@@ -99,6 +103,10 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 
 .medium-left-padding{
   padding-left: var(--medium-left-padding);
+}
+
+.code-padding{
+  padding-left: 46px;
 }
 
 .highlight {
