@@ -21,6 +21,15 @@
           <h2 style="margin-top: 0;">Viscous pipe flows</h2>
           <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
           <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+          <!-- <h5>
+            <em>Contributions to these slides by:</em>
+            <p>
+              <a href="https://github.com/jakobhaervig/slides/graphs/contributors">
+                <img src="https://contrib.rocks/image?repo=jakobhaervig/slides&max=204" />
+              </a>
+            </p>
+          </h5> -->
+
         </section>
 
         <section>
@@ -67,6 +76,26 @@
 
             </div>
           </div>
+        </section>
+
+      <section>
+          <h2> Much research focuses on complex multiphase flows (<a href="https://vbn.aau.dk/ws/portalfiles/portal/549460132/PHD_Jakob_Haervig_rettet_E_pdf.pdf">including own PhD</a>)</h2>
+            <div class="container">
+            <div class="col">
+              <p>Numerical simulations provide details on the process, which <em>can be difficult to capture experimentally</em>.</p>
+              <ul class="bottom-3">
+                <li class="fragment"> Turbulent pipe flow</li>
+                <li class="fragment"> Solid particles with $d_p = 10$ μm</li>
+                <li class="fragment"> Particle agglomeration (sticking) occurs due to van der Waals and electrostatic forces</li>
+              </ul>
+
+            </div>
+   
+            <div class="col">
+              <p> <em>Video</em>: Agglomeration of particles in a turbulent pipe flow</p>
+                <iframe width="800" height="415" src="https://www.youtube.com/embed/KdJ32i4EzNQ?si=u18ULF2mBM8oMTvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+                
         </section>
 
         <section>
@@ -168,8 +197,6 @@
               <ul>
                 <li>$\partial p/\partial x= -\Delta p/p < 0$</li>
               </ul>
-              <p></p>
-              <img src="img/fig8-6.jpg" width="600"/>
 
               <p>Pressure drop in pipe flows is balanced by:</p>
               <ul>
@@ -179,30 +206,105 @@
               </ul>
             </div>
             <div class="col">
-
+              <img src="img/fig8-6.jpg" width="1200"/>
             </div>
         </section>
 
         <section>
-          <h2>Turbulent pipe flow</h2>
+          <h2>Transition from laminar to turbulent flow</h2>
           <div class="container">
             <div class="col">
-              <p>Pressure varies <em>in fully-developed laminar flow <b>linearly </b></em> along the pipe</p>
+              <p>Happens <em>gradually</em> between $Re \approx 2100$ and $Re \approx 4000$</p>
               <ul>
-                <li>$\partial p/\partial x= -\Delta p/p < 0$</li>
+                <li>Small <em>bursts</em> of turbulence start at $\text{Re} \approx 2100$</li>
+                <li>Bursts grow in <em>size</em> and <em>frequency</em> with increasing $\text{Re}$</li>
+                <li>Increased mixing and momentum transfer occurs</li>
+                <li>Higher <em>heat transfer rates</em> and <em>pressure drop</em></li>
               </ul>
-              <p></p>
-              <img src="img/fig8-6.jpg" width="600"/>
 
-              <p>Pressure drop in pipe flows is balanced by:</p>
+              <p>Velocity field $\textbf{\textit{V}}$ <em>changes</em> from being 1-D to 3-D</p>
               <ul>
-                <li>Pressure drop due to friction (viscous effects)</li>
-                <li>Pressure drop due to acceleration/deceleration of flow (inertia effects)</li>
-                <li>Hydrostatic pressure variation due to elevation changes</li>
+                <li><em>Laminar:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}}$</li>
+                <li><em>Turbulent:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}} + v_y\cdot \hat{\textbf{j}} + v_z\cdot \hat{\textbf{k}}$</li>
               </ul>
             </div>
             <div class="col">
+              <img src="img/fig8-11.jpg" width="1000"/>
+            </div>
+        </section>
 
+        <section>
+          <h2>Decomposing a turbulent flow</h2>
+          <div class="container">
+            <div class="col">
+              <p> Consider a turbulent flow with instantaneous velocity $u(t)$</p>
+              <ul>
+                <li class="fragment" data-fragment-index="1"><em>Time-averaged</em> velocity component $\overline{u}$</li>
+                <p class="fragment" data-fragment-index="1">
+                  $$\overline{u}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u(x,y,z,t) \, \text{d}t$$
+              </p>
+              <ul>
+                <li class="fragment" data-fragment-index="2"> $T$ is the <em>averaging time period</em> (should be long enough to capture the relevant flow structures)</li>
+              </ul>
+              <p class="bottom-2"></p>
+                <li class="fragment" data-fragment-index="3"><em>Fluctuating</em> velocity component $u'$</li>
+                <p class="fragment" data-fragment-index="3">
+                  $$u'(x,y,z,t) = u(x,y,z,t) - \overline{u}(x,y,z)$$
+                </p>
+                <p class="bottom-2"></p>
+                <li class="fragment" data-fragment-index="4"> <em>Instantaneous</em> velocity can then be decomposed as:</li>
+                <p class="fragment" data-fragment-index="4">
+                  $$u(x,y,z,t) = \overline{u}(x,y,z) + u'(x,y,z,t)$$
+                </p>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/fig8-12-0.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="1" src="img/fig8-12-1.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="2" src="img/fig8-12-2.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="3" src="img/fig8-12-3.jpg" width="1000"/>
+              </div>
+            </div>
+        </section>
+
+        <section>
+          <h2>Describing turbulence</h2>
+          <div class="container">
+            <div class="col">
+              <p>Relevant to quantify strength of fluctuations</p>
+              <ul>
+                <li class="fragment" data-fragment-index="1">Clearly, <em>time-averaging</em> fluctuations $\overline{u'}$ does not make sense</li>
+                <p class="fragment" data-fragment-index="1">
+                  $$\overline{u'}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t) \, \text{d}t = 0$$
+              </p>
+            </ul>
+              <ul>
+                <li class="fragment" data-fragment-index="2">What if we take <em>squareroot of fluctuations</em> and then <em>time-average</em>? </li>
+                <p class="fragment" data-fragment-index="5">
+                  $$\overline{(u')^2}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t)^2 \, \text{d}t > 0$$
+              </p>
+              </ul>
+              <ul>
+                <li class="fragment" data-fragment-index="6">To get "back" to same order of magnitude, we now take squareroot</li>
+                <p class="fragment" data-fragment-index="7">
+                  $$u_\text{rms}(x,y,z) = \sqrt{\overline{(u')^2}(x,y,z)}$$
+              </p>
+              </ul>
+              <ul>
+                <li class="fragment bottom-2" data-fragment-index="8">This is called the <em>root-mean-square (RMS)</em> of the fluctuations</li>
+                  <li class="fragment" data-fragment-index="9">Often normalised by the time-averaged velocity to get a <em>relative measure</em>, aka <em>turbulence intensity</em></li>
+                  <p class="fragment" data-fragment-index="9">
+                    $$I(x,y,z) = \dfrac{u_\text{rms}(x,y,z)}{\overline{u}(x,y,z)}$$
+                  </p>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/fig8-13-0.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="1" src="img/fig8-13-1.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="3" src="img/fig8-13-2.jpg" width="1000"/>
+                <img class="fragment" data-fragment-index="4" src="img/fig8-13-3.jpg" width="1000"/>
+              </div>
             </div>
         </section>
 
