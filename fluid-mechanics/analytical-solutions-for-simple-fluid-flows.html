@@ -433,17 +433,9 @@ boundaryField
                 <span>\( v_z(r) = \dfrac{1}{4\mu}-\left(\dfrac{\partial p}{\partial z}\right)\left(r^2-R^2\right)\)</span>
               </p>
 
-              <p class="singleline-math fragment small-left-padding bottom-1" data-fragment-index="7">
-                <span class="highlight fragment" data-fragment-index="7">
-                  <span>\( v_{max} = 2 V \)</span>
-                </span>
-              </p>
-              <p class="singleline-math fragment small-left-padding " data-fragment-index="8">
-                <span class="highlight fragment" data-fragment-index="8">
-                  <span>\( \dfrac{v_z}{v_{max}} = 1- \dfrac{r^2}{R^2} \)</span>
-                </span>
-              </p>
-
+              <ul>
+                <li class="singleline-math fragment" data-fragment-index="7">Velocity is a function of <em>viscosity</em> $\mu$, <em>pressure gradient</em> $\partial p/ \partial z$ and <em>pipe radius</em> $R$.</li>
+              </ul>
             </div>
 
             <div class="col">
@@ -537,6 +529,56 @@ boundaryField
               </p>
 
             </div>
+        </section>
+        <section>
+        <h2> Details on flow in <em>circular pipes</em> (aka Poiseuille flow)</h2>
+          <div class="container">
+            <div class="col">
+              <ul>
+                  <li class="fragment" data-fragment-index="1">Volume flow rate (integrate velocity):</li>
+                    <p class="fragment" data-fragment-index="1">
+                      $$ Q = 2\pi \int_0^R v_z(r) r dr = -\dfrac{\pi R^4}{8\mu} \left(\dfrac{\partial p}{\partial z}\right) = \dfrac{\pi R^4 \Delta p}{8\mu l}$$
+                  </p>
+                  <ul>
+                    <li class="fragment" data-fragment-index="2">Flow rate is a function of <em>viscosity</em> $\mu$, <em>pressure gradient</em> $\partial p/ \partial z$ and <em>pipe radius</em> $R$.</li>
+                  </ul>
+                  </li>
+
+                  <p class="bottom-1"></p>
+
+                  <li class="fragment" data-fragment-index="3">Average velocity (divide by area):</li>
+                    <p class="fragment" data-fragment-index="3">
+                      $$ V = \dfrac{Q}{A} = \dfrac{-\dfrac{\pi R^4}{8\mu} \left(\dfrac{\partial p}{\partial z}\right)}{\pi R^2} = -\dfrac{R^2}{8\mu} \left(\dfrac{\partial p}{\partial z}\right) = \dfrac{R^2 \Delta p}{8\mu l}$$
+                  </p>
+                  <ul>
+                    <li class="fragment" data-fragment-index="4">Mean velocity is a function of <em>viscosity</em> $\mu$, <em>pressure gradient</em> $\partial p/ \partial z$ and <em>pipe radius</em> $R$.</li>
+                  </ul>
+                  </li>
+
+                  <p class="bottom-1"></p>
+                  <li class="fragment" data-fragment-index="5">Maximum velocity ($r=0$):</li>
+                    <p class="fragment" data-fragment-index="5">
+                      $$ v_z(r=0) = \dfrac{1}{4\mu}-\left(\dfrac{\partial p}{\partial z}\right)(0^2-R^2)=-\dfrac{R^2}{4\mu} \left(\dfrac{\partial p}{\partial z}\right) = \dfrac{R^2 \Delta p}{4\mu l}$$
+                  </p>
+                  <ul>
+                    <li class="fragment" data-fragment-index="6">Mean velocity is a function of <em>viscosity</em> $\mu$, <em>pressure gradient</em> $\partial p/ \partial z$ and <em>pipe radius</em> $R$.</li>
+                  </ul>
+                  </li>
+              </ul>
+            </div>
+
+            <div class="col">
+              <ul>
+                  <li class="fragment" data-fragment-index="7">Ratio of centerline to mean velocity ($v_z(r=0)/V$):</li>
+                    <p class="fragment" data-fragment-index="7">
+                      $$ \dfrac{v_z(r=0)}{V} = \dfrac{\dfrac{R^2 \Delta p}{4\mu l}}{\dfrac{R^2 \Delta p}{8\mu l}} = 2$$
+                  </p>
+                  <ul>
+                    <li class="fragment" data-fragment-index="8">Centerline velocity is exactly <em>twice</em> the mean velocity.</li>
+                  </ul>
+                  </li>
+                  </ul>
+              </div>
         </section>
 
         <section>

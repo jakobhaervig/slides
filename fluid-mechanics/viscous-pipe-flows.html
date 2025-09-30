@@ -181,7 +181,6 @@
                 <p></p>
                 <img class="fragment fade-in-then-semi-out" data-fragment-index="8" src="img/fig8-5-side.jpg" width="300"/>
                        
-
             </div>
             <div class="col">
               <img src="img/fig8-5.jpg" width="1200"/>
@@ -193,20 +192,40 @@
           <h2>Pressure profile in pipe flows</h2>
           <div class="container">
             <div class="col">
-              <p>Pressure varies <em>in fully-developed laminar flow <b>linearly </b></em> along the pipe</p>
+              <p >Pressure varies <em>in fully-developed laminar flow <b>linearly </b></em> along the pipe</p>
               <ul>
                 <li>$\partial p/\partial x= -\Delta p/p < 0$</li>
               </ul>
 
-              <p>Pressure drop in pipe flows is balanced by:</p>
+              <p class="fragment" data-fragment-index="1">Pressure drop in pipe flows is balanced by:</p>
               <ul>
-                <li>Pressure drop due to friction (viscous effects)</li>
-                <li>Pressure drop due to acceleration/deceleration of flow (inertia effects)</li>
-                <li>Hydrostatic pressure variation due to elevation changes</li>
+                <li class="fragment" data-fragment-index="2">Pressure drop due to friction (viscous effects)</li>
+                <li class="fragment" data-fragment-index="3">Pressure drop due to acceleration/deceleration of flow (inertia effects)</li>
+                <li class="fragment" data-fragment-index="4">Hydrostatic pressure variation due to elevation changes</li>
+              </ul>
+              <p class="bottom-2"></p>
+              <p class="fragment" data-fragment-index="5">Recall from analytical solutions earlier:</p>
+              <ul>
+              <p class="singleline-math small-left-padding">
+                <span class="fragment" data-fragment-index="5">\(Q = \dfrac{\pi R^4}{8\mu} \left(-\dfrac{\partial p}{\partial z}\right)\)</span>
+                <span class="fragment" data-fragment-index="6">\(= \dfrac{\pi D^4}{128\mu} \left(-\dfrac{\partial p}{\partial z}\right)\)</span>
+                <span class="fragment" data-fragment-index="7">\(= \dfrac{\pi D^4 \Delta p}{128\mu l}\)</span>
+                <ul>
+                  <li class="fragment" data-fragment-index="8"><em>Valid</em> for laminar, steady, horisontal, fully-developed flow</li>
+                </ul>
+              </p>
+              </ul>
+
+              <p class="fragment" data-fragment-index="9">For non-horisontal pipes:</p>
+              <ul>
+              <p class="singleline-math small-left-padding">
+                <span class="fragment" data-fragment-index="9">\( Q =\dfrac{\pi(\Delta p - \rho g l \text{sin}\theta)D^4}{128\mu l}\)</span>
+              </p>
               </ul>
             </div>
             <div class="col">
               <img src="img/fig8-6.jpg" width="1200"/>
+              <img class="fragment" data-fragment-index="9" src="img/fig8-10b.jpg" width="900"/>
             </div>
         </section>
 
