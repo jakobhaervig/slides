@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Jakob Hærvig">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="../../custom/theme/haervig.css">
+    <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
+  </head>
+
+  <body>
+
+    <!--slides-->
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
+          <h2 style="margin-top: 0;">Short introduction to Navier-Stokes equations</h2>
+          <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+          <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+        </section>
+
+    <section>
+      <h1> Any experience with the Navier-Stokes Equations? </h1>
+    </section>
+
+  <section>
+    <h2> Richard Feynman on Turbulence </h2>
+    <p class="bottom-3"></p>
+
+		<blockquote cite="https://royalsocietypublishing.org/doi/10.1098/rsta.2010.0332">
+			&ldquo;Turbulence is the most important unsolved problem of classical physics.&rdquo;
+      <em> - Eames & Flor (2011)</em>
+		</blockquote>
+    
+
+    <p class="bottom-3"></p>
+
+    <p>
+		<blockquote class="fragment" cite="https://www.goodreads.com/book/show/17278.The_Feynman_Lectures_on_Physics_Vol_1">
+			&ldquo;There is a physical problem that is common to many fields, that is very old, and that has not been solved. It is not the problem of finding new fundamental particles, but something left over from a long time ago—over a hundred years. Nobody in physics has really been able to analyze it mathematically satisfactorily in spite of its importance to the sister sciences. It is the analysis of circulating or turbulent fluids.&rdquo;
+		<em> - Feynman et al. (1965)</em>
+    </blockquote>
+    
+    </p>
+
+
+  </section>
+
+  <section>
+    <h2> A Millennium Problem </h2>
+          <div class="container">
+            <div class="col">
+              <p>The Clay Mathematics Institute has identified the existence and smoothness of solutions to the Navier-Stokes equations as one of the seven Millennium Prize Problems.</p>
+              <ul>
+                    <li class="fragment"><em>Sketch of the Problem</em> <br>
+                      Prove or give a counter-example that in 3-D, solutions to the incompressible Navier-Stokes equations always exist and are smooth for all time. <br>
+                      <a href="https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf"></a>
+                    </li><br>
+                    <li class="fragment"><em>Prize</em> <br>
+                      $1,000,000 for a correct solution.
+                    </li>
+                  </ul>
+              </div>
+            <div class="col">
+
+              <iframe
+                class="fragment"
+                width="800" 
+                height="1000" 
+                src="https://en.wikipedia.org/wiki/Millennium_Prize_Problems" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+  </section>
+
+
+
+  <section>
+    <h2> The Navier-Stokes Equations </h2>
+
+              <h4> Navier-Stokes momentum equation:</h4>
+              <p>
+                \(\rho \left(\dfrac{\partial \mathbf{u}}{dt} + \mathbf{u} \cdot \nabla \mathbf{u}\right)= -\nabla p + \mu \nabla^2 \mathbf{u} + \rho \mathbf{g}\)
+              </p>
+
+              <h4 > Continuity equation:</h4>
+              <p class="singleline-math">
+                <span>\( \dfrac{\partial \rho}{\partial t} + \dfrac{\partial(\rho u)}{\partial x} + \dfrac{\partial(\rho v)}{\partial y} + \dfrac{\partial(\rho w)}{\partial z} = 0 \)</span>
+              </p>
+
+              <h4 class="fragment" data-fragment-index="1"> Re-written in $x$-direction, $y$-direction, $z$-direction:</h4>
+
+              <h4 class="fragment" data-fragment-index="1"><em>$x$</em>-direction:</h4>
+              <p class="singleline-math fragment" data-fragment-index="1">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial u}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span>\( u \dfrac{\partial u}{\partial x} \)</span>
+                <span>\( + \)</span>
+                <span>\( v \dfrac{\partial u}{\partial y} \)</span>
+                <span>\( + \)</span>
+                <span>\( w \dfrac{\partial u}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial x} \)</span>
+                <span>\( + \)</span>
+                <span>\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial^2 u}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 u}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 u}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span>\( \rho g_x \)</span>
+              </p>
+
+              <h4 class="fragment" data-fragment-index="2"><em>$y$</em>-direction:</h4>
+              <p class="singleline-math fragment" data-fragment-index="2">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial v}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span>\( u \dfrac{\partial v}{\partial x} \)</span>
+                <span>\( + \)</span>
+                <span>\( v \dfrac{\partial v}{\partial y} \)</span>
+                <span>\( + \)</span>
+                <span>\( w \dfrac{\partial v}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial y} \)</span>
+                <span>\( + \)</span>
+                <span>\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial^2 v}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 v}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 v}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span>\( \rho g_y \)</span>
+              </p>
+
+              <h4 class="fragment" data-fragment-index="3"><em>$z$</em>-direction:</h4>
+              <p class="singleline-math fragment" data-fragment-index="3">
+                <span>\( \rho \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial w}{\partial t} \)</span>
+                <span>\( + \)</span>
+                <span>\( u \dfrac{\partial w}{\partial x} \)</span>
+                <span>\( + \)</span>
+                <span>\( v \dfrac{\partial w}{\partial y} \)</span>
+                <span>\( + \)</span>
+                <span>\( w \dfrac{\partial w}{\partial z} \)</span>
+                <span>\( \bigg) = -\)</span>
+                <span>\( \dfrac{\partial p}{\partial z} \)</span>
+                <span>\( + \)</span>
+                <span>\( \mu \)</span>
+                <span>\( \bigg( \)</span>
+                <span>\( \dfrac{\partial^2 w}{\partial x^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 w}{\partial y^2} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dfrac{\partial^2 w}{\partial z^2} \)</span>
+                <span>\( \bigg) + \)</span>
+                <span>\( \rho g_z \)</span>
+              </p>
+
+              <p class="bottom-1"></p>
+              <h4 class="fragment" data-fragment-index="4"> Continuity equation (<em>incompressible flow</em>):</h4>
+              <p class="singleline-math fragment" data-fragment-index="4">
+                <span>\( \dfrac{\partial u }{\partial x} + \dfrac{\partial v}{\partial y} + \dfrac{\partial w}{\partial z} = 0 \)</span>
+              </p>
+      </section>
+
+      <section>
+        <h2>Learning goals</h2>
+         <p class="bottom-1"></p>
+              <iframe
+                width="1400" 
+                height="1000" 
+                src="https://moduler.aau.dk/course/2025-2026/N-EE-K1-8B?lang=da-DK" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+
+      </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
+    <script type="module" src="../../main.js"></script>
+  </body>
+</html>
