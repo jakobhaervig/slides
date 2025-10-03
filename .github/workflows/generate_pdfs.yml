@@ -25,11 +25,11 @@ jobs:
       - name: Serve slides locally
         run: |
           npm install -g http-server
+          nohup npx http-server -p 8000 &  # Use nohup so it persists
+          sleep 3
 
       - name: Convert slides to PDF
         run: |
-          npx http-server -p 8000 &
-          sleep 2 # wait for server to start
           ignore_folders=("reveal.js" "__pycache__")
           base_dir="."
 
