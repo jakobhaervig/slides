@@ -33,6 +33,10 @@ jobs:
           curl -I http://127.0.0.1:8000/index.html
           curl -I http://127.0.0.1:8000/fluid-mechanics/analytical-solutions-for-simple-fluid-flows.html
 
+      - name: Verify revealjs exists
+        run: |
+          curl -I http://127.0.0.1:8000/reveal.js/dist/reveal.js
+
       - name: Convert slides to PDF
         run: |
           mkdir -p pdfs
