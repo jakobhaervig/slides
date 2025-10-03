@@ -39,18 +39,3 @@ Reveal.initialize({
         ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     }
 });
-
-Reveal.on('ready', () => {
-    // Only add button if we're not on the main index page
-    if (!window.location.pathname.endsWith('index.html') && 
-        !window.location.pathname.endsWith('/')) {
-        
-        const backButton = document.createElement('a');
-        backButton.href = '../index.html';
-        backButton.className = 'back-to-index';
-        backButton.innerHTML = '<h2>←</h2>';
-        backButton.setAttribute('aria-label', 'Return to slide deck index');
-        
-        document.querySelector('.reveal').appendChild(backButton);
-    }
-});

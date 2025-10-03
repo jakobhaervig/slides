@@ -476,26 +476,8 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   color: var(--r-link-color);
 }
 
-/*********************************************
- * CUSTOM ARROW TO GO BACK TO INDEX
- *********************************************/
-
-.reveal .back-to-index {
-    position: fixed;
-    bottom: 20px;
-    left: 30px;
-    z-index: 1000;
-    text-decoration: none;
-    color: #222;
-    
-}
-
 @media print {
   .backgrounds {
     background-color: var(--r-background-color);
-  }
-
-  .reveal .back-to-index {
-    display: none !important;
   }
 }
