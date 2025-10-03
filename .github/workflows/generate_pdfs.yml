@@ -22,6 +22,12 @@ jobs:
       - name: Install Decktape
         run: npm install -g decktape
 
+      - name: Serve slides locally
+        run: |
+          npm install -g http-server
+          npx http-server -p 8000 &
+          sleep 2 # wait for server to start
+
       - name: Create PDFs folder
         run: mkdir -p pdfs
 
@@ -39,7 +45,7 @@ jobs:
               for file in $(ls "$folder_path" | sort); do
                 if [[ "$file" == *.html ]]; then
                   filename="${file%.html}"
-                  decktape --chrome-arg="--no-sandbox" reveal "$folder_path/$file" "pdfs/${filename}.pdf"
+                  decktape --chrome-arg="--no-sandbox" reveal "http://localhost:8000/$folder/$file" "pdfs/${filename}.pdf"
                 fi
               done
             done
