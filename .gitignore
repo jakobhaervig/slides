@@ -6,7 +6,6 @@ build/
 *_data/
 *.aup
 *.mov
-*.pdf
 *.cropped.mp4
 media/audio/**/fragments
 *.ipynb_checkpoints
