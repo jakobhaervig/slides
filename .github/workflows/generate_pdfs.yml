@@ -25,7 +25,7 @@ jobs:
       - name: Serve slides locally
         run: |
           npm install -g http-server
-          nohup npx http-server -p 8000 &  # Use nohup so it persists
+          nohup npx http-server $GITHUB_WORKSPACE -p 8000 &
           sleep 3
 
       - name: Convert slides to PDF
