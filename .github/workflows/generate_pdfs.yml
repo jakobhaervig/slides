@@ -45,7 +45,7 @@ jobs:
               for file in $(ls "$folder_path" | sort); do
                 if [[ "$file" == *.html ]]; then
                   filename="${file%.html}"
-                  decktape --chrome-arg="--no-sandbox" reveal "http://localhost:8000/$folder/$file" "pdfs/${filename}.pdf"
+                  decktape --chrome-arg="--no-sandbox" reveal "http://127.0.0.1:8000/$folder/$file" "pdfs/${filename}.pdf"
                 fi
               done
             done
