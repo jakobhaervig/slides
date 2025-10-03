@@ -29,8 +29,9 @@ jobs:
           sleep 5  # give the server time to start
 
       - name: Test server
-        run: curl -I http://127.0.0.1:8000/index.html
-        run: curl -I http://127.0.0.1:8000/fluid-mechanics/analytical-solutions-for-simple-fluid-flows.html
+        run: |
+          curl -I http://127.0.0.1:8000/index.html
+          curl -I http://127.0.0.1:8000/fluid-mechanics/analytical-solutions-for-simple-fluid-flows.html
 
       - name: Convert slides to PDF
         run: |
