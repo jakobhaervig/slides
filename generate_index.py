@@ -71,10 +71,12 @@ with open(output_file, "w") as f:
 </div>
 
 <!-- Reveal.js JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
-    <script src="main.js" type="module"></script>
+  <script src="reveal.js/dist/reveal.js"></script>
+  <script src="reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="reveal.js/plugin/math/math.js"></script>
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+  <script src="reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="init-reveal.js"></script>
 </body>
 </html>
 """)
