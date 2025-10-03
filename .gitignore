@@ -13,3 +13,4 @@ media/audio/**/fragments
 *.ipynb
 .sass-cache
 **/.DS_Store
+server.log
