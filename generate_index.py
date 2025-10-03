@@ -26,7 +26,7 @@ for folder in sorted(os.listdir(base_dir)):
             t_obj = time.strptime(m_ti)
             T_stamp = time.strftime("%Y-%m-%d %H:%M:%S", t_obj)
 
-            download_link = file_path+"?print-pdf"
+            download_link = os.path.join("pdfs", file_path.replace(".html", ".pdf"))
             slide_files.append((folder.replace('-', ' ').title(), title, file_path, download_link, T_stamp))
 
 # Generate main index.html
