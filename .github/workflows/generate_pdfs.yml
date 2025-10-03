@@ -30,19 +30,19 @@ jobs:
           ignore_folders=("reveal.js" "__pycache__")
           base_dir="."
 
-          for folder in $(ls "$base_dir" | sort); do
-            folder_path="$base_dir/$folder"
-            if [[ ! -d "$folder_path" ]] || [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
-              continue
-            fi
-
-            for file in $(ls "$folder_path" | sort); do
-              if [[ "$file" == *.html ]]; then
-                filename="${file%.html}"
-                decktape reveal "$folder_path/$file" "pdfs/${filename}.pdf"
+            for folder in $(ls "$base_dir" | sort); do
+              folder_path="$base_dir/$folder"
+              if [[ ! -d "$folder_path" ]] || [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+                continue
               fi
+
+              for file in $(ls "$folder_path" | sort); do
+                if [[ "$file" == *.html ]]; then
+                  filename="${file%.html}"
+                  decktape --chrome-arg="--no-sandbox" reveal "$folder_path/$file" "pdfs/${filename}.pdf"
+                fi
+              done
             done
-          done
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
