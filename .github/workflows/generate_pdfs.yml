@@ -1,9 +1,6 @@
 name: Convert Reveal.js slides to PDF
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -29,15 +26,6 @@ jobs:
         run: |
           nohup npx http-server . -p 8000 > server.log 2>&1 &
           sleep 5  # give the server time to start
-
-      - name: Test server
-        run: |
-          curl -I http://127.0.0.1:8000/index.html
-          curl -I http://127.0.0.1:8000/fluid-mechanics/analytical-solutions-for-simple-fluid-flows.html
-
-      - name: Verify revealjs exists
-        run: |
-          curl -I http://127.0.0.1:8000/reveal.js/dist/reveal.js
 
       - name: Convert slides to PDF
         run: |
