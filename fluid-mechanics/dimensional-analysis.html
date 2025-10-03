@@ -1,59 +1,128 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Jakob Hærvig">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
-    <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="../../custom/theme/haervig.css">
-    <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
-  </head>
 
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
-          <h2 style="margin-top: 0;">Dimensional analysis</h2>
-          <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
-          <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
-        </section>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
+</head>
 
-        <section>
-          <h2>Why look at <em> dimensional analysis</em>?</h2>
-              <img class="fragment block semi-fade-out" data-fragment-index="1" src="img/applications-dimensional-analysis0.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="1" src="img/applications-dimensional-analysis1.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="2" src="img/applications-dimensional-analysis2.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="3" src="img/applications-dimensional-analysis3.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="4" src="img/applications-dimensional-analysis4.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="5" src="img/applications-dimensional-analysis5.jpg" width="1400"/>
-              <img class="fragment block fade-in-then-semi-out" data-fragment-index="6" src="img/applications-dimensional-analysis6.jpg" width="1400"/>
-        </section>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
+        <h2 style="margin-top: 0;">Dimensional analysis</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+        <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+      </section>
 
-        <section>
-          <h2>Three reasons for dimensional analysis (1/3)</h2>
-          <div class="container">
-            <div class="col">
-              <p>Provides a <em>systematic approach</em> to go from model to prototype</p>
-              <ul>
-                  <li class="fragment">Solution <em>approximated</em> using <em>numerical methods</em> (e.g. CFD)</li>
-                  <li class="fragment">Solution found by <em>experiments</em></li>
-              </ul>
-              <p class="fragment">Analytical solutions for <em> only a few problems</em></p>
-              <ul>
-                  <li class="fragment"><em>Simple geometries</em>: Flow between two plates or in a tube</em></li>
-                  <li class="fragment"><em>Simple flows</em>: Steady, laminar and fully-developed flows</li>
-            </div>
+      <section>
+        <h2>Why look at <em> dimensional analysis</em>?</h2>
+        <img class="fragment block semi-fade-out" data-fragment-index="1"
+          src="img/applications-dimensional-analysis0.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="1"
+          src="img/applications-dimensional-analysis1.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="2"
+          src="img/applications-dimensional-analysis2.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="3"
+          src="img/applications-dimensional-analysis3.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="4"
+          src="img/applications-dimensional-analysis4.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="5"
+          src="img/applications-dimensional-analysis5.jpg" width="1400" />
+        <img class="fragment block fade-in-then-semi-out" data-fragment-index="6"
+          src="img/applications-dimensional-analysis6.jpg" width="1400" />
+      </section>
 
-            <div class="col">
-              hej
-            </div>
+      <section>
+        <h2><em>Dimensionless numbers</em> are important for dimensional analysis</h2>
+        <p class="bottom-1"></p>
+        <iframe width="1920" height="1000" src="https://en.wikipedia.org/wiki/Dimensionless_numbers_in_fluid_mechanics"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+      </section>
+
+      <section>
+        <h2>How do people come up with <em>dimensionless numbers</em>?</h2>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="col">
+            <h2>The basis for all dimensional analysis</h2>
+
+            <p>Total of <em>seven base dimensions</em> in the <b>MLT</b> system:</p>
+            <ol>
+              <li class="fragment">Mass, M</li>
+              <li class="fragment">Length, L</li>
+              <li class="fragment">Time, T</li>
+              <li class="fragment">Temperature, θ</li>
+              <li class="fragment">Amount of substance, N</li>
+              <li class="fragment">Electrical current, I</li>
+              <li class="fragment">Luminous intensity, C</li>
+            </ol>
+
+            <p class="fragment">All <em>derived dimensions</em> can be expressed in terms of these base dimensions:</p>
+            <ul>
+              <li class="fragment">Velocity, [$V$] = LT$^{-1}$</li>
+              <li class="fragment">Acceleration, [$a$] = LT$^{-2}$</li>
+              <li class="fragment">Force, [$F$] = MLT$^{-2}$</li>
+              <li class="fragment">Energy, [$E$] = ML$^{2}$T$^{-2}$</li>
+              <li class="fragment">...</li>
           </div>
-        </section>
-      </div>
-    </div>
 
-    <script type="module" src="../../main.js"></script>
-  </body>
+
+          <div class="col">
+
+            <img class="fragment" data-fragment-index="1" src="img/7-base-dimensions.png" width="300" />
+
+
+            <p class="fragment">.. we may also use the <b>FLT</b> system:</p>
+            <ol>
+              <li class="fragment">Force, F</li>
+              <li class="fragment">Length, L</li>
+              <li class="fragment">Time, T</li>
+              <li class="fragment">...</li>
+            </ol>
+            <p class="fragment">Simply convert between <b>MLT</b> and <b>FLT</b> by $\text{F}=\text{MLT}^{-2}$.</p>
+          </div>
+      </section>
+
+      <section>
+        <h2>MLT systems in the wild..</h2>
+        <img src="img/dimless-numbers-openfoam.jpg" width="1400" />
+        <p>Dimensions in OpenFOAM are defined in terms of the <b>MLT</b> system (here velocity)</p>
+      </section>
+
+      <section>
+        <h2>Law of <em>Dimensional Homogeneity</em></h2>
+        <div class="container">
+          <div class="col">
+            <p class="fragment">Every <em>additive term ($+$ or $-$)</em> in an equation <b>must</b> have same dimensions</p>
+            <p class="fragment">Example: Newton's second law of motion</p>
+            <p class="fragment">F = m a</p>
+            <p class="fragment">[$F$] = [$m$][$a$]</p>
+            <p class="fragment">MLT: MLT$^{-2}$ = M LT$^{-2}$</p>
+            <p class="fragment">FLT: F = F</p>
+          </div>
+          <div class="col">
+            yrsdy
+            <p>Dimensions in OpenFOAM are defined in terms of the <b>MLT</b> system (here velocity)</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="module" src="../../main.js"></script>
+</body>
+
 </html>

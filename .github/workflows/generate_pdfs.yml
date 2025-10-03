@@ -1,0 +1,51 @@
+name: Convert Reveal.js slides to PDF
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  generate-pdfs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Decktape
+        run: npm install -g decktape
+
+      - name: Create PDFs folder
+        run: mkdir -p pdfs
+
+      - name: Convert slides to PDF
+        run: |
+          ignore_folders=("reveal.js" "__pycache__")
+          base_dir="."
+
+          for folder in $(ls "$base_dir" | sort); do
+            folder_path="$base_dir/$folder"
+            if [[ ! -d "$folder_path" ]] || [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+              continue
+            fi
+
+            for file in $(ls "$folder_path" | sort); do
+              if [[ "$file" == *.html ]]; then
+                filename="${file%.html}"
+                decktape reveal "$folder_path/$file" "pdfs/${filename}.pdf"
+              fi
+            done
+          done
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v3
+        with:
+          name: pdfs
+          path: pdfs/
