@@ -4,6 +4,7 @@ import time
 # Base directory and output file
 base_dir = "."
 output_file = "index.html"
+base_url = "https://github.com/jakobhaervig/slides/raw/main/"
 
 # Folders to ignore
 ignore_folders = ["reveal.js", "__pycache__"]
@@ -26,7 +27,8 @@ for folder in sorted(os.listdir(base_dir)):
             t_obj = time.strptime(m_ti)
             T_stamp = time.strftime("%Y-%m-%d %H:%M:%S", t_obj)
 
-            download_link = os.path.join("pdfs", file_path.replace(".html", ".pdf"))
+            pdf_link = os.path.join("pdfs", file_path.replace(".html", ".pdf"))
+            download_link = base_url + pdf_link + "?download="
             slide_files.append((folder.replace('-', ' ').title(), title, file_path, download_link, T_stamp))
 
 # Generate main index.html
@@ -39,9 +41,9 @@ with open(output_file, "w") as f:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Reveal.js CSS -->
-<link rel="stylesheet" href="reveal.js/dist/reset.css">
-<link rel="stylesheet" href="reveal.js/dist/reveal.css">
-<link rel="stylesheet" href="custom/theme/haervig.css">
+<link rel="stylesheet" href="/reveal.js/dist/reset.css">
+<link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+<link rel="stylesheet" href="/custom/theme/haervig.css">
 </head>
 <body>
 <div class="reveal">
@@ -70,13 +72,12 @@ with open(output_file, "w") as f:
   </div>
 </div>
 
-<!-- Reveal.js JS -->
-  <script src="reveal.js/dist/reveal.js"></script>
-  <script src="reveal.js/plugin/zoom/zoom.js"></script>
-  <script src="reveal.js/plugin/math/math.js"></script>
-  <script src="reveal.js/plugin/notes/notes.js"></script>
-  <script src="reveal.js/plugin/highlight/highlight.js"></script>
-  <script src="init-reveal.js"></script>
+  <script src="/reveal.js/dist/reveal.js"></script>
+  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="/reveal.js/plugin/notes/notes.js"></script>
+  <script src="/reveal.js/plugin/math/math.js"></script>
+  <script src="/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="/init-reveal.js"></script>
 </body>
 </html>
 """)
