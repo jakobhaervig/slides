@@ -19,34 +19,35 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Decktape
-        run: npm install -g decktape
-
-      - name: Serve slides locally
+      - name: Install Decktape and HTTP server
         run: |
-          npm install -g http-server
-          nohup npx http-server $GITHUB_WORKSPACE -p 8000 &
-          sleep 3
+          npm install -g decktape http-server
+
+      - name: Start local HTTP server
+        run: |
+          nohup npx http-server . -p 8000 > server.log 2>&1 &
+          sleep 5  # give the server time to start
+
+      - name: Test server
+        run: curl -I http://127.0.0.1:8000/index.html
+        run: curl -I http://127.0.0.1:8000/fluid-mechanics/analytical-solutions-for-simple-fluid-flows.html
 
       - name: Convert slides to PDF
         run: |
+          mkdir -p pdfs
           ignore_folders=("reveal.js" "__pycache__")
-          base_dir="."
-
-            for folder in $(ls "$base_dir" | sort); do
-              folder_path="$base_dir/$folder"
-              if [[ ! -d "$folder_path" ]] || [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
-                continue
-              fi
-
-              for file in $(ls "$folder_path" | sort); do
-                if [[ "$file" == *.html ]]; then
-                  filename="${file%.html}"
-                  mkdir -p pdfs/"$folder"
-                  decktape --chrome-arg="--no-sandbox" reveal "http://127.0.0.1:8000/$folder/$file" "pdfs/${folder}/${filename}.pdf"
-                fi
-              done
+          for folder in */; do
+            folder=${folder%/}  # remove trailing slash
+            if [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+              continue
+            fi
+            for file in "$folder"/*.html; do
+              [ -e "$file" ] || continue
+              filename=$(basename "$file" .html)
+              mkdir -p pdfs/"$folder"
+              decktape --chrome-arg="--no-sandbox" reveal "http://127.0.0.1:8000/$folder/$filename.html" "pdfs/$folder/$filename.pdf"
             done
+          done
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
