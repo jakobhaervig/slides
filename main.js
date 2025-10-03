@@ -20,7 +20,7 @@ Reveal.initialize({
     transition: 'fade', // none/fade/slide/convex/concave/zoom
     backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
     transitionSpeed: 'default', // default/fast/slow
-    plugins: [Markdown, Highlight, Math.KaTeX, Notes, Search, Zoom, RevealChalkboard, RevealCustomControls],
+    plugins: [Markdown, Highlight, Math.KaTeX, Notes, Search, Zoom],
     history: true,
     pdfSeparateFragments: false,
     fragments: true,
@@ -37,16 +37,20 @@ Reveal.initialize({
         
         ],
         ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-    },
-  	chalkboard: { 
-		src: null,
-		readOnly: undefined, 
-		toggleNotesButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
-		transition: 800,
-		theme: "whiteboard",
-		// configuration options for notes canvas and chalkboard
-		color: [ 'rgba(0,0,255,1)', 'rgba(255,255,255,0.5)' ],
-		background: [ 'rgba(255, 255, 255, 0)' , 'reveal.js-plugins/chalkboard/img/blackboard.png' ],
-		pen:  [ 'url(reveal.js-plugins/chalkboard/img/boardmarker.png), auto', 'url(reveal.js-plugins/chalkboard/img/chalk.png), auto' ],
-	},
+    }
+});
+
+Reveal.on('ready', () => {
+    // Only add button if we're not on the main index page
+    if (!window.location.pathname.endsWith('index.html') && 
+        !window.location.pathname.endsWith('/')) {
+        
+        const backButton = document.createElement('a');
+        backButton.href = '../index.html';
+        backButton.className = 'back-to-index';
+        backButton.innerHTML = '<h2>←</h2>';
+        backButton.setAttribute('aria-label', 'Return to slide deck index');
+        
+        document.querySelector('.reveal').appendChild(backButton);
+    }
 });

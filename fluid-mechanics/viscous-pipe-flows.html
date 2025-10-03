@@ -1,360 +1,372 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Jakob Hærvig">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
-    <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="../../custom/theme/haervig.css">
-    <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/style.css">
-  </head>
 
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
-          <h2 style="margin-top: 0;">Viscous pipe flows</h2>
-          <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
-          <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
-          <!-- <h5>
-            <em>Contributions to these slides by:</em>
-            <p>
-              <a href="https://github.com/jakobhaervig/slides/graphs/contributors">
-                <img src="https://contrib.rocks/image?repo=jakobhaervig/slides&max=204" />
-              </a>
-            </p>
-          </h5> -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="../../reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="../../custom/theme/haervig.css">
+  <link rel="stylesheet" href="../../custom/plugins/highlight/haervig.css">
+</head>
 
-        </section>
-
-        <section>
-          <h2>Types of pipe flows</h2>
-          <div class="container">
-            <div class="col">
-            <p>Various pipe flow types exist, each with <em>distinct</em> physics</p>
-
-              <ul class="fragment fade-in-then-semi-out" data-fragment-index="0">
-                <li><b>Single phase </b>pipe flows</li>
-
-                <img src="img/fig8-2a.jpg" width="600"/>
-                  <ul>
-                    <li>Completely filled with liquid (or gas)</li>
-                    <li>Pressure difference ($p_2 - p_1$) drives flow</li>
-                    
-                  </ul>
-              </ul>
-            </div> 
-
-            <div class="col">
-
-              <ul class="fragment fade-in-then-semi-out bottom-2" data-fragment-index="1">
-                <li><b>Open channel </b>pipe flow</li>
-
-                <img src="img/fig8-2b.jpg" width="600"/>
-                  <ul>
-                    <li>Partially filled with liquid</li>
-                    <li>Gravity drives flow</li>
-                  </ul>
-              </ul>
-
-              <ul class="fragment " data-fragment-index="2">
-                <li><b>Multiphase </b>pipe flow</li>
-
-                <img src="img/fig8-2c.jpg" width="600"/>
-                  <ul>
-                    <li>Either partially or full of liquid (or gas)</li>
-                    <li>Gravity drives flow</li>
-                    <li>Complex physics (bubbles, particles, droplets etc)</li>
-
-                  </ul>
-              </ul>
-
-            </div>
-          </div>
-        </section>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
+        <h2 style="margin-top: 0;">Viscous pipe flows</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+        <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+      </section>
 
       <section>
-          <h2> Much research focuses on complex multiphase flows (<a href="https://vbn.aau.dk/ws/portalfiles/portal/549460132/PHD_Jakob_Haervig_rettet_E_pdf.pdf">including own PhD</a>)</h2>
-            <div class="container">
-            <div class="col">
-              <p>Numerical simulations provide details on the process, which <em>can be difficult to capture experimentally</em>.</p>
-              <ul class="bottom-3">
-                <li class="fragment"> Turbulent pipe flow</li>
-                <li class="fragment"> Solid particles with $d_p = 10$ μm</li>
-                <li class="fragment"> Particle agglomeration (sticking) occurs due to van der Waals and electrostatic forces</li>
-              </ul>
+        <h2>Types of pipe flows</h2>
+        <div class="container">
+          <div class="col">
+            <p>Various pipe flow types exist, each with <em>distinct</em> physics</p>
 
-            </div>
-   
-            <div class="col">
-              <p> <em>Video</em>: Agglomeration of particles in a turbulent pipe flow</p>
-                <iframe width="800" height="415" src="https://www.youtube.com/embed/KdJ32i4EzNQ?si=u18ULF2mBM8oMTvs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-                
-        </section>
+            <ul class="fragment fade-in-then-semi-out" data-fragment-index="0">
+              <li><b>Single phase </b>pipe flows</li>
 
-        <section>
-          <h2>Why look at <em> viscous pipe flows </em>?</h2>
-
-          <div class="container">
-            <div class="col">
-              <img src="img/applications-viscous-pipe-flows1.jpg" width="800"/>
-              <img class="fragment" data-fragment-index="1" src="img/applications-viscous-pipe-flows2.jpg" width="800"/>
-              <img class="fragment" data-fragment-index="2" src="img/applications-viscous-pipe-flows3.jpg" width="800"/>
-              <img class="fragment" data-fragment-index="3" src="img/applications-viscous-pipe-flows4.jpg" width="800"/>
-            </div>
-            <div class="col">
-              <img class="fragment" data-fragment-index="4" src="img/applications-viscous-pipe-flows5.jpg" width="800"/>
-              <img class="fragment" data-fragment-index="5" src="img/applications-viscous-pipe-flows6.jpg" width="800"/>
-              <img class="fragment" data-fragment-index="6" src="img/applications-viscous-pipe-flows7.jpg" width="800"/>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2> Laminar and turbulent flows</h2>
-          <div class="container">
-            <div class="col">
-              <img src="img/fig8-3b.jpg" width="800"/>
-              <p>Characterised by different flow regimes:</p>
+              <img src="img/fig8-2a.jpg" width="600" />
               <ul>
-                <li><em>Turbulent flow:</em> chaotic and irregular <em>(mixing occurs)</em></li>
-                <li><em>Transitional flow:</em> between laminar and turbulent</li>
-                <li><em>Laminar flow:</em> smooth and orderly <em> (no mixing)</em></li>
+                <li>Completely filled with liquid (or gas)</li>
+                <li>Pressure difference ($p_2 - p_1$) drives flow</li>
+
               </ul>
+            </ul>
+          </div>
+
+          <div class="col">
+
+            <ul class="fragment fade-in-then-semi-out bottom-2" data-fragment-index="1">
+              <li><b>Open channel </b>pipe flow</li>
+
+              <img src="img/fig8-2b.jpg" width="600" />
+              <ul>
+                <li>Partially filled with liquid</li>
+                <li>Gravity drives flow</li>
+              </ul>
+            </ul>
+
+            <ul class="fragment " data-fragment-index="2">
+              <li><b>Multiphase </b>pipe flow</li>
+
+              <img src="img/fig8-2c.jpg" width="600" />
+              <ul>
+                <li>Either partially or full of liquid (or gas)</li>
+                <li>Gravity drives flow</li>
+                <li>Complex physics (bubbles, particles, droplets etc)</li>
+
+              </ul>
+            </ul>
+
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2> Much research focuses on complex multiphase flows (<a
+            href="https://vbn.aau.dk/ws/portalfiles/portal/549460132/PHD_Jakob_Haervig_rettet_E_pdf.pdf">including own
+            PhD</a>)</h2>
+        <div class="container">
+          <div class="col">
+            <p>Numerical simulations provide details on the process, which <em>can be difficult to capture
+                experimentally</em>.</p>
+            <ul class="bottom-3">
+              <li class="fragment"> Turbulent pipe flow</li>
+              <li class="fragment"> Solid particles with $d_p = 10$ μm</li>
+              <li class="fragment"> Particle agglomeration (sticking) occurs due to van der Waals and electrostatic
+                forces</li>
+            </ul>
+
+          </div>
+
+          <div class="col">
+            <p> <em>Video</em>: Agglomeration of particles in a turbulent pipe flow</p>
+            <iframe width="800" height="415" src="https://www.youtube.com/embed/KdJ32i4EzNQ?si=u18ULF2mBM8oMTvs"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+      </section>
+
+      <section>
+        <h2>Why look at <em> viscous pipe flows </em>?</h2>
+
+        <div class="container">
+          <div class="col">
+            <img src="img/applications-viscous-pipe-flows1.jpg" width="800" />
+            <img class="fragment" data-fragment-index="1" src="img/applications-viscous-pipe-flows2.jpg" width="800" />
+            <img class="fragment" data-fragment-index="2" src="img/applications-viscous-pipe-flows3.jpg" width="800" />
+            <img class="fragment" data-fragment-index="3" src="img/applications-viscous-pipe-flows4.jpg" width="800" />
+          </div>
+          <div class="col">
+            <img class="fragment" data-fragment-index="4" src="img/applications-viscous-pipe-flows5.jpg" width="800" />
+            <img class="fragment" data-fragment-index="5" src="img/applications-viscous-pipe-flows6.jpg" width="800" />
+            <img class="fragment" data-fragment-index="6" src="img/applications-viscous-pipe-flows7.jpg" width="800" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2> Laminar and turbulent flows</h2>
+        <div class="container">
+          <div class="col">
+            <img src="img/fig8-3b.jpg" width="800" />
+            <p>Characterised by different flow regimes:</p>
+            <ul>
+              <li><em>Turbulent flow:</em> chaotic and irregular <em>(mixing occurs)</em></li>
+              <li><em>Transitional flow:</em> between laminar and turbulent</li>
+              <li><em>Laminar flow:</em> smooth and orderly <em> (no mixing)</em></li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <div class="fragment" data-fragment-index="1">
+              <iframe width="800" height="200"
+                src="https://www.youtube.com/embed/WDtOuBJaCSw?si=j6Uy9NFz4Pal3pLN&amp;autoplay=1&mute=1&modestbranding=1&fs=0&loop=1&playlist=WDtOuBJaCSw"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+              </iframe>
+            </div>
+            <p class="bottom-6"></p>
+
+            <div class="fragment" data-fragment-index="2">
+              <img src="img/laminar.jpg" width="800" />
             </div>
 
-            <div class="col">
-              <div class="fragment" data-fragment-index="1">
-              <iframe 
-                width="800" 
-                height="200" 
-                src="https://www.youtube.com/embed/WDtOuBJaCSw?si=j6Uy9NFz4Pal3pLN&amp;autoplay=1&mute=1&modestbranding=1&fs=0&loop=1&playlist=WDtOuBJaCSw" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-              </iframe>
-              </div>
-              <p class="bottom-6"></p>
-
-              <div class="fragment" data-fragment-index="2">
-              <img src="img/laminar.jpg" width="800"/>
-              </div>
-
-              <div class="fragment" data-fragment-index="3">
+            <div class="fragment" data-fragment-index="3">
               <p>Flow regime depends on Reynolds number ($\text{Re}_D=U\rho D/\mu$)</p>
               <ul>
                 <li><em>$\text{Re}_D > 4000$</em>: Turbulent</li>
                 <li><em>$2300 < \text{Re}_D < 4000$</em>: Transitional</li>
                 <li><em>$\text{Re}_D < 2300$ </em>: Laminar</li>
               </ul>
-              </div>
-            </div>
-        </section>
-
-        <section>
-          <h2> Entrance regions and fully-developed flows</h2>
-          <div class="container">
-            <div class="col">
-              <p class="fragment semi-fade-out" data-fragment-index="1">Region close to inlets</p>
-              <ul>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="1"><b>(1)</b>: Inviscid (enters with near uniform velocity aka plug flow)</li>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="2"><b>(2)</b>: Reaches fully-developed (boundary layer reached centre)</li>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="3"><b>(3)</b>: Remains fully developed and nothing changes</li>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="4"><b>(4)</b>: Skewed and starts to develop again</li>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="5"><b>(5)</b>: Reaches fully-developed again</li>
-                <li class="fragment fade-in-then-semi-out" data-fragment-index="6"><b>(6)</b>: Remains fully-developed and nothing changes</li>
-              </ul>
-
-              <p class="fragment fade-in-then-semi-out" data-fragment-index="7" >Entrance length $l_e$ depends on Reynolds number:</p>
-                <ul class="fragment fade-in-then-semi-out" data-fragment-index="7">
-                  <li>Laminar: <em>\( l_e/D \approx 0.06 \text{Re}_D \)</em></li>
-                  <li>Turbulent: <em>\( l_e/D \approx 4.4 \text{Re}_D^{1/6} \)</em></li>
-                </ul>
-                <p></p>
-                <img class="fragment fade-in-then-semi-out" data-fragment-index="8" src="img/fig8-5-side.jpg" width="300"/>
-                       
-            </div>
-            <div class="col">
-              <img src="img/fig8-5.jpg" width="1200"/>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section>
-          <h2>Pressure profile in pipe flows</h2>
-          <div class="container">
-            <div class="col">
-              <p >Pressure varies <em>in fully-developed laminar flow <b>linearly </b></em> along the pipe</p>
-              <ul>
-                <li>$\partial p/\partial x= -\Delta p/p < 0$</li>
-              </ul>
+      <section>
+        <h2> Entrance regions and fully-developed flows</h2>
+        <div class="container">
+          <div class="col">
+            <p class="fragment semi-fade-out" data-fragment-index="1">Region close to inlets</p>
+            <ul>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1"><b>(1)</b>: Inviscid (enters with near
+                uniform velocity aka plug flow)</li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="2"><b>(2)</b>: Reaches fully-developed
+                (boundary layer reached centre)</li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="3"><b>(3)</b>: Remains fully developed and
+                nothing changes</li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="4"><b>(4)</b>: Skewed and starts to
+                develop again</li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="5"><b>(5)</b>: Reaches fully-developed
+                again</li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="6"><b>(6)</b>: Remains fully-developed and
+                nothing changes</li>
+            </ul>
 
-              <p class="fragment" data-fragment-index="1">Pressure drop in pipe flows is balanced by:</p>
-              <ul>
-                <li class="fragment" data-fragment-index="2">Pressure drop due to friction (viscous effects)</li>
-                <li class="fragment" data-fragment-index="3">Pressure drop due to acceleration/deceleration of flow (inertia effects)</li>
-                <li class="fragment" data-fragment-index="4">Hydrostatic pressure variation due to elevation changes</li>
-              </ul>
-              <p class="bottom-2"></p>
-              <p class="fragment" data-fragment-index="5">Recall from analytical solutions earlier:</p>
-              <ul>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="7">Entrance length $l_e$ depends on Reynolds
+              number:</p>
+            <ul class="fragment fade-in-then-semi-out" data-fragment-index="7">
+              <li>Laminar: <em>\( l_e/D \approx 0.06 \text{Re}_D \)</em></li>
+              <li>Turbulent: <em>\( l_e/D \approx 4.4 \text{Re}_D^{1/6} \)</em></li>
+            </ul>
+            <p></p>
+            <img class="fragment fade-in-then-semi-out" data-fragment-index="8" src="img/fig8-5-side.jpg" width="300" />
+
+          </div>
+          <div class="col">
+            <img src="img/fig8-5.jpg" width="1200" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Pressure profile in pipe flows</h2>
+        <div class="container">
+          <div class="col">
+            <p>Pressure varies <em>in fully-developed laminar flow <b>linearly </b></em> along the pipe</p>
+            <ul>
+              <li>$\partial p/\partial x= -\Delta p/p < 0$</li>
+            </ul>
+
+            <p class="fragment" data-fragment-index="1">Pressure drop in pipe flows is balanced by:</p>
+            <ul>
+              <li class="fragment" data-fragment-index="2">Pressure drop due to friction (viscous effects)</li>
+              <li class="fragment" data-fragment-index="3">Pressure drop due to acceleration/deceleration of flow
+                (inertia effects)</li>
+              <li class="fragment" data-fragment-index="4">Hydrostatic pressure variation due to elevation changes</li>
+            </ul>
+            <p class="bottom-2"></p>
+            <p class="fragment" data-fragment-index="5">Recall from analytical solutions earlier:</p>
+            <ul>
               <p class="singleline-math small-left-padding">
-                <span class="fragment" data-fragment-index="5">\(Q = \dfrac{\pi R^4}{8\mu} \left(-\dfrac{\partial p}{\partial z}\right)\)</span>
-                <span class="fragment" data-fragment-index="6">\(= \dfrac{\pi D^4}{128\mu} \left(-\dfrac{\partial p}{\partial z}\right)\)</span>
+                <span class="fragment" data-fragment-index="5">\(Q = \dfrac{\pi R^4}{8\mu} \left(-\dfrac{\partial
+                  p}{\partial z}\right)\)</span>
+                <span class="fragment" data-fragment-index="6">\(= \dfrac{\pi D^4}{128\mu} \left(-\dfrac{\partial
+                  p}{\partial z}\right)\)</span>
                 <span class="fragment" data-fragment-index="7">\(= \dfrac{\pi D^4 \Delta p}{128\mu l}\)</span>
-                <ul>
-                  <li class="fragment" data-fragment-index="8"><em>Valid</em> for laminar, steady, horisontal, fully-developed flow</li>
-                </ul>
-              </p>
-              </ul>
-
-              <p class="fragment" data-fragment-index="9">For non-horisontal pipes:</p>
               <ul>
-              <p class="singleline-math small-left-padding">
-                <span class="fragment" data-fragment-index="9">\( Q =\dfrac{\pi D^4(\Delta p - \rho g l \text{sin}\theta)}{128\mu l}\)</span>
-              </p>
+                <li class="fragment" data-fragment-index="8"><em>Valid</em> for laminar, steady, horisontal,
+                  fully-developed flow</li>
               </ul>
-            </div>
-            <div class="col">
-              <img src="img/fig8-6.jpg" width="1200"/>
-              <img class="fragment" data-fragment-index="9" src="img/fig8-10b.jpg" width="900"/>
-            </div>
-        </section>
-
-        <section>
-          <h2> <b>Exercise:</b> Laminar Pipe Flow</h2>
-          <div class="container">
-            <div class="col">
-              <p class="small-font">
-                An oil with a viscosity of $\mu = 0.1 \, \text{Pa} \cdot \text{s}$ and density $\rho = 900 \, \text{kg/m}^3$ flows in a pipe of diameter $D = 0.020 \, \text{m}$.
-              </p>
-              <ul>
-                <li class="small-font"><em>(a)</em> What pressure drop, $p_1-p_2$, is needed to produce
-                a flowrate of $Q=2.0 \times 10^{-5} \, \text{m}^3/\text{s}$ if the pipe is horizontal with
-                $x_1 = 0$ and $x_2 = 10 \, \text{m}$?</li>
-                <li class="small-font"><em>(b)</em> How steep a hill, $\theta$, must the pipe be on to if the oil is to flow through the pipe at the same rate as in part <em>(a)</em>, but with $p_1=p_2$?</li>
-                <li class="small-font"><em>(c)</em> For the conditions of part <em>(b)</em>, if $p_1=200$ kPa, what is the pressure at section $x_3=5$ m, where $x$ is measured along the pipe?</li>
-              </ul>
-            </div>
-
-            <div class="fragment" class="col">
-
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2>Transition from laminar to turbulent flow</h2>
-          <div class="container">
-            <div class="col">
-              <p>Happens <em>gradually</em> between $Re \approx 2100$ and $Re \approx 4000$</p>
-              <ul>
-                <li>Small <em>bursts</em> of turbulence start at $\text{Re} \approx 2100$</li>
-                <li>Bursts grow in <em>size</em> and <em>frequency</em> with increasing $\text{Re}$</li>
-                <li>Increased mixing and momentum transfer occurs</li>
-                <li>Higher <em>heat transfer rates</em> and <em>pressure drop</em></li>
-              </ul>
-
-              <p class="fragment" data-fragment-index="1">Velocity field $\textbf{\textit{V}}$ <em>changes</em> from being 1-D to 3-D</p>
-              <ul class="fragment" data-fragment-index="1">
-                <li><em>Laminar:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}}$</li>
-                <li><em>Turbulent:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}} + v_y\cdot \hat{\textbf{j}} + v_z\cdot \hat{\textbf{k}}$</li>
-              </ul>
-            </div>
-            <div class="col">
-              <img src="img/fig8-11.jpg" width="1000"/>
-            </div>
-        </section>
-
-        <section>
-          <h2>Decomposing a turbulent flow</h2>
-          <div class="container">
-            <div class="col">
-              <p> Consider a turbulent flow with instantaneous velocity $u(t)$</p>
-              <ul>
-                <li class="fragment" data-fragment-index="1"><em>Time-averaged</em> velocity component $\overline{u}$</li>
-                <p class="fragment" data-fragment-index="1">
-                  $$\overline{u}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u(x,y,z,t) \, \text{d}t$$
-              </p>
-              <ul>
-                <li class="fragment" data-fragment-index="2"> $T$ is the <em>averaging time period</em> (should be long enough to capture the relevant flow structures)</li>
-              </ul>
-              <p class="bottom-2"></p>
-                <li class="fragment" data-fragment-index="3"><em>Fluctuating</em> velocity component $u'$</li>
-                <p class="fragment" data-fragment-index="3">
-                  $$u'(x,y,z,t) = u(x,y,z,t) - \overline{u}(x,y,z)$$
-                </p>
-                <p class="bottom-2"></p>
-                <li class="fragment" data-fragment-index="4"> <em>Instantaneous</em> velocity can then be decomposed as:</li>
-                <p class="fragment" data-fragment-index="4">
-                  $$u(x,y,z,t) = \overline{u}(x,y,z) + u'(x,y,z,t)$$
-                </p>
-            </div>
-            <div class="col">
-              <div class="r-stack">
-                <img src="img/fig8-12-0.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="1" src="img/fig8-12-1.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="2" src="img/fig8-12-2.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="3" src="img/fig8-12-3.jpg" width="1000"/>
-              </div>
-            </div>
-        </section>
-
-        <section>
-          <h2>Describing turbulence</h2>
-          <div class="container">
-            <div class="col">
-              <p>Relevant to quantify strength of fluctuations</p>
-              <ul>
-                <li class="fragment" data-fragment-index="1">Clearly, <em>time-averaging</em> fluctuations $\overline{u'}$ does not make sense</li>
-                <p class="fragment" data-fragment-index="1">
-                  $$\overline{u'}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t) \, \text{d}t = 0$$
               </p>
             </ul>
-              <ul>
-                <li class="fragment" data-fragment-index="2">What if we take <em>squareroot of fluctuations</em> and then <em>time-average</em>? </li>
-                <p class="fragment" data-fragment-index="5">
-                  $$\overline{(u')^2}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t)^2 \, \text{d}t > 0$$
+
+            <p class="fragment" data-fragment-index="9">For non-horisontal pipes:</p>
+            <ul>
+              <p class="singleline-math small-left-padding">
+                <span class="fragment" data-fragment-index="9">\( Q =\dfrac{\pi D^4(\Delta p - \rho g l
+                  \text{sin}\theta)}{128\mu l}\)</span>
               </p>
-              </ul>
-              <ul>
-                <li class="fragment" data-fragment-index="6">To get "back" to same order of magnitude, we now take squareroot</li>
-                <p class="fragment" data-fragment-index="7">
-                  $$u_\text{rms}(x,y,z) = \sqrt{\overline{(u')^2}(x,y,z)}$$
+            </ul>
+          </div>
+          <div class="col">
+            <img src="img/fig8-6.jpg" width="1200" />
+            <img class="fragment" data-fragment-index="9" src="img/fig8-10b.jpg" width="900" />
+          </div>
+      </section>
+
+      <section>
+        <h2> <b>Exercise:</b> Laminar Pipe Flow</h2>
+        <div class="container">
+          <div class="col">
+            <p class="small-font">
+              An oil with a viscosity of $\mu = 0.1 \, \text{Pa} \cdot \text{s}$ and density $\rho = 900 \,
+              \text{kg/m}^3$ flows in a pipe of diameter $D = 0.020 \, \text{m}$.
+            </p>
+            <ul>
+              <li class="small-font"><em>(a)</em> What pressure drop, $p_1-p_2$, is needed to produce
+                a flowrate of $Q=2.0 \times 10^{-5} \, \text{m}^3/\text{s}$ if the pipe is horizontal with
+                $x_1 = 0$ and $x_2 = 10 \, \text{m}$?</li>
+              <li class="small-font"><em>(b)</em> How steep a hill, $\theta$, must the pipe be on to if the oil is to
+                flow through the pipe at the same rate as in part <em>(a)</em>, but with $p_1=p_2$?</li>
+              <li class="small-font"><em>(c)</em> For the conditions of part <em>(b)</em>, if $p_1=200$ kPa, what is the
+                pressure at section $x_3=5$ m, where $x$ is measured along the pipe?</li>
+            </ul>
+          </div>
+
+          <div class="fragment" class="col">
+
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Transition from laminar to turbulent flow</h2>
+        <div class="container">
+          <div class="col">
+            <p>Happens <em>gradually</em> between $Re \approx 2100$ and $Re \approx 4000$</p>
+            <ul>
+              <li>Small <em>bursts</em> of turbulence start at $\text{Re} \approx 2100$</li>
+              <li>Bursts grow in <em>size</em> and <em>frequency</em> with increasing $\text{Re}$</li>
+              <li>Increased mixing and momentum transfer occurs</li>
+              <li>Higher <em>heat transfer rates</em> and <em>pressure drop</em></li>
+            </ul>
+
+            <p class="fragment" data-fragment-index="1">Velocity field $\textbf{\textit{V}}$ <em>changes</em> from being
+              1-D to 3-D</p>
+            <ul class="fragment" data-fragment-index="1">
+              <li><em>Laminar:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}}$</li>
+              <li><em>Turbulent:</em> $\textbf{\textit{V}}=v_x\cdot \hat{\textbf{i}} + v_y\cdot \hat{\textbf{j}} +
+                v_z\cdot \hat{\textbf{k}}$</li>
+            </ul>
+          </div>
+          <div class="col">
+            <img src="img/fig8-11.jpg" width="1000" />
+          </div>
+      </section>
+
+      <section>
+        <h2>Decomposing a turbulent flow</h2>
+        <div class="container">
+          <div class="col">
+            <p> Consider a turbulent flow with instantaneous velocity $u(t)$</p>
+            <ul>
+              <li class="fragment" data-fragment-index="1"><em>Time-averaged</em> velocity component $\overline{u}$</li>
+              <p class="fragment" data-fragment-index="1">
+                $$\overline{u}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u(x,y,z,t) \, \text{d}t$$
               </p>
-              </ul>
               <ul>
-                <li class="fragment bottom-2" data-fragment-index="8">This is called the <em>root-mean-square (RMS)</em> of the fluctuations</li>
-                  <li class="fragment" data-fragment-index="9">Often normalised by the time-averaged velocity to get a <em>relative measure</em>, aka <em>turbulence intensity</em></li>
-                  <p class="fragment" data-fragment-index="9">
-                    $$I(x,y,z) = \dfrac{u_\text{rms}(x,y,z)}{\overline{u}(x,y,z)}$$
-                  </p>
+                <li class="fragment" data-fragment-index="2"> $T$ is the <em>averaging time period</em> (should be long
+                  enough to capture the relevant flow structures)</li>
               </ul>
+              <p class="bottom-2"></p>
+              <li class="fragment" data-fragment-index="3"><em>Fluctuating</em> velocity component $u'$</li>
+              <p class="fragment" data-fragment-index="3">
+                $$u'(x,y,z,t) = u(x,y,z,t) - \overline{u}(x,y,z)$$
+              </p>
+              <p class="bottom-2"></p>
+              <li class="fragment" data-fragment-index="4"> <em>Instantaneous</em> velocity can then be decomposed as:
+              </li>
+              <p class="fragment" data-fragment-index="4">
+                $$u(x,y,z,t) = \overline{u}(x,y,z) + u'(x,y,z,t)$$
+              </p>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img src="img/fig8-12-0.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="1" src="img/fig8-12-1.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="2" src="img/fig8-12-2.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="3" src="img/fig8-12-3.jpg" width="1000" />
             </div>
-            <div class="col">
-              <div class="r-stack">
-                <img src="img/fig8-13-0.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="1" src="img/fig8-13-1.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="3" src="img/fig8-13-2.jpg" width="1000"/>
-                <img class="fragment" data-fragment-index="4" src="img/fig8-13-3.jpg" width="1000"/>
-              </div>
+          </div>
+      </section>
+
+      <section>
+        <h2>Describing turbulence</h2>
+        <div class="container">
+          <div class="col">
+            <p>Relevant to quantify strength of fluctuations</p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">Clearly, <em>time-averaging</em> fluctuations $\overline{u'}$
+                does not make sense</li>
+              <p class="fragment" data-fragment-index="1">
+                $$\overline{u'}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t) \, \text{d}t = 0$$
+              </p>
+            </ul>
+            <ul>
+              <li class="fragment" data-fragment-index="2">What if we take <em>squareroot of fluctuations</em> and then
+                <em>time-average</em>? </li>
+              <p class="fragment" data-fragment-index="5">
+                $$\overline{(u')^2}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t)^2 \, \text{d}t > 0$$
+              </p>
+            </ul>
+            <ul>
+              <li class="fragment" data-fragment-index="6">To get "back" to same order of magnitude, we now take
+                squareroot</li>
+              <p class="fragment" data-fragment-index="7">
+                $$u_\text{rms}(x,y,z) = \sqrt{\overline{(u')^2}(x,y,z)}$$
+              </p>
+            </ul>
+            <ul>
+              <li class="fragment bottom-2" data-fragment-index="8">This is called the <em>root-mean-square (RMS)</em>
+                of the fluctuations</li>
+              <li class="fragment" data-fragment-index="9">Often normalised by the time-averaged velocity to get a
+                <em>relative measure</em>, aka <em>turbulence intensity</em></li>
+              <p class="fragment" data-fragment-index="9">
+                $$I(x,y,z) = \dfrac{u_\text{rms}(x,y,z)}{\overline{u}(x,y,z)}$$
+              </p>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img src="img/fig8-13-0.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="1" src="img/fig8-13-1.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="3" src="img/fig8-13-2.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="4" src="img/fig8-13-3.jpg" width="1000" />
             </div>
-        </section>
-      </div>
+          </div>
+      </section>
     </div>
+  </div>
 
+  <script type="module" src="../../main.js"></script>
+</body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/customcontrols/plugin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chalkboard/plugin.js"></script>
-    <script type="module" src="../../main.js"></script>
-  </body>
 </html>
