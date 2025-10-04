@@ -53,9 +53,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f pdfs   # force add in case of .gitignore
-          if git diff --cached --quiet; then
-            echo "No PDF changes to commit"
-          else
+
+          # Commit if there are changes
+          if ! git diff --cached --quiet; then
             git commit -m "Update generated PDFs [skip ci]"
-            git push origin HEAD:main
+          else
+            echo "No PDF changes to commit"
+          fi
+
+          # Always pull latest remote changes to avoid push conflicts
+          git pull --rebase origin main
+
+          # Push only if there are local commits not on remote
+          if ! git diff --quiet origin/main; then
+            git push origin main
+          else
+            echo "Nothing to push"
           fi
