@@ -81,7 +81,7 @@
 
           <div class="col">
 
-            <img class="fragment" data-fragment-index="1" src="img/7-base-dimensions.png" width="300" />
+            <img src="img/7-base-dimensions.png" width="300" />
 
 
             <p class="fragment">.. we may also use the <b>FLT</b> system:</p>
@@ -97,24 +97,34 @@
 
       <section>
         <h2>MLT systems in the wild..</h2>
-        <img src="img/dimless-numbers-openfoam.jpg" width="1400" />
+        <img src="img/dimanalysis-numbers-openfoam.jpg" width="1400" />
         <p>Dimensions in OpenFOAM are defined in terms of the <b>MLT</b> system (here velocity)</p>
       </section>
 
       <section>
         <h2>Law of <em>Dimensional Homogeneity</em></h2>
         <div class="container">
+          <p>Every <em>additive term ($+$ or $-$)</em> in an equation <b>must</b> have same dimensions
+          </p>
+        </div>
+        <img class="fragment" src="img/dimanalysis-law-homogenity.jpg" width="1400" />
+      </section>
+
+      <section>
+        <h2> <b>Exercise:</b> Dimensional homogeneity</h2>
+        <div class="container">
           <div class="col">
-            <p class="fragment">Every <em>additive term ($+$ or $-$)</em> in an equation <b>must</b> have same dimensions</p>
-            <p class="fragment">Example: Newton's second law of motion</p>
-            <p class="fragment">F = m a</p>
-            <p class="fragment">[$F$] = [$m$][$a$]</p>
-            <p class="fragment">MLT: MLT$^{-2}$ = M LT$^{-2}$</p>
-            <p class="fragment">FLT: F = F</p>
+            <p class="small-font">
+              If $V$ is a velocity, <em>determine</em> the dimensions of $Z$, $\alpha$ and $G$, which appear in the
+              dimensionally homogeneous equation
+            </p>
+            <p class="singleline-math">
+              <span class="larger-font">\( p+\dfrac{1}{2}\rho V^2 + \rho g z = C \)</span>
+            </p>
           </div>
-          <div class="col">
-            yrsdy
-            <p>Dimensions in OpenFOAM are defined in terms of the <b>MLT</b> system (here velocity)</p>
+
+          <div class="fragment" class="col">
+
           </div>
         </div>
       </section>

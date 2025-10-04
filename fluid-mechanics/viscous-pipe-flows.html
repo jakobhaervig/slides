@@ -296,17 +296,20 @@
                 <li class="fragment" data-fragment-index="2"> $T$ is the <em>averaging time period</em> (should be long
                   enough to capture the relevant flow structures)</li>
               </ul>
+
               <p class="bottom-2"></p>
-              <li class="fragment" data-fragment-index="3"><em>Fluctuating</em> velocity component $u'$</li>
-              <p class="fragment" data-fragment-index="3">
-                $$u'(x,y,z,t) = u(x,y,z,t) - \overline{u}(x,y,z)$$
-              </p>
-              <p class="bottom-2"></p>
-              <li class="fragment" data-fragment-index="4"> <em>Instantaneous</em> velocity can then be decomposed as:
+              <li class="fragment" data-fragment-index="3"> <em>Instantaneous</em> velocity can then be decomposed as:
               </li>
-              <p class="fragment" data-fragment-index="4">
+              <p class="fragment" data-fragment-index="3">
                 $$u(x,y,z,t) = \overline{u}(x,y,z) + u'(x,y,z,t)$$
               </p>
+
+              <p class="bottom-2"></p>
+              <li class="fragment" data-fragment-index="4"><em>Fluctuating</em> velocity component $u'$</li>
+              <p class="fragment" data-fragment-index="4">
+                $$u'(x,y,z,t) = u(x,y,z,t) - \overline{u}(x,y,z)$$
+              </p>
+
           </div>
           <div class="col">
             <div class="r-stack">
@@ -331,7 +334,7 @@
               </p>
             </ul>
             <ul>
-              <li class="fragment" data-fragment-index="2">What if we take <em>squareroot of fluctuations</em> and then
+              <li class="fragment" data-fragment-index="2">What if we take <em>square</em> fluctuations and then
                 <em>time-average</em>? </li>
               <p class="fragment" data-fragment-index="5">
                 $$\overline{(u')^2}(x,y,z) = \dfrac{1}{T} \int_{t_0}^{T+t_0} u'(x,y,z,t)^2 \, \text{d}t > 0$$
@@ -339,7 +342,7 @@
             </ul>
             <ul>
               <li class="fragment" data-fragment-index="6">To get "back" to same order of magnitude, we now take
-                squareroot</li>
+                <em>the square root of</em> fluctuations</li>
               <p class="fragment" data-fragment-index="7">
                 $$u_\text{rms}(x,y,z) = \sqrt{\overline{(u')^2}(x,y,z)}$$
               </p>
