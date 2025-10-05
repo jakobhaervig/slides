@@ -93,6 +93,10 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   font-size: 0.55em !important;
 }
 
+.singleline-math-larger-font{
+  font-size: 1.2em !important;
+}
+
 .smaller-left-padding{
   padding-left: var(--smaller-left-padding);
 } 
@@ -157,6 +161,23 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 
 .block {
       display: block;
+}
+
+.reveal .backgrounds .slide-background.example,
+.reveal .backgrounds .slide-background.example.present,
+.reveal .backgrounds .slide-background.example.current,
+.reveal .backgrounds .slide-background.example.active {
+  /* kill any image and set the color */
+  background-image: none !important;
+  /* background-color: var(--haervig-gray) !important; */
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+/* text color inside the section */
+.reveal section.example b
+{ 
+  color: var(--haervig-green-dark);
 }
 
 /* END CUSTOM THEME BASED ON WHITE */
@@ -484,8 +505,30 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   color: var(--r-link-color);
 }
 
+/*********************************************
+ * BACK ARROW
+ *********************************************/
+.back-arrow {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  text-decoration: none;
+  color: var(--haervig-orange-light);
+  font-size: 30px;
+}
+
+.back-arrow::before {
+  content: "↩";
+  font-weight: bold;
+}
+
 @media print {
   .backgrounds {
     background-color: var(--r-background-color);
+  }
+  
+  .back-arrow {
+    display: none;
   }
 }
