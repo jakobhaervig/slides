@@ -134,7 +134,7 @@
         <h2>Solution <em>without</em> dimensional analysis (don't try this at home)</h2>
         <div class="container">
           <div class="col">
-            <p class="fragment fade-in-then-semi-out" data-fragment-index="1"><b>Problem</b>: Interested in pressure
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="1"><b>Problem</b>: Investigate pressure drop
               drop per unit length pipe $\Delta p_l$ </p>
             <ul>
               <li class="fragment fade-in-then-semi-out" data-fragment-index="2">Variables <em>expected</em> to be
@@ -153,8 +153,9 @@
                 specific parameters chosen</li>
               <li class="fragment fade-in-then-semi-out" data-fragment-index="9">Difficult to generalise results to
                 other situations</li>
-              <li class="fragment fade-in-then-semi-out" data-fragment-index="10">Full parameter span shown requires
-                <em>5^4=625</em> experiments/simulations
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="10">Full parameter span (4 parameters with
+                5 variations)<br> requires
+                <em>$5^4=625$</em> experiments/simulations
               </li>
             </ul>
           </div>
@@ -170,14 +171,14 @@
         <h2>Solution <em>with</em> dimensional analysis</h2>
         <div class="container">
           <div class="col">
-            <p class="fragment" data-fragment-index="1"><b>Problem</b>: Interested in pressure drop per unit length pipe
+            <p class="fragment" data-fragment-index="1"><b>Problem</b>: Investigate pressure drop per unit length pipe
               $\Delta p_l$ </p>
             <ul>
               <li class="fragment" data-fragment-index="2">Variables <em>expected</em> to be important: Velocity $V$,
                 diameter $D$, dynamic viscosity $\mu$, density $\rho$, length $L$</li>
               <li class="fragment" data-fragment-index="3">Thus, we may write</b>: $\Delta p = f(V, D, \mu, \rho)$</li>
-              <li class="fragment" data-fragment-index="4"><em>Now</em>, transform to dimensionless form: $\dfrac{D
-                \Delta p}{\rho V^2} = f(\dfrac{\rho V D}{\mu})$</li>
+              <li class="fragment" data-fragment-index="4"><em>Now</em>, transform to dimensionless form: \[\dfrac{D
+                \Delta p}{\rho V^2} = f\left(\dfrac{\rho V D}{\mu}\right)\]</li>
             </ul>
             <p class="fragment" data-fragment-index="5"><b>Problem now much simpler</b>: Only need to vary one
               parameter!</p>
@@ -235,14 +236,15 @@
         <div class="container">
           <div class="col">
             <p>
-              Determine the <em>number of non-dimensional groups</em> required to describe pressure loss per unit length pipe for
+              Determine the <em>number of non-dimensional groups</em> required to describe pressure loss per unit length
+              pipe for
               laminar flow.
             </p>
             <img src="img/dimanalysis-intro2.jpg" width="700" />
-            <img src="img/dimanalysis-sidefigure.jpg" width="400" />
+            <img src="img/dimanalysis-sidefigure.jpg" width="300" />
           </div>
           <div class="col">
-            
+
           </div>
         </div>
       </section>
@@ -263,7 +265,8 @@
               </li>
               <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Count number of base dimensions,
                 <em>$r$</em>, involved in the
-                problem</li>
+                problem
+              </li>
               <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Rewrite the problem in terms
                 <em>$k-r$</em> non-dimensional numbers
               </li>
@@ -317,39 +320,191 @@
               Determine the <em>non-dimensional groups</em> required to describe pressure loss per unit length pipe for
               laminar flow.
             </p>
-            <img  src="img/dimanalysis-sidefigure.jpg" width="400" />
+            <img src="img/dimanalysis-intro2.jpg" width="700" />
+            <br>
+            <img src="img/dimanalysis-sidefigure.jpg" width="300" />
+          </div>
+      </section>
+
+      <section>
+        <h2>Additional comments for</h2>
+        <h4><b>Step 1</b>: Identify number of variables, <em>$k$</em>, involved in the problem</h4>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <ul>
+              <li class="fragment">What if we pick <em>too few</em> variables?</li>
+              <ul>
+                <li class="fragment"> .. forgot surface roughness for turbulent flow:</li>
+              </ul>
+            </ul>
+            <img class="fragment" src="img/dimanalysis-too-few-vars.jpg" width="600" />
+            <ul>
+              <li class="fragment"> <b>Conclusion</b>: Data does not collapse to one line</li>
+            </ul>
+          </div>
+          <div class="col">
+            <p class="bottom-1"></p>
+            <ul>
+              <li class="fragment">What if we pick <em>too many</em> variables?</li>
+              <ul>
+                <li class="fragment"> .. include surface roughness for laminar flow:</li>
+              </ul>
+            </ul>
+            <img class="fragment" src="img/dimanalysis-too-many-vars.jpg" width="600" />
+            <ul>
+              <li class="fragment"> <b>Conclusion</b>: All data on one line</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section>
-        <h2>Tips for choosing repeating variables</h2>
+        <h2>Additional comments for</h2>
+        <h4><b>Step 2</b>: Count number of base dimensions, <em>$r$</em>, involved in the problem</h4>
         <div class="container">
           <div class="col">
+            <p class="bottom-1"></p>
             <ul>
-              <p class="bottom-1"></p>
-              <li class="fragment">Pick variables that together <em>represent all the base dimensions</em> involved in the problem</li>
-             <p class="bottom-1"></p>
-              <li class="fragment">Don't pick the <em>dependent variable</em> as a repeating variable (the one we interested in)</li>
+              <li class="fragment" data-fragment-index="0">Does it matter if we <em>use $\text{M}\text{L}\text{T}$</em>
+                or <em>use
+                  $\text{F}\text{L}\text{T}$</em>
+                system?</li>
               <ul>
-                <li class="fragment"> .. otherwise it will appear in more non-dimensional groups</li>
+                <li class="fragment" data-fragment-index="1"> .. take a look at the following:</li>
               </ul>
               <p class="bottom-1"></p>
-              <li class="fragment">Don't pick variables that are <em>already dimensionless</em> (angles, for example)</li>
+              <table class="fragment" data-fragment-index="2">
+                <thead>
+                  <tr class="fragment" data-fragment-index="2">
+                    <th>Variable</th>
+                    <th>MLT</th>
+                    <th>FLT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="fragment" data-fragment-index="3">
+                    <td>Deflection, $\delta$</td>
+                    <td>L</td>
+                    <td>L</td>
+                  </tr>
+                  <tr class="fragment" data-fragment-index="4">
+                    <td>Diameter, $D$</td>
+                    <td>L</td>
+                    <td>L</td>
+                  </tr>
+                  <tr class="fragment" data-fragment-index="5">
+                    <td>Height, $h$</td>
+                    <td>L</td>
+                    <td>L</td>
+                  </tr>
+                  <tr class="fragment" data-fragment-index="6">
+                    <td>Thickness, $d$</td>
+                    <td>L</td>
+                    <td>L</td>
+                  </tr>
+                  <tr class="fragment" data-fragment-index="7">
+                    <td>Specific gravity, $\gamma$</td>
+                    <td>$\text{M}\text{L}^{-2}\text{T}^{-2}$</td>
+                    <td>$\text{F}\text{L}^{-3}$</td>
+                  </tr>
+                  <tr class="fragment" data-fragment-index="8">
+                    <td>Young's modulus, $E$</td>
+                    <td>$\text{M}\text{L}^{-1}\text{T}^{-2}$</td>
+                    <td>$\text{F}\text{L}^{-1}$</td>
+                  </tr>
+                </tbody>
+              </table>
               <p class="bottom-1"></p>
-              <li class="fragment">Don't pick variables that <em>can form a dimensionless group by themselves</em></li>
+
               <ul>
-                <li class="fragment"> .. such as diameter $[\text{D}]=L$ and height $[\text{H}]=L$</li>
+                <li class="fragment">$\text{FLT}$: <em>2 base dimensions</em> ($\text{F}$ and $\text{L}$)</li>
+                <li class="fragment">$\text{MLT}$: <em>2 base dimensions</em> ($\text{M}\text{T}^{-2}$ and $\text{L}$)
+                </li>
               </ul>
               <p class="bottom-1"></p>
-              <li class="fragment">Don't pick variables with the <em>same dimensions</em>, or <em>vary by an exponent</em> (e.g. $\text{LT}^{-1}$ and $\text{L}^2\text{T}^{-2}$)</li>
-              <p class="bottom-1"></p>
-              <li class="fragment">Pick variables that are <em>easy to measure or control</em></li>
-              <ul>
-                <li class="fragment">.. it's easier to vary velocity than viscosity later on..</li>
-              </ul>
+              <li class="fragment"> <b>Conclusion</b>: No, but we should be careful..</li>
             </ul>
+          </div>
+          <div class="col">
+            <img class="fragment" data-fragment-index="1" src="img/fige7-2.jpg" width="600" />
+          </div>
         </div>
       </section>
+
+      <section>
+        <section>
+          <h2>Additional comments for</h2>
+          <h4><b>Step 4</b>: Select a number of repeating variables, where the number of repeating variables equals the
+            number of base dimensions <em>$r$</em></h4>
+          <div class="container">
+            <ul>
+              <p class="bottom-1"></p>
+              <li>Does it matter which ones we choose?</li>
+              <li class="fragment"> <b>Conclusion</b>: No, but..</li>
+
+              <ul>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Pick variables that together <em>represent all the base
+                    dimensions</em> involved in
+                  the problem</li>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Don't pick the <em>dependent variable</em> as a repeating
+                  variable (the one we
+                  interested in)</li>
+                <ul>
+                  <li class="fragment fade-in-then-semi-out"> .. otherwise it will appear in more non-dimensional groups
+                  </li>
+                </ul>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Don't pick variables that are <em>already dimensionless</em>
+                  (angles, for example)
+                </li>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Don't pick variables that <em>can form a dimensionless group
+                    by themselves</em>
+                </li>
+                <ul>
+                  <li class="fragment fade-in-then-semi-out"> .. such as diameter $[D]=\text{L}$ and height
+                    $[H]=\text{L}$</li>
+                </ul>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Don't pick variables with the <em>same dimensions</em>, or
+                  <em>vary by an
+                    exponent</em> (e.g. $\text{LT}^{-1}$ and $\text{L}^2\text{T}^{-2}$)</li>
+                <p class="bottom-05"></p>
+                <li class="fragment fade-in-then-semi-out">Pick variables that are <em>easy to measure or control</em>
+                </li>
+                <ul>
+                  <li class="fragment fade-in-then-semi-out">.. it's easier to vary velocity than viscosity later on..
+                  </li>
+                </ul>
+              </ul>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Additional comments for</h2>
+          <h4><b>Step 4</b>: Select a number of repeating variables, where the number of repeating variables equals the
+            number of base dimensions <em>$r$</em></h4>
+          <div class="container">
+            <div class="col">
+              <ul>
+                <p class="bottom-1"></p>
+                <li>Functions depend on choice of repeating variables</li>
+                <li class="fragment"> <b>Conclusion</b>: End result is the same</li>
+
+              </ul>
+            </div>
+            <div class="col">
+              <p class="bottom-1"></p>
+              <img class="fragment" data-fragment-index="1" src="img/dimanalysis-sidefigure2.jpg" width="400" />
+            </div>
+          </div>
+        </section>
+      </section>
+
 
     </div>
   </div>

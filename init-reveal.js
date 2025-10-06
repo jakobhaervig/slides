@@ -6,8 +6,8 @@ window.onload = function() {
         center: false,
         progress: true,
         slideNumber: true,
-        transition: 'fade', // none/fade/slide/convex/concave/zoom
-        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'slide', // none/fade/slide/convex/concave/zoom
         transitionSpeed: 'default', // default/fast/slow
         plugins: [ RevealZoom, RevealNotes, RevealHighlight, RevealMath.KaTeX ],
         history: true,
