@@ -1,24 +1,222 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Jakob Hærvig">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/reveal.js/dist/reset.css">
-    <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="/custom/theme/haervig.css">
-    <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
-  </head>
 
-  <body>
-    <a href="/" class="back-arrow" title="Back to Home"></a>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h2>Getting started with the command line</h2>
-        </section>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="/custom/theme/haervig.css">
+  <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+  <a href="/" class="back-arrow" title="Back to Home"></a>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- TITLE -->
+      <section>
+        <h1>Using the Linux Bash Terminal</h1>
+        <p>Learn how to navigate, manage, and automate with Bash</p>
+        <p><small>by Your Name</small></p>
+      </section>
+
+      <!-- INTRO -->
+      <section>
+        <h2>What is Bash?</h2>
+        <ul>
+          <li>Bash stands for <strong>Bourne Again Shell</strong></li>
+          <li>It’s a command-line interface (CLI) used to interact with the Linux system</li>
+          <li>Provides tools for file manipulation, process control, scripting, and automation</li>
+        </ul>
+      </section>
+
+      <!-- WHY TERMINAL -->
+      <section>
+        <h2>Why Use the Terminal?</h2>
+        <ul>
+          <li>More powerful and flexible than GUIs</li>
+          <li>Allows automation and scripting</li>
+          <li>Remote administration via SSH</li>
+          <li>Essential for servers, development, and system management</li>
+        </ul>
+      </section>
+
+      <!-- STRUCTURE -->
+      <section>
+        <h2>Bash Prompt Structure</h2>
+        <pre><code>$ user@hostname:~/directory$</code></pre>
+        <ul>
+          <li><code>user</code> — your username</li>
+          <li><code>hostname</code> — the machine name</li>
+          <li><code>~/directory</code> — current working directory</li>
+        </ul>
+      </section>
+
+      <!-- NAVIGATION -->
+      <section>
+        <h2>Basic Navigation</h2>
+        <pre><code data-trim>
+pwd          # Print current directory
+ls           # List files
+cd /path     # Change directory
+cd ..        # Go up one directory
+cd ~         # Go to home directory
+          </code></pre>
+      </section>
+
+      <!-- FILE MANAGEMENT -->
+      <section>
+        <h2>File and Directory Management</h2>
+        <pre><code data-trim>
+touch file.txt          # Create file
+mkdir folder            # Create directory
+cp file1 file2          # Copy file
+mv old new              # Move or rename
+rm file.txt             # Remove file
+rm -r folder            # Remove directory recursively
+          </code></pre>
+      </section>
+
+      <!-- VIEWING CONTENT -->
+      <section>
+        <h2>Viewing Files</h2>
+        <pre><code data-trim>
+cat file.txt            # Print file contents
+less file.txt           # Scroll through file
+head file.txt           # Show first 10 lines
+tail file.txt           # Show last 10 lines
+grep "text" file.txt    # Search for text
+          </code></pre>
+      </section>
+
+      <!-- PERMISSIONS -->
+      <section>
+        <h2>Permissions and Ownership</h2>
+        <pre><code data-trim>
+ls -l                    # Show permissions
+chmod 755 file.sh        # Change permissions
+chown user:group file    # Change owner and group
+          </code></pre>
+        <p>Example permission format: <code>-rwxr-xr--</code></p>
+      </section>
+
+      <!-- PROCESS MANAGEMENT -->
+      <section>
+        <h2>Process Management</h2>
+        <pre><code data-trim>
+ps                      # Show processes
+top                     # Interactive process viewer
+kill PID                # Terminate process
+kill -9 PID             # Force kill process
+jobs                    # List background jobs
+fg / bg                 # Bring job to foreground/background
+          </code></pre>
+      </section>
+
+      <!-- REDIRECTION -->
+      <section>
+        <h2>Redirection and Pipes</h2>
+        <pre><code data-trim>
+command > file          # Redirect output to file
+command >> file         # Append output to file
+command < file          # Read input from file
+command1 | command2     # Pipe output of one into another
+          </code></pre>
+        <p>Example: <code>cat file.txt | grep "error"</code></p>
+      </section>
+
+      <!-- ENVIRONMENT VARIABLES -->
+      <section>
+        <h2>Environment Variables</h2>
+        <pre><code data-trim>
+echo $HOME
+echo $PATH
+export MYVAR="Hello"
+echo $MYVAR
+unset MYVAR
+          </code></pre>
+      </section>
+
+      <!-- SHELL SCRIPTS -->
+      <section>
+        <h2>Writing Shell Scripts</h2>
+        <pre><code data-trim>
+#!/bin/bash
+# My first script
+echo "Hello, $USER!"
+pwd
+ls
+          </code></pre>
+        <p>Save as <code>script.sh</code>, make executable: <code>chmod +x script.sh</code></p>
+        <p>Run: <code>./script.sh</code></p>
+      </section>
+
+      <!-- CONTROL STRUCTURES -->
+      <section>
+        <h2>Control Structures</h2>
+        <pre><code data-trim>
+if [ -f file.txt ]; then
+  echo "File exists"
+else
+  echo "File not found"
+fi
+
+for file in *.txt; do
+  echo $file
+done
+          </code></pre>
+      </section>
+
+      <!-- HISTORY AND ALIASES -->
+      <section>
+        <h2>History and Aliases</h2>
+        <pre><code data-trim>
+history               # View command history
+!45                   # Run command #45 from history
+alias ll='ls -lh'     # Create alias
+unalias ll            # Remove alias
+          </code></pre>
+      </section>
+
+      <!-- SHORTCUTS -->
+      <section>
+        <h2>Keyboard Shortcuts</h2>
+        <ul>
+          <li><code>Ctrl + C</code> – Cancel command</li>
+          <li><code>Ctrl + L</code> – Clear screen</li>
+          <li><code>Ctrl + R</code> – Reverse search history</li>
+          <li><code>Tab</code> – Autocomplete</li>
+          <li><code>!!</code> – Repeat last command</li>
+        </ul>
+      </section>
+
+      <!-- TIPS -->
+      <section>
+        <h2>Tips and Tricks</h2>
+        <ul>
+          <li>Use <code>man command</code> for help</li>
+          <li>Chain commands with <code>&&</code> or <code>;</code></li>
+          <li>Use <code>sudo</code> for admin tasks</li>
+          <li>Learn <code>tmux</code> or <code>screen</code> for multitasking</li>
+        </ul>
+      </section>
+
+      <!-- CONCLUSION -->
+      <section>
+        <h2>Summary</h2>
+        <ul>
+          <li>Bash is powerful for interacting with Linux systems</li>
+          <li>Mastering it improves efficiency and automation</li>
+          <li>Explore scripting and customization next!</li>
+        </ul>
+        <p><em>“The command line is where power users live.”</em></p>
+      </section>
+
     </div>
+  </div>
 
   <script src="/reveal.js/dist/reveal.js"></script>
   <script src="/reveal.js/plugin/zoom/zoom.js"></script>
@@ -26,5 +224,6 @@
   <script src="/reveal.js/plugin/math/math.js"></script>
   <script src="/reveal.js/plugin/highlight/highlight.js"></script>
   <script src="/init-reveal.js"></script>
-  </body>
+</body>
+
 </html>
