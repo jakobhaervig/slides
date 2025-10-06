@@ -25,33 +25,19 @@
       <section>
         <h2>Why look at <em> dimensional analysis</em>?</h2>
         <img class="fragment block semi-fade-out" data-fragment-index="1"
-          src="img/applications-dimensional-analysis0.jpg" width="1400" />
+          src="img/applications-dimensional-analysis0.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="1"
-          src="img/applications-dimensional-analysis1.jpg" width="1400" />
+          src="img/applications-dimensional-analysis1.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="2"
-          src="img/applications-dimensional-analysis2.jpg" width="1400" />
+          src="img/applications-dimensional-analysis2.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="3"
-          src="img/applications-dimensional-analysis3.jpg" width="1400" />
+          src="img/applications-dimensional-analysis3.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="4"
-          src="img/applications-dimensional-analysis4.jpg" width="1400" />
+          src="img/applications-dimensional-analysis4.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="5"
-          src="img/applications-dimensional-analysis5.jpg" width="1400" />
+          src="img/applications-dimensional-analysis5.jpg" width="1000" />
         <img class="fragment block fade-in-then-semi-out" data-fragment-index="6"
-          src="img/applications-dimensional-analysis6.jpg" width="1400" />
-      </section>
-
-      <section>
-        <h2><em>Dimensionless numbers</em> are important for dimensional analysis</h2>
-        <p class="bottom-1"></p>
-        <iframe width="1920" height="1000" src="https://en.wikipedia.org/wiki/Dimensionless_numbers_in_fluid_mechanics"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-        </iframe>
-      </section>
-
-      <section>
-        <h2>How do people come up with <em>dimensionless numbers</em>?</h2>
+          src="img/applications-dimensional-analysis6.jpg" width="1000" />
       </section>
 
       <section>
@@ -81,10 +67,7 @@
 
 
           <div class="col">
-
             <img src="img/7-base-dimensions.png" width="300" />
-
-
             <p class="fragment">.. we may also use the <b>FLT</b> system:</p>
             <ol>
               <li class="fragment">Force, F</li>
@@ -218,8 +201,8 @@
               <li class="fragment"><em>Step 2</em>: Count number of base dimensions, <em>$r$</em>, involved in the
                 problem</li>
               <p class="bottom-1"></p>
-              <li class="fragment"><em>Step 3</em>: Then we may rewrite the problem in terms <em>$k-r$</em>
-                non-dimensional numbers:
+              <li class="fragment"><em>Step 3</em>: Determine the number of required non-dimensional groups,
+                <em>$k-r$</em> (Buckingham Pi Theorem)
               </li>
               <p class="singleline-math-larger-font fragment">
                 <span>\( \Pi_1 = f(\Pi_2, \Pi_3, \ldots, \Pi_{k-r}) \)</span>
@@ -256,7 +239,6 @@
         </h4>
 
         <div class="container">
-
           <div class="col">
             <p class="bottom-1"></p>
             <ol>
@@ -267,8 +249,8 @@
                 <em>$r$</em>, involved in the
                 problem
               </li>
-              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Rewrite the problem in terms
-                <em>$k-r$</em> non-dimensional numbers
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Determine the number of required
+                non-dimensional groups, <em>$k-r$</em> (Buckingham Pi Theorem)
               </li>
               <li class="fragment fade-in-then-semi-out" data-fragment-index="2">Select a number of repeating variables,
                 where the number of repeating variables equals the number of base dimensions <em>$r$</em>
@@ -471,7 +453,8 @@
                 <p class="bottom-05"></p>
                 <li class="fragment fade-in-then-semi-out">Don't pick variables with the <em>same dimensions</em>, or
                   <em>vary by an
-                    exponent</em> (e.g. $\text{LT}^{-1}$ and $\text{L}^2\text{T}^{-2}$)</li>
+                    exponent</em> (e.g. $\text{LT}^{-1}$ and $\text{L}^2\text{T}^{-2}$)
+                </li>
                 <p class="bottom-05"></p>
                 <li class="fragment fade-in-then-semi-out">Pick variables that are <em>easy to measure or control</em>
                 </li>
@@ -493,7 +476,8 @@
               <ul>
                 <p class="bottom-1"></p>
                 <li>Functions depend on choice of repeating variables</li>
-                <li class="fragment"> <b>Conclusion</b>: End result is the same</li>
+                <li class="fragment"> <b>Conclusion</b>: End result is the same in terms of $\Delta p_l$ but functions
+                  are different</li>
 
               </ul>
             </div>
@@ -505,6 +489,239 @@
         </section>
       </section>
 
+      <section>
+        <h2>Forming non-Dimensional groups by <em>simple inspection</em></h2>
+        <h4><em>An alternative</em> to the systematic method of repeating variables</h4>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <ol>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Identify number of variables,
+                <em>$k$</em>, involved in the problem
+              </li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Count number of base dimensions,
+                <em>$r$</em>, involved in the
+                problem
+              </li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">Determine the number of required
+                non-dimensional groups, <em>$k-r$</em> (Buckingham Pi Theorem)
+              </li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="2">Form the non-dimensional groups <em>by
+                  inspection</em>, ensuring each group is dimensionless
+              </li>
+            </ol>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </section>
+
+      <section class="example">
+        <h2> <b>Exercise:</b> Use simple inspection to form non-dimensional groups</h2>
+        <div class="container">
+
+          <div class="col">
+            <p>
+              Determine <em>by inspection</em> the non-dimensional groups required to describe drag $F_D$ on a flat
+              plate.
+            </p>
+          </div>
+          <div class="col">
+            <p class="bottom-1"></p>
+            <img src="img/fige7-1.jpg" width="500" />
+          </div>
+      </section>
+
+      <section>
+        <h2><em>Dimensionless numbers</em> are important for dimensional analysis</h2>
+        <p class="bottom-1"></p>
+        <iframe width="1920" height="1000" src="https://en.wikipedia.org/wiki/Dimensionless_numbers_in_fluid_mechanics"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+      </section>
+
+      <section>
+        <h2>Similitude</h2>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <ul>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="1">A <em>prototype</em> refers to the real
+                thing
+                (e.g. full-scale aircraft, building, bridge, etc.)
+              </li>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="2">A <em>model</em> refers to a smaller
+                (or sometimes larger) representation
+                of the prototype (e.g. wind tunnel model of an aircraft, hydraulic model of a dam, etc.)
+              </li>
+            </ul>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="3">Dimensional analysis gives us the
+              dimensional number</p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="3">
+              <span>\( \Pi_1 = f(\Pi_2, \Pi_3, \ldots, \Pi_5) \)</span>
+            </span>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="4">.. exact same is valid for the model</p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+              <span>\( \Pi_{1,m} = f(\Pi_{2,m}, \Pi_{3,m}, \ldots, \Pi_{5,m}) \)</span>
+            </span>
+
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="5">To predict outcome on prototype based on
+              model <br>we use the <em>predictive equation:</em></p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="6">
+              <span>\( \Pi_{1,m} = \Pi_1 \)</span>
+            </span>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="7">.. which is <em></em>only valid</em> if
+              the so-called <em>similarity conditions</em> <br>(aka model design conditions or modeling laws) are met:
+            </p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="6">
+              <span class="fragment" data-fragment-index="8">\( \Pi_{2,m} = \Pi_2, \)</span>
+              <span>\(~~~~~\)</span>
+              <span class="fragment" data-fragment-index="9">\( \Pi_{3,m} = \Pi_3 \)</span>
+              <span>\(~~~~~\)</span>
+              <span class="fragment" data-fragment-index="10">\( \ldots \)</span>
+              <span>\(~~~~~\)</span>
+              <span class="fragment" data-fragment-index="10">\( \Pi_{5,m} = \Pi_5 \)</span>
+            </span>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img class="fragment" data-fragment-index="1" src="img/dimanalysis-similitude-prototype.jpg"
+                width="400" />
+              <img class="fragment" data-fragment-index="2" src="img/dimanalysis-similitude-model.jpg" width="400" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Types of Similarity</h2>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="1"><em>Three types</em> of similarity:</p>
+            <ul>
+              <ol>
+                <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="2"><em>Geometric
+                    similarity</em>: All geometric parameters are scaled equally</li>
+                <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="2">
+                  <span>\( \dfrac{L_m}{L_p} = \dfrac{D_m}{D_p} = \dfrac{H_m}{H_p} = \ldots = \text{constant} \)</span>
+                </span>
+                <p class="bottom-1"></p>
+                <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="3"><em>Kinematic
+                    similarity</em>: Flow fields are scaled equally</li>
+                <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="3">
+                  <span>\( \dfrac{V_m}{V_p} = \dfrac{a_m}{a_p} = \ldots = \text{constant} \)</span>
+                </span>
+                <p class="bottom-1"></p>
+                <li class="fragment fade-in-then-semi-out bottom-1" data-fragment-index="4"><em>Dynamic similarity</em>:
+                  Forces are scaled equally</li>
+                <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+                  <span>\( \dfrac{F_{m,1}}{F_{p,1}} = \dfrac{F_{m,2}}{F_{p,2}} = \ldots = \text{constant} \)</span>
+                </span>
+                <p class="bottom-1"></p>
+              </ol>
+            </ul>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="5"><em>Complete similarity</em> if all three
+              are fulfilled</p>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Distorted models</h2>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="1">When similarity conditions are <em>not
+                met</em>, e.g.:</p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="2">
+              <span>\( \Pi_{m,2} \neq \Pi_{p,2} \)</span>
+              <span>\(~~\)</span>
+              <span>or</span>
+              <span>\(~~\)</span>
+              <span>\( \Pi_{m,3} \neq \Pi_{p,3} \)</span>
+              <span>\(~~\)</span>
+              <span>\( \ldots \)</span>
+              <span>\(~~\)</span>
+              <span>or</span>
+              <span>\(~~\)</span>
+              <span>\( \Pi_{m,5} \neq \Pi_{p,5} \)</span>
+            </span>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="3">Then, the predictive equation <em>is not
+                valid</em></p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+              <span>\( \Pi_{m,1} \neq \Pi_{p,1} \)</span>
+            </span>
+            <ul>
+              <p class="botom-1"> </p>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="5"><em>No general rule</em> for when
+                distorted models are accurate <b>(requires experience)</b></li>
+
+            </ul>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Typical distorted models</h2>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1"></p>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="1">When similarity conditions are <em>not
+                met</em>, e.g.:</p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="2">
+              <span>\( \Pi_{m,2} \neq \Pi_{p,2} \)</span>
+              <span>\(~~\)</span>
+              <span>or</span>
+              <span>\(~~\)</span>
+              <span>\( \Pi_{m,3} \neq \Pi_{p,3} \)</span>
+              <span>\(~~\)</span>
+              <span>\( \ldots \)</span>
+              <span>\(~~\)</span>
+              <span>or</span>
+              <span>\(~~\)</span>
+              <span>\( \Pi_{m,5} \neq \Pi_{p,5} \)</span>
+            </span>
+            <p class="fragment fade-in-then-semi-out" data-fragment-index="3">Then, the predictive equation <em>is not
+                valid</em></p>
+            <span class="singleline-math-larger-font fragment fade-in-then-semi-out" data-fragment-index="4">
+              <span>\( \Pi_{m,1} \neq \Pi_{p,1} \)</span>
+            </span>
+            <ul>
+              <p class="botom-1"> </p>
+              <li class="fragment fade-in-then-semi-out" data-fragment-index="5"><em>No general rule</em> for when
+                distorted models are accurate <b>(requires experience)</b></li>
+            </ul>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </section>
+
+      <section class="example">
+        <h2> <b>Exercise:</b> Small ships in large oceans</h2>
+        <div class="container">
+
+          <div class="col">
+            <p>
+             Show that we can't use water test both model and prototype if we want to achieve complete similarity. Assume the dimensional groups have already been found to be the Reynolds and Froude numbers:
+            </p>
+            <span class="singleline-math-larger-font">
+              <span>\( \text{Re} = \dfrac{V l}{\nu}, \)</span>
+              <span>\(~~~~~\)</span>
+              <span>\( \text{Fr} = \dfrac{V}{\sqrt{g L}}, \)</span>
+          </div>
+          <div class="col">
+            <p class="bottom-1"></p>
+            <img src="img/dimanalysis-distorted-models.jpg" width="500" />
+          </div>
+      </section>
 
     </div>
   </div>
