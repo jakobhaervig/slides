@@ -191,23 +191,23 @@
         <div class="container">
           <div class="col">
             <p class="bottom-1"></p>
-            <ul>
-              <li class="fragment"><em>Step 1</em>: Identify number of variables, <em>$k$</em>, involved in the problem:
+            <ol>
+              <li class="fragment">Identify number of variables, <em>$k$</em>, involved in the problem:
               </li>
               <p class="singleline-math-larger-font fragment">
                 <span>\( x_1 = f(x_2, x_3, \ldots, x_k) \)</span>
               </p>
               <p class="bottom-1"></p>
-              <li class="fragment"><em>Step 2</em>: Count number of base dimensions, <em>$r$</em>, involved in the
+              <li class="fragment">Count number of base dimensions, <em>$r$</em>, involved in the
                 problem</li>
               <p class="bottom-1"></p>
-              <li class="fragment"><em>Step 3</em>: Determine the number of required non-dimensional groups,
+              <li class="fragment">Determine the number of required non-dimensional groups,
                 <em>$k-r$</em> (Buckingham Pi Theorem)
               </li>
               <p class="singleline-math-larger-font fragment">
                 <span>\( \Pi_1 = f(\Pi_2, \Pi_3, \ldots, \Pi_{k-r}) \)</span>
               </p>
-            </ul>
+            </ol>
           </div>
           <div class="col">
           </div>
@@ -216,18 +216,23 @@
 
       <section class="example">
         <h2> <b>Exercise:</b> Use Buckingham Pi Theorem to determine number of non-dimensional groups</h2>
+
         <div class="container">
           <div class="col">
             <p>
               Determine the <em>number of non-dimensional groups</em> required to describe pressure loss per unit length
-              pipe for
-              laminar flow.
+              pipe for laminar flow using Buckingham Pi Theorem:
             </p>
-            <img src="img/dimanalysis-intro2.jpg" width="700" />
-            <img src="img/dimanalysis-sidefigure.jpg" width="300" />
-          </div>
-          <div class="col">
-
+            <br>
+            <ol class="fragment">
+              <li>Identify number of variables, <em>$k$</em>, involved in the problem:
+              </li>
+              <li>Count number of base dimensions, <em>$r$</em>, involved in the
+                problem</li>
+              <li>Determine the number of required non-dimensional groups,
+                <em>$k-r$</em> (Buckingham Pi Theorem)
+              </li>
+            </ol>
           </div>
         </div>
       </section>
@@ -272,26 +277,8 @@
             </ol>
 
           </div>
-          <div class="col">
-
-          </div>
         </div>
       </section>
-
-      <!-- <section class="example">
-        <h2> <b>Exercise:</b> Use method of repeating variables to form non-dimensional group</h2>
-        <div class="container">
-
-          <div class="col">
-            <p>
-              A thin rectangular plate having a width<em> $w$</em> and a height<em> $h$</em> is located so that it is normal to a moving
-              stream of fluid as shown. Assume the drag <em>$F_D$</em> that the fluid exerts on the plate is a function of $w$
-              and $h$, the fluid viscosity<em> $\mu$</em> and density<em> $\rho$</em> respectively, and the velocity<em> $V$</em> of the fluid
-              approaching the plate.
-            </p>
-            <img  src="img/fige7-1.jpg" width="700" />
-        </div>
-      </section> -->
 
       <section class="example">
         <h2> <b>Exercise:</b> Use method of repeating variables to form non-dimensional groups</h2>
@@ -300,11 +287,38 @@
           <div class="col">
             <p>
               Determine the <em>non-dimensional groups</em> required to describe pressure loss per unit length pipe for
-              laminar flow.
+              laminar flow <br>using the <em>method of repeating variables</em></p>
+
+            <ol class="fragment" data-fragment-index="1">
+              <li>Identify number of variables,
+                <em>$k$</em>, involved in the problem
+              </li>
+              <li>Count number of base dimensions,
+                <em>$r$</em>, involved in the
+                problem
+              </li>
+              <li>Determine the number of required
+                non-dimensional groups, <em>$k-r$</em> (Buckingham Pi Theorem)
+              </li>
+              <li>Select a number of repeating variables,
+                where the number of repeating variables equals the number of base dimensions <em>$r$</em>
+              </li>
+              <li>Construct the non-dimensional groups by
+                multiplying one of the non-repeating variables by the product of the repeating variables, each raised to
+                an exponent that will make the group dimensionless
+              </li>
+              <li>Repeat step 5 for each of the remaining
+                non-repeating variables
+              </li>
+              <li>Check if the numbers formed are
+                actually non-dimensional
+              </li>
+              <li>Re-arrange the numbers to more common
+                groups (if such exist)
+              </li>
+              <li>Relax and think about the results</li>
+            </ol>
             </p>
-            <img src="img/dimanalysis-intro2.jpg" width="700" />
-            <br>
-            <img src="img/dimanalysis-sidefigure.jpg" width="300" />
           </div>
       </section>
 
