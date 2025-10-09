@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="/custom/theme/haervig.css">
+  <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+  <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Heat Transfer</b></h3>
+        <h2 style="margin-top: 0;">Steady heat transfer with the energy balance method</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+      </section>
+
+      <section>
+        <h3>Notation for one-dimension problems</h3>
+        <div class="grid">
+          <div class="col-6">
+            <ul>
+              <li>
+                <p>A <b class="definition">1D plane wall</b> is defined as being infinitely long (i.e. heat transfer
+                  only occurs in one direction)</p>
+              </li>
+              <li class="fragment" data-fragment-index="1">It extends from $x=0$ to $x=L$</li>
+              <li class="fragment" data-fragment-index="2">We discretise into $M$ nodes from $m=0$ to $m=M$</li>
+              <li class="fragment" data-fragment-index="3">Distance between nodes is $\Delta x$</li>
+              <li class="fragment" data-fragment-index="4">We form a volume element around each node which naturally
+                also has width $\Delta x$</li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <div class="r-stack">
+              <img src="img/energy-balance-method-steady/energy-balance-notation_0.svg" height="1000">
+              <img class="fragment" data-fragment-index="4"
+                src="img/energy-balance-method-steady/energy-balance-notation_5.svg" height="1000">
+              <img class="fragment" data-fragment-index="4"
+                src="img/energy-balance-method-steady/energy-balance-notation_6.svg" height="1000">
+              <img class="fragment" data-fragment-index="1"
+                src="img/energy-balance-method-steady/energy-balance-notation_1.svg" height="1000">
+              <img class="fragment" data-fragment-index="2"
+                src="img/energy-balance-method-steady/energy-balance-notation_2.svg" height="1000">
+              <img class="fragment" data-fragment-index="2"
+                src="img/energy-balance-method-steady/energy-balance-notation_3.svg" height="1000">
+              <img class="fragment" data-fragment-index="3"
+                src="img/energy-balance-method-steady/energy-balance-notation_4.svg" height="1000">
+            </div>
+          </div>
+        </div>
+      </section>
+<!--
+      <section>
+        <h3>The energy balance equation</h3>
+        <div class="grid">
+          <div class="col-6">
+            <ul>
+              <li>We sum up heat transfer to/from volume element:</li>
+            </ul>
+            <ul>
+              <p>
+                $$
+                \small
+                \left(
+                \begin{array}{ccc}
+                \text{Sum of heat}\\
+                \text{transfer rate}\\
+                \text{across surfaces}\\
+                \text{of volume element}
+                \end{array}
+                \right)
+                +
+                \left(
+                \begin{array}{ccc}
+                \text{Rate of heat}\\
+                \text{generation}\\
+                \text{inside the}\\
+                \text{element}
+                \end{array}
+                \right)
+                =
+                \left(
+                \begin{array}{ccc}
+                \text{Rate of change}\\
+                \text{of the energy}\\
+                \text{content of}\\
+                \text{the element}
+                \end{array}
+                \right)
+                $$
+              </p>
+            </ul>
+            <ul class="fragment" data-fragment-index="2">
+              <li>For <b class="definition">unsteady heat transfer</b>, e.g. transient:</li>
+              <p>
+                $$
+                \small
+                \sum_\text{all surfaces} \dot{Q} +
+                \dot{G}_\text{element}
+                =
+                \frac{\Delta E_\text{element}}{\Delta t}
+                $$
+              </p>
+            </ul>
+            <ul class="fragment" data-fragment-index="3">
+              <li>For <b class="definition">steady heat transfer</b>, e.g. no change in time:</li>
+              <p>
+                $$
+                \small
+                \sum_\text{all surfaces} \dot{Q} +
+                \dot{G}_\text{element}
+                =
+                0
+                $$
+              </p>
+            </ul>
+            <ul class="fragment" data-fragment-index="4">
+              <li>$\dot{G}_\text{element}$ is the heat generation rate in the element (W):</li>
+              <p>
+                $$
+                \dot{G}_\text{element} = \dot{g}V_\text{element}
+                $$
+              </p>
+            </ul>
+            <ul class="fragment" data-fragment-index="4">
+              <ul>
+                <li>$\dot{g}$ is the volumetric heat generation rate in the element ($\text{W}/\text{m}^3$)</li>
+              </ul>
+            </ul>
+          </div>
+          <div class="col-6">
+            <div class="r-stack">
+              <img src="media/energy-balance-method-steady/energy-balance.svg" height="1000">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>Convention for heat transfer direction</h3>
+        <ul>
+          <li>
+            <p>Assumed direction of heat transfer is <b class="definition">irrelevant as long as we are consistent</b>
+            </p>
+          </li>
+        </ul>
+        <div class="grid">
+          <div class="col-6 fragment" data-fragment-index="1">
+            <div class="r-stack">
+              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
+              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
+            </div>
+            $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+          </div>
+          <div class="col-6 fragment" data-fragment-index="2">
+            <div class="r-stack">
+              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
+              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
+            </div>
+            $$\small kA \frac{T_{m-1}-T_m}{\Delta x}+kA\frac{T_{m+1}-T_{m}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+          </div>
+        </div>
+    </div>
+    <ul>
+      <li class="col-6 fragment" data-fragment-index="3">
+        <p>In both cases it reduces to same expression:</p>
+      </li>
+    </ul>
+    <div class="col-6 fragment" data-fragment-index="3">
+      $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
+    </div>
+    </section>
+
+    <section>
+      <h3>Boundary condition types</h3>
+    </section>
+
+    <section>
+      <h3>The four boundary condition types</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>
+              <p>We have to specify <b class="definition">boundary conditions</b> on each non-internal node. Four types
+                exist:</p>
+            </li>
+            <ul>
+              <li class="fragment" data-fragment-index="1">1. Constant temperature</li>
+              <ul>
+                <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
+              </ul>
+              <li class="fragment" data-fragment-index="2">2. Constant heat flux</li>
+              <ul>
+                <p class="fragment" data-fragment-index="2">
+                  $\dot{Q}_\text{left,surface}=kA\frac{\text{d}T}{\text{d}x}=c$</p>
+              </ul>
+              <li class="fragment" data-fragment-index="3">3. Convection</li>
+              <ul>
+                <p class="fragment" data-fragment-index="3">$\dot{Q}_\text{left,surface}=hA\left(T_\infty-T_0 \right)=c$
+                </p>
+              </ul>
+              <li class="fragment" data-fragment-index="4">4. Radiation</li>
+              <ul>
+                <p class="fragment" data-fragment-index="4">$\dot{Q}_\text{left,surface}=\epsilon \sigma A
+                  \left(T_\text{surr}^4-T_0^4\right)=c$</p>
+              </ul>
+            </ul>
+          </ul>
+        </div>
+        <div class="col-6 align-right">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Incorporating the different boundary conditions</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>For BC type 1 (constant temperature), we simply fix the temperature</li>
+            <li class="fragment" data-fragment-index="1">For BC type 2-4, we set up an energy balance on the volume
+              element:
+              $$
+              \small
+              \begin{aligned} \small
+              \sum_\text{all surfaces} \dot{Q} + \dot{G}_\text{element} = 0,
+              \end{aligned}
+              $$
+            </li>
+            <ul>
+              <li class="fragment" data-fragment-index="2"> which, in the case of a 1D plane wall, expands to</li>
+              <p class="fragment" data-fragment-index="2">$$\small \dot{Q}_\text{left,surface} + kA
+                \frac{T_1-T_0}{\Delta x}+\dot{g}_0\left(\frac{\Delta x}{2}A\right)=0.$$</p>
+            </ul>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="3">Expression for $\dot{Q}_\text{left,surface}$ depends on BC type
+            </li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Incorporating constant heat flux BC</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>A constant heat flux given by $\dot{q}$:</li>
+            <p>$$\small \dot{Q}_\text{left,surface} = \dot{q}_0 A$$</p>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="2">Energy balance at node $m=0$ then becomes:</li>
+            <p class="fragment" data-fragment-index="2">$$\small \dot{q}_0 A + k A \frac{T_1-T_0}{\Delta x} +
+              \dot{g}_0\left(\frac{\Delta x}{2}A\right) = 0$$</p>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="3"><b class="definition">Special case</b> of insulated boundary
+              (zero heat flux):</li>
+            <p class="fragment" data-fragment-index="3">$$\small 0 + k A \frac{T_1-T_0}{\Delta x} +
+              \dot{g}_0\left(\frac{\Delta x}{2}A\right) = 0$$</p>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Incorporating convection BC</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>Convection with heat transfer coefficient $h$:</li>
+            <p>$$\small \dot{Q}_\text{left,surface} = h A \left(T_\infty-T_0\right)$$</p>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="2">Energy balance at node $m=0$ then becomes:</li>
+            <p class="fragment" data-fragment-index="2">$$\small h A \left(T_\infty-T_0\right) + k A
+              \frac{T_1-T_0}{\Delta x} + \dot{g}_0\left(\frac{\Delta x}{2}A\right) = 0$$</p>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Incorporating radiation BC</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>Radiation with emissivity $\epsilon$ and Stefan-Boltzmann constant $\sigma$:</li>
+            <p>$$\small \dot{Q}_\text{left,surface} = \epsilon \sigma A \left(T_\text{surr}^4-T_0^4\right)$$</p>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="2">Energy balance at node $m=0$ then becomes:</li>
+            <p class="fragment" data-fragment-index="2">$$\small \epsilon \sigma A \left(T_\text{surr}^4-T_0^4\right) +
+              k A \frac{T_1-T_0}{\Delta x} + \dot{g}_0\left(\frac{\Delta x}{2}A\right) = 0$$</p>
+          </ul>
+          <ul>
+            <li class="fragment" data-fragment-index="3"><b class="definition">Note that:</b> For radiation the term
+              $\small T_0^4$ makes the equation set non-linear. Different solution method is therefore typically needed.
+            </li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Incorporating mixed boundary condition types</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>All BC types (<b class="mycolor1">heat flux</b>, <b class="mycolor4">convection</b> and <b
+                class="mycolor5">radiation</b>) can easily be added to form mixed types:</li>
+            <div class="singleline-ca">
+              <p>$$\small \dot{Q}_\text{left,surface}=$$</p>
+              <p class="mycolor1">$$\small~\dot{q}_0 A$$</p>
+              <p>$$~+$$</p>
+              <p class="mycolor4">$$\small~h A \left(T_\infty-T_0\right)$$</p>
+              <p>$$~+$$</p>
+              <p class="mycolor5">$$\small~\epsilon \sigma A \left(T_\text{surr}^4-T_0^4\right)$$</p>
+            </div>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Example</h3>
+      <iframe width="1440" height="810" src="https://www.youtube.com/embed/wunH6dYNyJM"></iframe>
+    </section>
+
+    <section>
+      <h3>Interfaces between different materials</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>Starting with the general energy balance:</li>
+            $$
+            \small
+            \begin{aligned} \small
+            \sum_\text{all surfaces} \dot{Q} + \dot{G}_\text{element} = 0,
+            \end{aligned}
+            $$
+            <p>We may assume <b class="definition">perfect contact (no air gaps)</b> at the interface between materials:
+            </p>
+            <div>
+              <p>$$\small k_A A \frac{T_{m-1}-T_m}{\Delta x} + k_B A \frac{T_{m+1}-T_m}{\Delta x} + ...$$</p>
+              <p>$$\dot{g}_{A,m}A \frac{\Delta x}{2} + \dot{g}_{B,m}A \frac{\Delta x}{2} = 0$$</p>
+            </div>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/energy-balance-interface-materials.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Two- and Three-dimenensional problems</h3>
+    </section>
+
+    <section>
+      <h3>Notation for two-dimensional problems</h3>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li>Double subscripts ($m$,$n$) to denote two dimensions (triple for three dimensions)</li>
+            <ul>
+              <li>$m$ used for $x$-direction</li>
+              <li>$n$ used for $y$-direction</li>
+            </ul>
+            <li class="fragment" data-fragment-index="1">Temperature at node ($m=5$, $n=4$) is written $T_{5,4}$</li>
+            <li class="fragment" data-fragment-index="2">Distances between nodes are $\Delta x$ and $\Delta y$</li>
+            <li class="fragment" data-fragment-index="3">Form volume elements around each node</li>
+            <li class="fragment" data-fragment-index="4">Convert from node number to actual coordinates by:</li>
+            <ul class="fragment" data-fragment-index="4">
+              <li>$x=m\Delta x$</li>
+              <li>$y=n\Delta y$</li>
+            </ul>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img src="media/energy-balance-method-steady/energy-balance-notation-2d-0.svg" height="1000">
+            <img src="media/energy-balance-method-steady/energy-balance-notation-2d-1.svg" height="1000">
+            <img src="media/energy-balance-method-steady/energy-balance-notation-2d-2.svg" height="1000">
+            <img src="media/energy-balance-method-steady/energy-balance-notation-2d-3.svg" height="1000">
+            <img class="fragment" data-fragment-index="2"
+              src="media/energy-balance-method-steady/energy-balance-notation-2d-4.svg" height="1000">
+            <img class="fragment" data-fragment-index="3"
+              src="media/energy-balance-method-steady/energy-balance-notation-2d-5.svg" height="1000">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>The energy balance equation for internal nodes</h3>
+      <ul>
+        <li>Sum up heat transfer to/from volume element:</li>
+      </ul>
+      <ul>
+        <p>
+          $$
+          \small
+          \left(
+          \begin{array}{ccc}
+          \text{Sum of heat}\\
+          \text{transfer rate}\\
+          \text{across surfaces}\\
+          \text{of volume element}
+          \end{array}
+          \right)
+          +
+          \left(
+          \begin{array}{ccc}
+          \text{Rate of heat}\\
+          \text{generation}\\
+          \text{inside the}\\
+          \text{element}
+          \end{array}
+          \right)
+          =
+          \left(
+          \begin{array}{ccc}
+          \text{Rate of change}\\
+          \text{of the energy}\\
+          \text{content of}\\
+          \text{the element}
+          \end{array}
+          \right)
+          $$
+        </p>
+      </ul>
+      <ul class="fragment" data-fragment-index="1">
+        <p>
+          $$
+          \small
+          \sum_\text{all surfaces} \dot{Q} +
+          \dot{G}_\text{element}
+          =
+          \frac{\Delta E_\text{element}}{\Delta t}
+          $$
+        </p>
+      </ul>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li class="fragment" data-fragment-index="2">Sum up heat transfer to/from volume element:</li>
+            <div class="singleline-la pad-top fragment" data-fragment-index="2">
+              <p class="mycolor2">$\dot{Q}_\text{left,cond}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor5">$\dot{Q}_\text{right,cond}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor6">$\dot{Q}_\text{bottom,cond}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor4">$\dot{Q}_\text{top,cond}$</p>
+              <p>$~+~$</p>
+              <p>$\dot{G}_\text{element}$</p>
+              <p>$~=~$</p>
+              <p>$0$</p>
+            </div>
+            <li class="fragment" data-fragment-index="3">.. or in terms of node numbers:</li>
+            <div class="singleline-la pad-top fragment" data-fragment-index="3">
+              <p class="mycolor2">$kA \frac{T_{m-1,n}-T_{m,n}}{\Delta x}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor5">$kA\frac{T_{m+1,n}-T_{m,n}}{\Delta x}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor6">$kA\frac{T_{m,n-1}-T_{m,n}}{\Delta y}$</p>
+              <p>$~+..~$</p>
+            </div>
+            <div class="singleline-la fragment" data-fragment-index="3">
+              <p class="mycolor4">$kA\frac{T_{m,n+1}-T_{m,n}}{\Delta y}$</p>
+              <p>$~+~$</p>
+              <p>$\dot{g}_{m,n}(\Delta x \Delta y)$</p>
+              <p>$~=~$</p>
+              <p>$0$</p>
+            </div>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img class="fragment" data-fragment-index="0"
+              src="media/energy-balance-method-steady/energy-balance-internal-node-2d-0.svg" height="600">
+            <img class="fragment" data-fragment-index="2"
+              src="media/energy-balance-method-steady/energy-balance-internal-node-2d-1.svg" height="600">
+            <img class="fragment" data-fragment-index="3"
+              src="media/energy-balance-method-steady/energy-balance-internal-node-2d-2.svg" height="600">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>The energy balance equation for boundary nodes</h3>
+      <ul>
+        <li>Sum up heat transfer to/from volume element:</li>
+      </ul>
+      <ul>
+        <p>
+          $$
+          \small
+          \left(
+          \begin{array}{ccc}
+          \text{Sum of heat}\\
+          \text{transfer rate}\\
+          \text{across surfaces}\\
+          \text{of volume element}
+          \end{array}
+          \right)
+          +
+          \left(
+          \begin{array}{ccc}
+          \text{Rate of heat}\\
+          \text{generation}\\
+          \text{inside the}\\
+          \text{element}
+          \end{array}
+          \right)
+          =
+          \left(
+          \begin{array}{ccc}
+          \text{Rate of change}\\
+          \text{of the energy}\\
+          \text{content of}\\
+          \text{the element}
+          \end{array}
+          \right)
+          $$
+        </p>
+      </ul>
+      <ul class="fragment" data-fragment-index="1">
+        <p>
+          $$
+          \small
+          \sum_\text{all surfaces} \dot{Q} +
+          \dot{G}_\text{element}
+          =
+          \frac{\Delta E_\text{element}}{\Delta t}
+          $$
+        </p>
+      </ul>
+      <div class="grid">
+        <div class="col-6">
+          <ul>
+            <li class="fragment" data-fragment-index="2">For a volume element on the left boundary:</li>
+            <div class="singleline-la pad-top fragment" data-fragment-index="2">
+              <p class="mycolor2">$\dot{Q}_\text{left surface}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor5">$\dot{Q}_\text{right,cond}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor6">$\dot{Q}_\text{bottom,cond}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor4">$\dot{Q}_\text{top,cond}$</p>
+              <p>$~+~$</p>
+              <p>$\dot{G}_\text{element}$</p>
+              <p>$~=~$</p>
+              <p>$0$</p>
+            </div>
+            <li class="fragment" data-fragment-index="3">.. or in terms of node numbers:</li>
+            <div class="singleline-la pad-top fragment" data-fragment-index="3">
+              <p class="mycolor2">$\dot{Q}_\text{left surface}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor5">$k\Delta y\frac{T_{1,n}-T_{0,n}}{\Delta x}$</p>
+              <p>$~+~$</p>
+              <p class="mycolor6">$k\frac{\Delta x}{2}\frac{T_{0,n-1}-T_{0,n}}{\Delta y}$</p>
+              <p>$~+..~$</p>
+            </div>
+            <div class="singleline-la fragment" data-fragment-index="3">
+              <p class="mycolor4">$k\frac{\Delta x}{2}\frac{T_{0,n+1}-T_{0,n}}{\Delta y}$</p>
+              <p>$~+~$</p>
+              <p>$\dot{g}_{0,n}(\frac{\Delta x}{2} \Delta y)$</p>
+              <p>$~=~$</p>
+              <p>$0$</p>
+            </div>
+            <li class="fragment" data-fragment-index="3">The expression for <b class="mycolor2">$\dot{Q}_\text{left
+                surface}$</b> depends on the type of boundary condition</li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <div class="r-stack">
+            <img class="fragment" data-fragment-index="0"
+              src="media/energy-balance-method-steady/energy-balance-boundary-node-2d-0.svg" height="600">
+            <img class="fragment" data-fragment-index="2"
+              src="media/energy-balance-method-steady/energy-balance-boundary-node-2d-1.svg" height="600">
+            <img class="fragment" data-fragment-index="3"
+              src="media/energy-balance-method-steady/energy-balance-boundary-node-2d-2.svg" height="600">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Example</h3>
+      <iframe width="1440" height="810" src="https://www.youtube.com/embed/_0MVKrRYIG8"></iframe>
+    </section>
+
+    <section>
+      <h3>Handling irregular boundaries</h3>
+      <ul>
+        <li>Different approaches to irregular boundaries:</li>
+      </ul>
+      <div class="grid">
+        <div class="col-4">
+          <img src="media/energy-balance-method-steady/irregular-boundary-0.svg" height="600">
+          Coarse representation by coarse structured grid
+        </div>
+        <div class="col-4">
+          <img class="fragment" data-fragment-index="1"
+            src="media/energy-balance-method-steady/irregular-boundary-1.svg" height="600">
+          <p class="fragment" data-fragment-index="1">Better representation by refined structured grid</p>
+        </div>
+        <div class="col-4">
+          <img class="fragment" data-fragment-index="2"
+            src="media/energy-balance-method-steady/irregular-boundary-2.svg" height="600">
+          <p class="fragment" data-fragment-index="2">Even better presentation by body-fitted grid</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+  <h2>Example</h2>
+    <iframe width="1440" height="810" src="https://www.youtube.com/embed/NaYRxVOR-x8"></iframe>
+</section>
+
+<section>
+  <script data-quiz>
+    quiz = {
+            "info": {
+                    "name":    "Quiz",
+                    "main":    "Test your knowledge about lumped system analysis"
+            },
+            "questions": [
+                    {
+                            "q": "What is lumped system analysis?",
+                            "a": [
+                                    {"option": "An approach to solve steady-state heat transfer problems", "correct": false},
+                                    {"option": "An approach to solve trasient heat transfer problems", "correct": true}
+                            ],
+                            "correct": "<p><span>That's right!</span> It's a simplified way to calculate transient heat transfer to objects that can be classied as lumped.</p>",
+                            "incorrect": "<p><span>Wrong!</span> It's only valid for transient heat transfer problems.</p>" // no comma here
+                          },
+                    {
+                            "q": "What is the criteria for it to be valid?",
+                            "a": [
+                                    {"option": "Biot number below 0.1",     "correct": true},
+                                    {"option": "Biot number between 0.1 and 1",      "correct": false},
+                                    {"option": "Biot number above 1",     "correct": false} // no comma here
+                            ],
+                            "correct": "<p><span>That's right!</span> The lumped system assumption is only valid when the Biot number is below 0.1. The Biot number is a measure of the ratio of conduction resistance inside the body to convection resistance at the surface of the body. A value of 0.1 means heat is transferred much faster inside the object compared to heat transfer rate at the surface.</p>",
+                            "incorrect": "<p><span>That's wrong!</span> The lumped system assumption is only valid when the Biot number is below 0.1. The Biot number is a measure of the ratio of conduction resistance inside the body to convection resistance at the surface of the body. A value of 0.1 means heat is transferred much faster inside the object compared to heat transfer rate at the surface.</p>"
+                    },
+                    {
+                            "q": "In what medium is the lumped system analysis more likely to be applicable?",
+                            "a": [
+                                    {"option": "Water",     "correct": false},
+                                    {"option": "Air",      "correct": true},
+                            ],
+                            "correct": "<p><span>That's right!</span> Because the heat transfer coefficient is smaller in air, heat has 'more' time to distribute inside the body, which makes the lumped system analysis more likely to be applicable for objects surrounded by air.</p>",
+                            "incorrect": "<p><span>That's wrong!</span> Because the heat transfer coefficient is smaller in air, heat has 'more' time to distribute inside the body, which makes the lumped system analysis more likely to be applicable for objects surrounded by air.</p>"
+                    },
+                    {
+                            "q": "For which solid is the lumped system analysis more likely to be applicable?",
+                            "a": [
+                                    {"option": "An actual apple", "correct": false},
+                                    {"option": "A golden apple of the same size", "correct": true},
+                            ],
+                            "correct": "<p><span>That's right!</span> A golden apple has a much higher thermal conductivity than an actual apple. As a result heat transfers much quicker, which results in a lower Biot number for the golden apple.</p>",
+                            "incorrect": "<p><span>That's wrong!</span> A golden apple has a much higher thermal conductivity than an actual apple. As a result heat transfers much quicker, which results in a lower Biot number for the golden apple.</p>"
+                    },
+                    {
+                            "q": "Consider a hot baked potato on a plate. The temperature of the potato is observed to drop by 4°C during the first minute. At which rate will the temperature drop during a second one minute later in time?",
+                            "a": [
+                                    {"option": "Faster", "correct": false},
+                                    {"option": "Slower", "correct": true},
+                                    {"option": "Rate rate", "correct": false},              
+                            ],
+                            "correct": "<p><span>That's right!</span> It's the temperature difference between the potato and the surroundings that determine the rate of heat transfer. As the temperature approaches the surrounding's temperature, the rate of heat transfer will decrease and approach 0 assymptotically.</p>",
+                            "incorrect": "<p><span>That's right!</span> It's the temperature difference between the potato and the surroundings that determine the rate of heat transfer. As the temperature approaches the surrounding's temperature, the rate of heat transfer will decrease and approach 0 assymptotically.</p>"
+                    },
+            ]
+    }
+  </script>
+</section> -->
+
+  </div>
+  </div>
+
+  <script src="/reveal.js/dist/reveal.js"></script>
+  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="/reveal.js/plugin/notes/notes.js"></script>
+  <script src="/reveal.js/plugin/math/math.js"></script>
+  <script src="/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="/init-reveal.js"></script>
+</body>
+
+</html>

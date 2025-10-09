@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="/custom/theme/haervig.css">
+  <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+  <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
+        <h2 style="margin-top: 0;">Boundary layers</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+        <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+      </section>
+
+      <section>
+        <h2>The beauty of boundary layers</h2>
+        <p class="bottom-2"> </p>
+        <iframe width="1400" height="800"
+          src="https://www.youtube.com/embed/e1TbkLIDWys?si=p1s59IRVSnHWkj_c&amp;start=42" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </section>
+
+      <section>
+        <section>
+          <img src="img/applications-boundary-layers0.jpg" width="1500" />
+          <img class="fragment  fade-in-then-semi-out" data-fragment-index="1"
+            src="img/applications-boundary-layers1.jpg" width="1500" />
+          <img class="fragment  fade-in-then-semi-out" data-fragment-index="2"
+            src="img/applications-boundary-layers2.jpg" width="1500" />
+        </section>
+        <section>
+          <img class="fragment semi-fade-out" data-fragment-index="1" src="img/applications-boundary-layers3.jpg"
+            width="1500" />
+          <img class="fragment fade-in-then-semi-out" data-fragment-index="1"
+            src="img/applications-boundary-layers4.jpg" width="1500" />
+          <img class="fragment fade-in-then-semi-out" data-fragment-index="2"
+            src="img/applications-boundary-layers5.jpg" width="1500" />
+        </section>
+        <section>
+          <img class="fragment semi-fade-out" data-fragment-index="1" src="img/applications-boundary-layers6.jpg"
+            width="1500" />
+          <img class="fragment fade-in-then-semi-out" data-fragment-index="1"
+            src="img/applications-boundary-layers7.jpg" width="1500" />
+        </section>
+      </section>
+
+
+
+      <section>
+        <h2>Introduction to boundary layers</h2>
+        <div class="container">
+          <div class="col">
+            <p class="fragment"><b>What is</b>: Boundary layers are thin regions adjacent to a solid boundary</p>
+            <p class="fragment"><b>Why</b>: Responsible for bringing velocity from:
+              <ul>
+                <li class="fragment">$u(y) = 0$ at the surface (<em>no-slip condition</em>)</li>
+                <li class="fragment">$u(y) = U$ far away from surface (<em>free stream condition</em>)</li>
+              </ul>
+          </div>
+          <div class="col">
+            <img src="img/fig9-7.jpg" width="800" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Visualisation of boundary layer flows</h2>
+        <p class="bottom-2"> </p>
+        <iframe width="1400" height="800"
+          src="https://www.youtube.com/embed/e1TbkLIDWys?si=p1s59IRVSnHWkj_c&amp;start=42" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </section>
+
+      <section>
+        <h2>Boundary layer definition</h2>
+        <div class="container">
+          <div class="col">
+            <p>Flat plate exposed to flow with <em>free stream velocity</em>, $U$</p>
+            <p>Velocity in boundary layer $u(y)$ approaches $U$ asymptotically as $y$ increases</p>
+            <p style="text-align: center;">δ = y | u(y) = 0.99 U∞</p>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img src="img/fig9-8-1.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="1" src="img/fig9-8-2.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="2" src="img/fig9-8-3.jpg" width="1000" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Boundary layer thicknesses</h2>
+        <div class="container">
+          <div class="col">
+            <p>Flat plate exposed to flow with <em>free stream velocity</em>, $U$</p>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img src="img/fig9-8-1.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="1" src="img/fig9-8-2.jpg" width="1000" />
+              <img class="fragment" data-fragment-index="2" src="img/fig9-8-3.jpg" width="1000" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="/reveal.js/dist/reveal.js"></script>
+  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
+  <script src="/reveal.js/plugin/notes/notes.js"></script>
+  <script src="/reveal.js/plugin/math/math.js"></script>
+  <script src="/reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="/init-reveal.js"></script>
+</body>
+
+</html>
