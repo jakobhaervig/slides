@@ -49,7 +49,7 @@ with open(output_file, "w") as f:
 <div class="reveal">
   <div class="slides">
     <section>
-      <table border="1" cellpadding="2" cellspacing="0">
+      <table id='table' cellpadding="2" cellspacing="0">
         <thead>
             <tr>
             <th><b>Slide deck</b></th>
@@ -78,6 +78,12 @@ with open(output_file, "w") as f:
   <script src="/reveal.js/plugin/math/math.js"></script>
   <script src="/reveal.js/plugin/highlight/highlight.js"></script>
   <script src="/init-reveal.js"></script>
+            
+<script type="module">
+  import { mergeFirstColumnOnLoad } from '/custom/js/merge-first-column.js';
+  mergeFirstColumnOnLoad('table');
+</script>
+            
 </body>
 </html>
 """)

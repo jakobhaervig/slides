@@ -135,8 +135,16 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   font-size: 1.4em;
 }
 
-.bottom-05 {
+.bottom-01 {
+     padding-bottom: 0.1em;
+}
+
+.bottom-02 {
      padding-bottom: 0.2em;
+}
+
+.bottom-05 {
+     padding-bottom: 0.5em;
 }
 
 .bottom-1 {

@@ -1,0 +1,31 @@
+title: "Course in Fluid Mechanics"
+lecturer: "Assoc. Prof. Jakob Hærvig"
+link: "https://jakobhaervig.com"
+affiliation: "Department of Energy, Aalborg University (AAU)"
+year: 2025
+
+lectures:
+  1:
+    date: "2025-02-03"
+    title: "Introduction to Fluid Mechanics"
+    slidedecks: {
+    "fluid-mechanics/introduction.html",
+    "fluid-mechanics/units-and-dimensions.html"
+    }
+
+  2:
+    date: "2025-02-10"
+    title: "Fluid Statics"
+    slidedecks: "fluid-mechanics/fluid-statics.html"
+  3:
+    date: "2025-02-17"
+    title: "Fluid Dynamics"
+    slidedecks: "fluid-mechanics/fluid-dynamics.html"
+  4:
+    date: "2025-02-24"
+    title: "Boundary Layer Theory"
+    slidedecks: "fluid-mechanics/boundary-layer-theory.html"
+  5:
+    date: "2025-03-03"
+    title: "Compressible Flow"
+    slidedecks: "fluid-mechanics/compressible-flow.html"
