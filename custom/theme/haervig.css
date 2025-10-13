@@ -85,8 +85,16 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
     font-size: 0.9em;
 }
 
+.singleline-center{
+  text-align: center;
+}
+
 .singleline-math{
   font-size: 0.8em !important;
+}
+
+.singleline-math-normal-font{
+  font-size: 1em !important;
 }
 
 .singleline-math-smaller-font{

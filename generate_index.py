@@ -37,7 +37,7 @@ with open(output_file, "w") as f:
 <html>
 <head>
 <meta charset="UTF-8">
-<title>All Slide Decks</title>
+<title>slides.jakobhaervig.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Reveal.js CSS -->

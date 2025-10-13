@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
+  <a href="https://slidhttps://slides.jcobandersen.dk/es.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
   <div class="reveal">
     <div class="slides">
 
@@ -60,15 +60,22 @@
 
 
       <section>
-        <h2>Introduction to boundary layers</h2>
+        <h2>Boundary layer structure</h2>
         <div class="container">
           <div class="col">
-            <p class="fragment"><b>What is</b>: Boundary layers are thin regions adjacent to a solid boundary</p>
-            <p class="fragment"><b>Why</b>: Responsible for bringing velocity from:
+            <p>Boundary layer (BL) structure and development for <em>parallel flow <br>over an infinite flat plate</em>
+            </p>
             <ul>
               <li class="fragment">$u(y) = 0$ at the surface (<em>no-slip condition</em>)</li>
               <li class="fragment">$u(y) = U$ far away from surface (<em>free stream condition</em>)</li>
             </ul>
+            <p class="fragment">Convenient to <em>define Reynolds number</em> as $\text{Re}_x = x U / \nu$</p>
+            <ul>
+              <li class="fragment">Laminar BL: $\text{Re}_x < 5 \times 10^5$: </li>
+              <li class="fragment">Turbulent BL: $\text{Re}_x > 5 \times 10^5$: </li>
+            </ul>
+            <p class="fragment">Critical Reynolds number varies with <em>surface roughness</em> <br>and <em>upstream
+                turbulence</em></p>
           </div>
           <div class="col">
             <img src="img/fig9-7.jpg" width="800" />
@@ -77,45 +84,67 @@
       </section>
 
       <section>
-        <h2>Visualisation of boundary layer flows</h2>
-        <p class="bottom-2"> </p>
-        <iframe width="1400" height="800"
-          src="https://www.youtube.com/embed/e1TbkLIDWys?si=p1s59IRVSnHWkj_c&amp;start=42" title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </section>
-
-      <section>
-        <h2>Boundary layer definition</h2>
+        <h2>Boundary layer thickness: <em>Standard</em></h2>
         <div class="container">
           <div class="col">
             <p>Flat plate exposed to flow with <em>free stream velocity</em>, $U$</p>
-            <p>Velocity in boundary layer $u(y)$ approaches $U$ asymptotically as $y$ increases</p>
-            <p style="text-align: center;">δ = y | u(y) = 0.99 U∞</p>
+
+            <ul>
+              <li class="fragment" data-fragment-index="2">Boundary layer <em>thickness $\delta$</em> defined as:</li>
+              <p class="fragment" style="text-align: center;" data-fragment-index="2">$\delta = y~~~~~$ where $~~~~~u(y)
+                = 0.99U$</p>
+            </ul>
+            <p class="fragment" data-fragment-index="3"><b>Note</b>: The 99% criterion is kind of arbitrary</p>
           </div>
           <div class="col">
             <div class="r-stack">
-              <img src="img/fig9-8-1.jpg" width="1000" />
-              <img class="fragment" data-fragment-index="1" src="img/fig9-8-2.jpg" width="1000" />
-              <img class="fragment" data-fragment-index="2" src="img/fig9-8-3.jpg" width="1000" />
+              <img src="img/fig9-8-1.jpg" width="400" />
+              <img class="fragment" data-fragment-index="1" src="img/fig9-8-2.jpg" width="400" />
+              <img class="fragment" data-fragment-index="2" src="img/fig9-8-3.jpg" width="400" />
             </div>
           </div>
         </div>
       </section>
 
       <section>
-        <h2>Boundary layer thicknesses</h2>
+        <h2>Boundary layer thickness: <em>Displacement and momentum thicknesses</em></h2>
         <div class="container">
           <div class="col">
             <p>Flat plate exposed to flow with <em>free stream velocity</em>, $U$</p>
+
+            <ul>
+              <li class="fragment" data-fragment-index="2">Boundary layer <em>displacement thickness $\delta^*$</em>
+                defined as:</li>
+              <p class="fragment" style="text-align: center;" data-fragment-index="2">$\displaystyle \delta^* =
+                \int_0^{\infty} \left(1-\dfrac{u}{U}\right) \text{d}y$</p>
+              <ul>
+                <li class="fragment" data-fragment-index="3"><b>Think as</b>: Distance the wall should be moved outward
+                  <em>to maintain the same volume flow rate for an inviscid flow</em>
+                </li>
+              </ul>
+              <p class="bottom-1"> </p>
+              <li class="fragment" data-fragment-index="4">Boundary layer <em>momentum thickness $\theta$</em> defined
+                as:</li>
+              <p class="fragment" style="text-align: center;" data-fragment-index="4">$\displaystyle \theta =
+                \int_0^{\infty} \dfrac{u}{U} \left(1-\dfrac{u}{U}\right) \text{d}y$</p>
+              <ul>
+                <li class="fragment" data-fragment-index="5"><b>Think as</b>: Distance the wall should be moved outward
+                  <em>to maintain the same momentum flow rate for an inviscid flow</em>
+                </li>
+              </ul>
+            </ul>
           </div>
           <div class="col">
             <div class="r-stack">
-              <img src="img/fig9-8-1.jpg" width="1000" />
-              <img class="fragment" data-fragment-index="1" src="img/fig9-8-2.jpg" width="1000" />
-              <img class="fragment" data-fragment-index="2" src="img/fig9-8-3.jpg" width="1000" />
+              <img src="img/fig9-8-4.jpg" width="1000" />
             </div>
+            <p class="singleline-math-normal-font singleline-center fragment" data-fragment-index="1">
+              <span>\(~~~~~~~~~~~~~\displaystyle \delta^*bU = \int_0^{\infty} \left( U-u\right) b \text{d}y \)</span>
+            </p>
+            <p class="singleline-math-normal-font singleline-center fragment" data-fragment-index="1">
+              <span>\(~~~~~~~~~~~~~~~~~~\displaystyle \delta^* = \int_0^{\infty} \left(1-\dfrac{u}{U}\right) \text{d}y
+                \)</span>
+            </p>
           </div>
         </div>
       </section>
@@ -132,33 +161,12 @@
               <li class="fragment" data-fragment-index="3"><em>Log-law layer</em>: Turbulent part, inertial effects
                 dominant</li>
             </ol>
-            <p>Dimensionless velocity and position</p>
-            <ul>
-              <li class="fragment" data-fragment-index="3"><em>Velocity</em>: $u^+ = \overline{u}/u^*$</li>
-              <li class="fragment" data-fragment-index="3"><em>Position</em>: $y^+ = y u^*/\nu$</li>
-              <ul>
-                <p class=bottom-01></p>
-                <li class="fragment" data-fragment-index="4">Time-averaged velocity, $\overline{u}$ </li>
-                <li class="fragment" data-fragment-index="4">Friction velocity, $u^*= \sqrt{\dfrac{\tau_w}{\rho}}$,
-                  where $\tau_w = \mu \dfrac{\text{d}\overline{u}}{\text{d}y}|_{y=0}$ </li>
-                <li class="fragment" data-fragment-index="4">Distance from wall, $y$ </li>
-                <li class="fragment" data-fragment-index="4">Kinematic viscosity, $\nu$ </li>
-              </ul>
-            </ul>
           </div>
           <div class="col">
-            <div class="r-stack">
-              <img src="img/boundary-layer-structure-turbulent-0.jpg" width="600" />
-              <img class="fragment" data-fragment-index="4" src="img/boundary-layer-structure-turbulent-1.jpg"
-                width="600" />
-              <img class="fragment" data-fragment-index="5" src="img/boundary-layer-structure-turbulent-2.jpg"
-                width="600" />
-              <img class="fragment" data-fragment-index="6" src="img/boundary-layer-structure-turbulent-3.jpg"
-                width="600" />
-            </div>
           </div>
 
         </div>
+        <p class=bottom-3></p>
         <div class="r-stack">
           <img src="img/boundary-layer-cfd1.jpg" width="1920" />
           <img class="fragment" data-fragment-index="1" src="img/boundary-layer-cfd2.jpg" width="1920" />
@@ -166,47 +174,113 @@
       </section>
 
       <section>
-        <h2>Turbulent boundary layer regions</h2>
+        <h2>Turbulent boundary layer velocity profile</h2>
         <div class="container">
           <div class="col">
-            <p>Divided into <em>three regions</em> away from the wall</p>
-            <ol>
-              <li class="fragment" data-fragment-index="0"><em>Viscous sublayer</em>: Laminar part, viscous effects</li>
-              <li class="fragment" data-fragment-index="2"><em>Buffer layer</em>: Transitional part, both viscous and
-                inertial effects</li>
-              <li class="fragment" data-fragment-index="3"><em>Log-law layer</em>: Turbulent part, inertial effects
-                dominant</li>
-            </ol>
-            <p>Dimensionless velocity and position</p>
+            <p>Based on dimensional analysis, we obtain <em>two dimensionless groups</em>:</p>
             <ul>
-              <li class="fragment" data-fragment-index="3"><em>Velocity</em>: $u^+ = \overline{u}/u^*$</li>
-              <li class="fragment" data-fragment-index="3"><em>Position</em>: $y^+ = y u^*/\nu$</li>
+              <li class="fragment" data-fragment-index="1"><em>Dimensionless velocity</em>: $u^+ = \overline{u}/u^*$
+              </li>
+              <li class="fragment" data-fragment-index="1"><em>Dimensionless position</em>: $y^+ = y u^*/\nu$</li>
               <ul>
                 <p class=bottom-01></p>
-                <li class="fragment" data-fragment-index="4">Time-averaged velocity, $\overline{u}$ </li>
-                <li class="fragment" data-fragment-index="4">Friction velocity, $u^*= \sqrt{\dfrac{\tau_w}{\rho}}$,
-                  where $\tau_w = \mu \dfrac{\text{d}\overline{u}}{\text{d}y}|_{y=0}$ </li>
-                <li class="fragment" data-fragment-index="4">Distance from wall, $y$ </li>
-                <li class="fragment" data-fragment-index="4">Kinematic viscosity, $\nu$ </li>
+                <li class="fragment" data-fragment-index="3">Time-averaged velocity, $\overline{u}$ </li>
+                <span class="singleline-ca">
+                  <li class="fragment" data-fragment-index="4"><span class="fragment" data-fragment-index="4">Friction
+                      velocity, $u^*= \sqrt{\dfrac{\tau_w}{\rho}}~~~~~~~~~~$</span><span class="fragment"
+                      data-fragment-index="5">where $\tau_w = \mu \dfrac{\text{d}\overline{u}}{\text{d}y}|_{y=0}$</span>
+                  </li>
+                </span>
+                <li class="fragment" data-fragment-index="6">Distance from wall, $y$ </li>
               </ul>
             </ul>
+            <p class="bottom-1"> </p>
+            <p class="fragment" data-fragment-index="7">Velocity profiles in <em>log-log plot</em></p>
+            <ul>
+              <li class="fragment" data-fragment-index="8"><em>Viscous sublayer</em>: Linear profile, $u^+ = y^+~~$
+                (<b>Eq. 1</b>)</li>
+              <ul>
+                <li class="fragment" data-fragment-index="8">Valid for $y^+ < 5$</li>
+              </ul>
+              <li class="fragment" data-fragment-index="9"><em>Log-law layer</em>: Logarithmic profile, $u^+ =
+                \dfrac{1}{2.5} \ln y^+ + 5.0~~$ (<b>Eq. 2</b>)</li>
+              <ul>
+                <li class="fragment" data-fragment-index="9">Valid for $y^+ > 30$</li>
+              </ul>
           </div>
           <div class="col">
             <div class="r-stack">
-              <img src="img/boundary-layer-structure-turbulent-0.jpg" width="600" />
-              <img class="fragment" data-fragment-index="4" src="img/boundary-layer-structure-turbulent-1.jpg"
-                width="600" />
-              <img class="fragment" data-fragment-index="5" src="img/boundary-layer-structure-turbulent-2.jpg"
-                width="600" />
-              <img class="fragment" data-fragment-index="6" src="img/boundary-layer-structure-turbulent-3.jpg"
-                width="600" />
+              <img class="fragment" data-fragment-index="2" src="img/boundary-layer-structure-turbulent-0.jpg"
+                width="800" />
+              <img class="fragment" data-fragment-index="8" src="img/boundary-layer-structure-turbulent-1.jpg"
+                width="800" />
+              <img class="fragment" data-fragment-index="9" src="img/boundary-layer-structure-turbulent-2.jpg"
+                width="800" />
+              <img class="fragment" data-fragment-index="10" src="img/boundary-layer-structure-turbulent-3.jpg"
+                width="800" />
             </div>
           </div>
-
         </div>
-        <div class="r-stack">
-          <img src="img/boundary-layer-cfd1.jpg" width="1920" />
-          <img class="fragment" data-fragment-index="1" src="img/boundary-layer-cfd2.jpg" width="1920" />
+      </section>
+
+      <section>
+        <h2>Laminar boundary layer velocity profile</h2>
+        <div class="container">
+          <div class="col">
+
+          </div>
+          <div class="col">
+            <p>Looking for an <em>analytical solution</em>..</p>
+            <h4><em>$x$</em>-direction:</h4>
+            <p class="singleline-math">
+              <span>\( \rho \)</span>
+              <span>\( \bigg( \)</span>
+              <span>\( u \dfrac{\partial u}{\partial x} \)</span>
+              <span">\( + \)</span>
+                <span>\( v \dfrac{\partial u}{\partial y}
+                  \)</span>
+                  <span>\( \bigg) = -\)</span>
+                  <span>\( \dfrac{\partial p}{\partial x} \)</span>
+                  <span>\( + \)</span>
+                  <span">\( \mu \)</span>
+                    <span>\( \bigg( \)</span>
+                    <span>\( \dfrac{\partial^2 u}{\partial x^2}
+                      \)</span>
+                    <span>\( + \)</span>
+                    <span>\( \dfrac{\partial^2 u}{\partial y^2} \)</span>
+                    <span>\( \bigg) \)</span>
+            </p>
+
+            <h4><em>$y$</em>-direction:</h4>
+            <p class="singleline-math">
+              <span>\( \rho \)</span>
+              <span>\( \bigg( \)</span>
+              <span>\( u \dfrac{\partial v}{\partial x} \)</span>
+              <span>\( + \)</span>
+                <span>\( v \dfrac{\partial v}{\partial y}
+                  \)</span>
+                  <span>\( \bigg) = -\)</span>
+                  <span>\( \dfrac{\partial p}{\partial y} \)</span>
+                  <span>\( + \)</span>
+                  <span>\( \mu \)</span>
+                    <span>\( \bigg( \)</span>
+                    <span>\( \dfrac{\partial^2 v}{\partial x^2}
+                      \)</span>
+                    <span>\( + \)</span>
+                    <span>\( \dfrac{\partial^2 v}{\partial y^2}
+                      \)</span>
+                    <span>\( + \)</span>
+                    <span>\( \bigg) \)</span>
+            </p>
+
+            <h4>Continuity equation:</h4>
+            <p class="singleline-math">
+              <span>\(\dfrac{\partial u}{\partial x} \)</span>
+              <span>\( + \)</span>
+              <span>\(\dfrac{\partial v}{\partial y}\)</span>
+              <span>\( = 0\)</span>
+            </p>
+          </div>
         </div>
       </section>
 
