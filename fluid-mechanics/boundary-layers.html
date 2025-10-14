@@ -107,7 +107,7 @@
       </section>
 
       <section>
-        <h2>Boundary layer thickness: <em>Displacement and momentum thicknesses</em></h2>
+        <h2>Boundary layer thickness: <em>Displacement</em> and <em>momentum thicknesses</em></h2>
         <div class="container">
           <div class="col">
             <p>Flat plate exposed to flow with <em>free stream velocity</em>, $U$</p>
@@ -227,7 +227,20 @@
         <h2>Laminar boundary layer velocity profile</h2>
         <div class="container">
           <div class="col">
+            <p class="fragment" data-fragment-index="1">Boundary layer thickness <em> $\delta$</em> (Blasius solution)</p>
+              <span class="singleline-math-normal-font singleline-center fragment" data-fragment-index="1">
+                <span>\( \delta = \dfrac{5x}{\sqrt{\text{Re}_x}} \)</span>
+              </span>
+            <p class="fragment" data-fragment-index="2">Boundary layer displacement thickness <em> $\delta^*$</em> (Blasius solution)</p>
+              <span class="singleline-math-normal-font singleline-center fragment" data-fragment-index="2">
+                <span>\( \delta^* = \dfrac{1.721x}{\sqrt{\text{Re}_x}} \)</span>
+              </span>
+            <p class="fragment" data-fragment-index="3">Boundary layer momentum thickness <em> $\theta$</em> (Blasius solution)</p>
+              <span class="singleline-math-normal-font singleline-center fragment" data-fragment-index="3">
+                <span>\( \theta = \dfrac{0.664x}{\sqrt{\text{Re}_x}} \)</span>
+              </span>
 
+            <p class="fragment" data-fragment-index="4"><b>Note</b>: Boundary layer thickness decreases with<br> increasing $\text{Re}_x$:<br> \( \delta \to 0 \) as \( \text{Re}_x \to \infty \) </p>
           </div>
           <div class="col">
             <p>Looking for an <em>analytical solution</em>..</p>
@@ -280,6 +293,15 @@
               <span>\(\dfrac{\partial v}{\partial y}\)</span>
               <span>\( = 0\)</span>
             </p>
+
+            <h4>Boundary conditions:</h4>
+            <p class="singleline-math">
+              <span>\(u=v=0 \) at \(y=0\)</span>
+              <br>
+              <span>\(u=U \) at \(y \rightarrow \infty\)</span>
+            </p>
+              <img src="img/laminar-boundary-layer-side.jpg"
+                width="200" />
           </div>
         </div>
       </section>
