@@ -1,27 +1,226 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Jakob Hærvig">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/reveal.js/dist/reset.css">
-    <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="/custom/theme/haervig.css">
-    <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
-  </head>
 
-  <body>
-    <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
-    <div class="reveal">
-      <div class="slides">
-        <section>
-          <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
-          <h2 style="margin-top: 0;">External flows</h2>
-          <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
-          <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
-        </section>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="/custom/theme/haervig.css">
+  <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+  <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
+        <h2 style="margin-top: 0;">External flows</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+        <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
+      </section>
+
+      <!-- Introduction to External Flows - Slide 1 -->
+      <section>
+        <h2>Introduction to External Flows</h2>
+        <div class="container">
+          <div class="col">
+            <p><em>External flows</em>: Flow around bodies immersed in fluid</p>
+            <br>
+            <ul>
+              <li class="fragment" data-fragment-index="1">Air flow (<em>aerodynamics</em>) around:</li>
+              <ul>
+                <li class="fragment" data-fragment-index="2">Buildings</li>
+                <li class="fragment" data-fragment-index="2">Wind turbine blade</li>
+                <li class="fragment" data-fragment-index="2">Airplanes/drones</li>
+                <li class="fragment" data-fragment-index="2">Cars</li>
+              </ul>
+              <p class="bottom-1"></p>
+              <li class="fragment" data-fragment-index="3">Water flow (<em>hydrodynamics</em>) around:</li>
+              <ul class="bottom-1">
+                <li class="fragment" data-fragment-index="4">Offshore wind turbine foundation</li>
+                <li class="fragment" data-fragment-index="4">Vessels</li>
+                <li class="fragment" data-fragment-index="4">Submarines</li>
+                <li class="fragment" data-fragment-index="4">Water turbine</li>
+              </ul>
+            </ul>
+          </div>
+          <div class="col" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <p style="width: 80%; text-align: center;">
+              <img src="img/examples-external-flows-chatgpt.png" alt="External Flows Examples"
+                style="max-width: 80%; height: auto;">
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Object categorisation</h2>
+        <div class="container">
+          <div class="col">
+            <p class="fragment" data-fragment-index="1"><b>Categorisation of objects:</b></p>
+            <ul>
+              <li class="fragment" data-fragment-index="1"><em>2-D</em> objects (infinitely long, constant
+                cross-section)
+              </li>
+              <li class="fragment" data-fragment-index="2"><em>Axisymmetric</em> objects (cross-section rotated about
+                symmetry axis)</li>
+              <li class="fragment" data-fragment-index="3"><em>3-D</em> objects</li>
+            </ul>
+            <p class="fragment" data-fragment-index="5">Note: Nominal 2-D objects may need to be modelled as 3-D
+              depending on the flow characteristics</p>
+            <p class="bottom-2"></p>
+            <p class="fragment" data-fragment-index="6"><b>Further classification:</b></p>
+            <ul>
+              <li class="fragment" data-fragment-index="6"><em>Streamlined</em> objects - <em>small</em> fluid
+                disturbance</li>
+              <ul>
+                <li class="fragment" data-fragment-index="7">Airfoils, ship hulls, some cars</li>
+              </ul>
+              <li class="fragment" data-fragment-index="8"><em>Blunt/bluff</em> objects - <em>significant</em> fluid
+                disturbance</li>
+              <ul>
+                <li class="fragment" data-fragment-index="9">Buildings, bridges, some cars, stalled airfoils, parachutes
+                </li>
+              </ul>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img class="fragment" data-fragment-index="1" src="img/fig9-2-1.jpg" width="1200" />
+              <img class="fragment" data-fragment-index="2" src="img/fig9-2-2.jpg" width="1200" />
+              <img class="fragment" data-fragment-index="3" src="img/fig9-2-3.jpg" width="1200" />
+            </div>
+
+            <p class="fragment" data-fragment-index="5" style="width: 100%; text-align: center; margin-top: 20px;">
+              <img src="img/externalflows-2d3d.jpg" alt="2-D flat plate" style="max-width: 80%; height: auto;">
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Total force on any object</h2>
+        <div class="container">
+          <div class="col">
+            <p>Commonly <em>split up in two different</em> contributions</p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">
+                Surface normal force due to <b>pressure</b>:
+              </li>
+              <span class="singleline-math-normal-font fragment" data-fragment-index="1">
+                $\displaystyle \boldsymbol{F}_p = \int p \cdot \mathbf{n} \, \text{d}A$
+              </span>
+              <ul>
+                <li class="fragment" data-fragment-index="1">On all points on the surface, $\mathbf{F}_p$ acts in the
+                  <em>normal direction</em></li>
+              </ul>
+              <p class="bottom-1"></p>
+
+              <li class="fragment" data-fragment-index="2">
+                Surface shear force due to <b>shear stress</b>:
+              </li>
+              <span class="singleline-math-normal-font fragment" data-fragment-index="2">
+                $\displaystyle \boldsymbol{F}_\tau = \int \tau_w \cdot \mathbf{t} \, \text{d}A$
+              </span>
+              <ul>
+                <li class="fragment" data-fragment-index="2"> On all points on the surface, $\mathbf{F}_\tau$ acts in
+                  the <em>tangential direction</em></li>
+              </ul>
+            </ul>
+            <p class="bottom-1"></p>
+            <p class="fragment" data-fragment-index="3">Total force on object is the sum:</p>
+            <span class="singleline-math-normal-font fragment" data-fragment-index="3">
+              $\displaystyle \boldsymbol{F} = \boldsymbol{F}_p + \boldsymbol{F}_\tau = \int (p \cdot \mathbf{n} + \tau_w
+              \cdot \mathbf{t}) \, \text{d}A$
+            </span>
+          </div>
+          <div class="col"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
+            <img class="fragment" data-fragment-index="1" src="img/fig9-3a.png" alt="Lift and Drag - fig9-3a"
+              style="max-width: 80%; margin-bottom: 20px;">
+            <img class="fragment" data-fragment-index="2" src="img/fig9-3b.png" alt="Lift and Drag - fig9-3b"
+              style="max-width: 80%; margin-bottom: 20px;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Drag and lift forces on any object</h2>
+        <div class="container">
+          <div class="col">
+            <p>Although, exact pressure and wall shear stress distributions are important and gives valuable
+              information, it is often useful to describe drag and lift instead</p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">
+                <b>Drag force</b>: Force component of total force in the direction of the free-stream velocity
+              </li>
+              <span class="singleline-math-normal-font">
+                <span class="fragment" data-fragment-index="2">$\displaystyle \boldsymbol{F}_D = \int
+                  \text{d}F_x$</span>
+                <span class="fragment" data-fragment-index="3">$\displaystyle = \int (p \cdot \mathbf{n} \cdot
+                  \text{cos}\theta + \tau_w \cdot \mathbf{t} \cdot \text{sin}\theta) \, \text{d}A$</span>
+              </span>
+
+              <p class="bottom-1"></p>
+
+              <li class="fragment" data-fragment-index="4">
+                <b>Lift force</b>: Force component of total force perpendicular to the direction of the free-stream
+                velocity
+              </li>
+              <span class="singleline-math-normal-font">
+                <span class="fragment" data-fragment-index="5">$\displaystyle \boldsymbol{F}_L = \int
+                  \text{d}F_y$</span>
+                <span class="fragment" data-fragment-index="6">$\displaystyle = \int (p \cdot \mathbf{n} \cdot
+                  \text{sin}\theta + \tau_w \cdot \mathbf{t} \cdot \text{cos}\theta) \, \text{d}A$</span> </span>
+            </ul>
+            <p class="fragment" data-fragment-index="7"><b>Note</b>: pressure, $p$, and wall shear stress, $\tau_w$, distributions are almost impossible to measure</p>
+          </div>
+          <div class="col"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
+            <img src="img/fig9-3c.png" style="max-width: 80%; margin-bottom: 20px;">
+            <p class="bottom-1"></p>
+            <img class="fragment" data-fragment-index="3" src="img/fig9-4.jpg" style="max-width: 80%; margin-bottom: 20px;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Dimensionless drag and lift</h2>
+        <div class="container">
+          <div class="col">
+            <p>Common to state <b>dimensionless</b> drag and lift</p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">
+                <b>Drag coefficient</b>: A dimensionless number that describes the drag force on an object in a fluid flow
+              </li>
+              <span class="singleline-math-normal-font">
+                <span class="fragment" data-fragment-index="2">$C_D = \dfrac{F_D}{\frac{1}{2} \rho U^2 A}$</span>
+              </span>
+
+              <p class="bottom-1"></p>
+
+              <li class="fragment" data-fragment-index="3">
+                <b>Lift coefficient</b>: A dimensionless number that describes the lift force on an object in a fluid flow
+              </li>
+              <span class="singleline-math-normal-font">
+                <span class="fragment" data-fragment-index="4">$C_L = \dfrac{F_L}{\frac{1}{2} \rho U^2 A}$</span>
+            </ul>
+            <p class="fragment" data-fragment-index="5"><b>Note</b>: $A$ is <em>commonly frontal area</em> (area seen from the front), but <em>sometimes the planform</em> area is used depending on object</p>
+          </div>
+          <div class="col"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
+            <img src="img/fig9-3c.png" style="max-width: 80%; margin-bottom: 20px;">
+            <p class="bottom-1"></p>
+            <img class="fragment" data-fragment-index="2" src="img/fig9-side.jpg" style="max-width: 35%; margin-bottom: 20px;">
+          </div>
+        </div>
+      </section>
+
+
     </div>
+  </div>
 
   <script src="/reveal.js/dist/reveal.js"></script>
   <script src="/reveal.js/plugin/zoom/zoom.js"></script>
@@ -29,5 +228,6 @@
   <script src="/reveal.js/plugin/math/math.js"></script>
   <script src="/reveal.js/plugin/highlight/highlight.js"></script>
   <script src="/init-reveal.js"></script>
-  </body>
+</body>
+
 </html>
