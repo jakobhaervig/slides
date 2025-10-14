@@ -114,7 +114,8 @@
               </span>
               <ul>
                 <li class="fragment" data-fragment-index="1">On all points on the surface, $\mathbf{F}_p$ acts in the
-                  <em>normal direction</em></li>
+                  <em>normal direction</em>
+                </li>
               </ul>
               <p class="bottom-1"></p>
 
@@ -175,13 +176,86 @@
                 <span class="fragment" data-fragment-index="6">$\displaystyle = \int (p \cdot \mathbf{n} \cdot
                   \text{sin}\theta + \tau_w \cdot \mathbf{t} \cdot \text{cos}\theta) \, \text{d}A$</span> </span>
             </ul>
-            <p class="fragment" data-fragment-index="7"><b>Note</b>: pressure, $p$, and wall shear stress, $\tau_w$, distributions are almost impossible to measure</p>
+            <p class="fragment" data-fragment-index="7"><b>Note</b>: pressure, $p$, and wall shear stress, $\tau_w$,
+              distributions are almost impossible to measure</p>
           </div>
           <div class="col"
             style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
             <img src="img/fig9-3c.png" style="max-width: 80%; margin-bottom: 20px;">
             <p class="bottom-1"></p>
-            <img class="fragment" data-fragment-index="3" src="img/fig9-4.jpg" style="max-width: 80%; margin-bottom: 20px;">
+            <img class="fragment" data-fragment-index="3" src="img/fig9-4.jpg"
+              style="max-width: 80%; margin-bottom: 20px;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Pressure and friction drag</h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Drag is normally <em>separated into two components</em>:
+            </p>
+            <ul>
+              <li class="fragment" data-fragment-index="1"><em>Pressure drag</em> caused by <em>pressure
+                  differences</em>
+
+              <li class="fragment" data-fragment-index="2"><em>Friction drag</em> caused by <em>wall shear stress</em>
+              </li>
+              </li>
+            </ul>
+            <p class="fragment" data-fragment-index="3">Pressure drag dominates for blunt objects, while skin
+              friction dominates for streamlined objects</p>
+          </div>
+          <div class="col">
+            </p>
+            <p>
+            <table class="fragment" data-fragment-index="3" style="text-align: center; margin: auto;">
+              <thead>
+                <tr>
+                  <th>Shape and Flow</th>
+                  <th>Pressure<br>drag</th>
+                  <th>Friction<br>drag</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Flow_plate.svg" alt="Flow over plate"
+                      width="173" height="64">
+                  </td>
+                  <td>$≈0 \%$</td>
+                  <td>$≈100 \%$</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Flow_foil.svg" alt="Flow over foil"
+                      width="173" height="64">
+                  </td>
+                  <td>$≈10 \%$</td>
+                  <td>$≈90 \%$</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Flow_sphere.svg"
+                      alt="Flow over sphere" width="173" height="152">
+                  </td>
+                  <td>$≈90 \%$</td>
+                  <td>$≈10 \%$</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Flow_plate_perpendicular.svg"
+                      alt="Flow over perpendicular plate" width="173" height="152">
+                  </td>
+                  <td>$≈100 \%$</td>
+                  <td>$≈0 \%$</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="fragment" data-fragment-index="3"
+              style="text-align: right; font-size: 0.7em; margin-right: 10px;">
+            </p>
           </div>
         </div>
       </section>
@@ -193,7 +267,8 @@
             <p>Common to state <b>dimensionless</b> drag and lift</p>
             <ul>
               <li class="fragment" data-fragment-index="1">
-                <b>Drag coefficient</b>: A dimensionless number that describes the drag force on an object in a fluid flow
+                <b>Drag coefficient</b>: A dimensionless number that describes the drag force on an object in a fluid
+                flow
               </li>
               <span class="singleline-math-normal-font">
                 <span class="fragment" data-fragment-index="2">$C_D = \dfrac{F_D}{\frac{1}{2} \rho U^2 A}$</span>
@@ -202,18 +277,231 @@
               <p class="bottom-1"></p>
 
               <li class="fragment" data-fragment-index="3">
-                <b>Lift coefficient</b>: A dimensionless number that describes the lift force on an object in a fluid flow
+                <b>Lift coefficient</b>: A dimensionless number that describes the lift force on an object in a fluid
+                flow
               </li>
               <span class="singleline-math-normal-font">
                 <span class="fragment" data-fragment-index="4">$C_L = \dfrac{F_L}{\frac{1}{2} \rho U^2 A}$</span>
             </ul>
-            <p class="fragment" data-fragment-index="5"><b>Note</b>: $A$ is <em>commonly frontal area</em> (area seen from the front), but <em>sometimes the planform</em> area is used depending on object</p>
+            <p class="fragment" data-fragment-index="5"><b>Note</b>: $A$ is <em>commonly frontal area</em> (area seen
+              from the front), but <em>sometimes the planform</em> area is used depending on object</p>
           </div>
           <div class="col"
             style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%;">
             <img src="img/fig9-3c.png" style="max-width: 80%; margin-bottom: 20px;">
             <p class="bottom-1"></p>
-            <img class="fragment" data-fragment-index="2" src="img/fig9-side.jpg" style="max-width: 35%; margin-bottom: 20px;">
+            <img class="fragment" data-fragment-index="2" src="img/fig9-side.jpg"
+              style="max-width: 35%; margin-bottom: 20px;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag and lift</h2>
+        <div class="container">
+          <div class="col">
+            <p>Many factors affect drag and lift</p>
+            <span class="singleline-math-normal-font">
+              <span class="fragment" data-fragment-index="2">$C_D = \phi(\Pi_1, \Pi_2, \ldots)$</span>
+            </span>
+            <br>
+            <span class="singleline-math-normal-font">
+              <span class="fragment" data-fragment-index="2">$C_L = \phi(\Pi_1, \Pi_2, \ldots)$</span>
+            </span>
+            <p class="fragment" data-fragment-index="3">Once the drag and lift coefficients ($C_D$ and $C_L$) are found,
+              we may easily find the forces ($F_D$ and $F_L$)</p>
+            <p class="fragment" data-fragment-index="4"><em>Important factors include</em>:</p>
+            <ol>
+              <li class="fragment" data-fragment-index="5">Shape of object</li>
+              <li class="fragment" data-fragment-index="6">Orientation of object (angle of attack)</li>
+              <li class="fragment" data-fragment-index="7">Reynolds number (turbulence)</li>
+              <li class="fragment" data-fragment-index="8">Surface roughness</li>
+              <li class="fragment" data-fragment-index="9">Mach number (compressibility effects)</li>
+              <li class="fragment" data-fragment-index="10">Froude number (gravity effects)</li>
+              <li class="fragment" data-fragment-index="11">... and more!</li>
+            </ol>
+            <p class="fragment" data-fragment-index="12">We may write:</p>
+            <span class="singleline-math-normal-font">
+              <span class="fragment" data-fragment-index="12">$C_D = \phi(\text{shape}, \alpha, \text{Re}, \epsilon/l,
+                \text{Ma}, \text{Fr}, ...)$</span>
+              <br>
+              <span class="fragment" data-fragment-index="12">$C_L = \phi(\text{shape}, \alpha, \text{Re}, \epsilon/l,
+                \text{Ma}, \text{Fr}, ...)$</span>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag: <b>Shape of object</b></h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Obviously, the <em>shape affects drag</em>
+            </p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">To illustrate, varying $l/D$ of an elliptical shape:</li>
+              <img class="fragment" data-fragment-index="2" src="img/fig9-19-ellipse.jpg"
+                style="max-width: 40%; margin-bottom: 10px;">
+              <ul>
+                <li class="fragment" data-fragment-index="3">$l/D \to 0$ (bluff object)</li>
+                <li class="fragment" data-fragment-index="4">$l/D \to \infty$ (streamlined object)</li>
+              </ul>
+              <p class="bottom-2"></p>
+              <li class="fragment" data-fragment-index="6">To illustrate, two objects varying by <em>factor 10</em> can
+                have same drag</li>
+            </ul>
+          </div>
+          <div class="col" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <img class="fragment" data-fragment-index="5" src="img/fig9-19.jpg"
+              style="max-width: 60%; margin-bottom: 10px;">
+            <img class="fragment" data-fragment-index="6" src="img/fig9-20a.jpg"
+              style="max-width: 50%; margin-bottom: 10px;">
+            <img class="fragment" data-fragment-index="6" src="img/fig9-20b.jpg" style="max-width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag: <b>Reynolds number</b> (streamlined object)</h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Flow parallel to a flat plate at three $\text{Re}_l = \{$$0.1$$,\,$$10$$,\,$$10^7$$\}$.
+            </p>
+            <p class="bottom-1"></p>
+            <ul>
+              <li class="fragment" data-fragment-index="1"><em>Low Re</em> ($\text{Re}_l = 0.1$)</li>
+              <ul class="fragment" data-fragment-index="1">
+                <li>Very large boundary layer</li>
+                <li>Flow deflected considerably</li>
+              </ul>
+              <li class="fragment" data-fragment-index="2"><em>Intermediate Re</em> ($\text{Re}_l = 10$)</li>
+              <ul class="fragment" data-fragment-index="2">
+                <li>Smaller boundary layer</li>
+                <li>Flow deflected somewhat</li>
+              </ul>
+              <li class="fragment" data-fragment-index="3"><em>High Re</em> ($\text{Re}_l = 10^7$)</li>
+              <ul class="fragment" data-fragment-index="3">
+                <li>Very small boundary layer</li>
+                <li>Flow almost not deflected</li>
+              </ul>
+          </div>
+          <div class="col" style="align-items: center; justify-content: center; display: flex; flex-direction: column;">
+            <img class="fragment" data-fragment-index="1" src="img/fig9-5a.png" style="max-width: 50%;">
+            <img class="fragment" data-fragment-index="2" src="img/fig9-5b.png" style="max-width: 50%;">
+            <img class="fragment" data-fragment-index="3" src="img/fig9-5c.png" style="max-width: 50%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag: <b>Reynolds number</b> (bluff object)</h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Flow past a circular cylinder at three $\text{Re}_D = \{$$0.1$$,\,$$50$$,\,$$10^5$$\}$.
+            </p>
+            <p class="bottom-1"></p>
+            <ul>
+              <li class="fragment" data-fragment-index="1"><em>Low Re</em> ($\text{Re}_D = 0.1$)</li>
+              <ul class="fragment" data-fragment-index="1">
+                <li>Very large boundary layer</li>
+                <li>Viscous forces dominate</lI>
+                <li>No separation</li>
+              </ul>
+              <li class="fragment" data-fragment-index="2"><em>Intermediate Re</em> ($\text{Re}_D = 50$)</li>
+              <ul class="fragment" data-fragment-index="2">
+                <li>smaller boundary layer</li>
+                <li>Mixed importance of viscous and inertial forces</li>
+                <li>Separation occurs, bubble forms</li>
+              </ul>
+              <li class="fragment" data-fragment-index="3"><em>High Re</em> ($\text{Re}_D = 10^5$)</li>
+              <ul class="fragment" data-fragment-index="3">
+                <li>Very small boundary layer</li>
+                <li>Viscous effects only important in wake and thin boundary layer</li>
+                <li>Boundary layer seperates</li>
+              </ul>
+          </div>
+          <div class="col">
+            <img class="fragment" data-fragment-index="1" src="img/fig9-6a.png" style="max-width: 62%;">
+            <img class="fragment" data-fragment-index="2" src="img/fig9-6b.png" style="max-width: 80%;">
+            <img class="fragment" data-fragment-index="3" src="img/fig9-6c.png" style="max-width: 80%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag: <b>Reynolds number</b> (closer look at cylinders and spheres)</h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Closer inspection of the flow past a circular cylinder and sphere as a function of $\text{Re}$.
+            </p>
+            <img src="img/fig9-21a.jpg" alt="CD for circ cylinder and sphere"
+              style="max-width: 100%; margin-top: 10px;">
+            <ul>
+              <li class="fragment" data-fragment-index="6"><em>Note</em>: Surface roughness can trigger turbulent BL at
+                lower $\text{Re}$</li>
+            </ul>
+          </div>
+          <div class="col" style="display: flex; justify-content: center; align-items: center;">
+            <div class="r-stack">
+              <img class="fragment" data-fragment-index="1" src="img/fig9-21b-a.jpg"
+                style="max-width: 90%; margin-top: 20px;">
+              <img class="fragment" data-fragment-index="2" src="img/fig9-21b-b.jpg"
+                style="max-width: 90%; margin-top: 20px;">
+              <img class="fragment" data-fragment-index="3" src="img/fig9-21b-c.jpg"
+                style="max-width: 90%; margin-top: 20px;">
+              <img class="fragment" data-fragment-index="4" src="img/fig9-21b-d.jpg"
+                style="max-width: 90%; margin-top: 20px;">
+              <img class="fragment" data-fragment-index="5" src="img/fig9-21b-e.jpg"
+                style="max-width: 90%; margin-top: 20px;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Factors affecting drag: <b>Surface roughness</b></h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              Surface roughness can significantly impact the drag force experienced by an object in a fluid flow.
+            </p>
+            <img src="img/fig9-25.jpg" style="max-width: 100%; margin-top: 10px;">
+            <ul>
+              <li class="fragment" data-fragment-index="7">Typical golf balls: $10^4 < \text{Re}_D < 10^5$</li>
+            </ul>
+          </div>
+          <div class="col" style="display: flex; justify-content: center; align-items: center;">
+            <img src="img/golfball.jpg" style="max-width: 40%; margin-top: 20px;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Force coefficients: Gotta find em all</h2>
+        <div class="container">
+          <div class="col">
+            <p>
+              <em>Force coefficients</em>: Drag, lift coefficients have been determined experimentally or numerically
+              for many typical geometries and flow conditions
+            </p>
+            <ul>
+              <li class="fragment" data-fragment-index="1">Tables with force coefficients can be in books, reports, scientific papers etc.</li>
+
+                  <a class="fragment" data-fragment-index="1" href="https://ia800606.us.archive.org/17/items/FluidDynamicDragHoerner1965/Fluid-dynamic_drag__Hoerner__1965_text.pdf"
+                    target="_blank">
+                    - Hoerner (1965)
+                  </a>
+            </ul>
+          </div>
+          <div class="col" style="align-items: center; justify-content: center; display: flex; flex-direction: column;">
+            <img src="img/fig9-29.jpg"
+               style="max-width: 100%; margin-bottom: 10px;">
+            </p>
           </div>
         </div>
       </section>
