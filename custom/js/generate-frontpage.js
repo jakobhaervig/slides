@@ -2,8 +2,8 @@ import * as jsyaml from 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml
 
 export async function generateFrontpage() {
     const dirPath = window.location.pathname.replace(/\/[^\/]*$/, '/'); // current directory
-    const pageYamlFile = `${dirPath}meta.yaml`;
-    const fallbackYamlFile = '/custom/js/meta-fallback.yaml';
+    const yamlFile = `${dirPath}meta.yaml`; // page-specific metadata
+    const fallbackFile = '/custom/js/meta-fallback.yaml'; // general metadata
 
     let fallbackData = {};
     let pageData = {};
@@ -16,21 +16,9 @@ export async function generateFrontpage() {
         return jsyaml.load(text);
     }
 
-    // Load fallback metadata first
-    try {
-        fallbackData = await loadYaml(fallbackYamlFile);
-    } catch {
-        console.warn(`Could not load fallback YAML: ${fallbackYamlFile}`);
-        fallbackData = {};
-    }
-
-    // Load page-specific metadata
-    try {
-        pageData = await loadYaml(pageYamlFile);
-    } catch {
-        console.warn(`No page-specific YAML found: ${pageYamlFile}`);
-        pageData = {};
-    }
+    // Load fallback first
+    try { fallbackData = await loadYaml(fallbackFile); } catch { fallbackData = {}; }
+    try { pageData = await loadYaml(yamlFile); } catch { pageData = {}; }
 
     // Merge: pageData overwrites fallbackData
     data = { ...fallbackData, ...pageData };
@@ -38,27 +26,29 @@ export async function generateFrontpage() {
     // --- Create first slide ---
     const firstSlide = document.createElement('section');
     firstSlide.className = 'first-slide';
-    firstSlide.innerHTML = `
+
+    // Top content (headings)
+    const topContent = document.createElement('div');
+    topContent.innerHTML = `
         <h3 style="margin-bottom: 0;"><b>${data.subject || 'Subject'}</b></h3>
         <h2 style="margin-top: 0;">${data.title || 'Presentation Title'}</h2>
-        ${data.author ? `<h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: ${data.author}</em></h3>` : ''}
+        ${data.name ? `<h3 style="margin-top: 40px; margin-bottom: 0;"><em>${data.name}</em></h3>` : ''}
         ${data.slidesBy ? `<h5 style="margin-top: 0;"><em>${data.slidesBy}</em></h5>` : ''}
     `;
+    firstSlide.appendChild(topContent);
 
     const slidesContainer = document.querySelector('.slides');
     slidesContainer.insertBefore(firstSlide, slidesContainer.firstChild);
 
-    // --- Fetch GitHub contributors ---
+    // --- GitHub contributors ---
+    if (!data.githubOwner || !data.githubRepo) return;
+
     try {
-        const repoMatch = window.location.href.match(/https:\/\/([^\/]+)\/([^\/]+)\//);
-        if (!repoMatch) throw new Error('Cannot detect GitHub repo from URL');
+        const owner = data.githubOwner;
+        const repo = data.githubRepo;
 
-        const owner = repoMatch[1];
-        const repo = repoMatch[2];
-
-        let path = window.location.pathname.replace(/^\//, '').replace(/\/?$/, '');
-        const branch = 'main'; // adjust if needed
-
+        // Compute file path relative to repo root
+        let path = window.location.pathname.replace(/^\/+/, '');
         const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?path=${path}&per_page=100`;
 
         const res = await fetch(apiUrl);
@@ -67,59 +57,87 @@ export async function generateFrontpage() {
 
         const contributorsMap = new Map();
         commits.forEach(c => {
-            if (c.author) {
-                contributorsMap.set(c.author.login, {
+            const key = c.author?.login || c.commit.author.name;
+            if (!contributorsMap.has(key)) {
+                contributorsMap.set(key, {
                     name: c.commit.author.name,
-                    login: c.author.login,
-                    avatar: c.author.avatar_url,
-                    url: c.author.html_url
+                    avatar: c.author?.avatar_url || 'https://via.placeholder.com/80',
+                    commits: 0,
+                    githubUrl: c.author?.html_url || null
                 });
             }
+            contributorsMap.get(key).commits++;
         });
 
-        if (contributorsMap.size > 0) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'contributors';
-            wrapper.style.display = 'flex';
-            wrapper.style.flexWrap = 'wrap';
-            wrapper.style.marginTop = '20px';
-            wrapper.style.gap = '15px';
-            wrapper.style.justifyContent = 'center';
+        const contributors = Array.from(contributorsMap.values())
+            .sort((a, b) => b.commits - a.commits);
 
-            contributorsMap.forEach(c => {
+        if (contributors.length > 0) {
+            // Append contributors at the end of the slide content
+            const contributorsDiv = document.createElement('div');
+            contributorsDiv.style.marginTop = '650px'; // spacing from top content
+            contributorsDiv.style.display = 'flex';
+            contributorsDiv.style.flexWrap = 'wrap';
+            contributorsDiv.style.gap = '10px';
+            contributorsDiv.style.alignItems = 'center';
+
+            // Optional header
+            const thanks = document.createElement('h5');
+            thanks.textContent = 'Thanks to all slide contributors 🙏';
+            contributorsDiv.appendChild(thanks);
+
+            // Optional "become contributor" link
+            if (data['contributor-page']) {
+                const becomingContributor = document.createElement('h5');
+                becomingContributor.innerHTML = `Suggest improvements/changes to <a href="${data['contributor-page']}">become a contributor</a>!`;
+                contributorsDiv.appendChild(becomingContributor);
+            }
+
+            const lineBreak = document.createElement('div');
+            lineBreak.style.flexBasis = '100%';
+            lineBreak.style.height = '0';
+            contributorsDiv.appendChild(lineBreak);
+
+            // Contributor cards
+            contributors.forEach(c => {
                 const card = document.createElement('div');
                 card.style.textAlign = 'center';
-                card.style.width = '100px';
+                card.style.width = '60px';
+                card.style.flex = '0 1 auto';
 
                 const img = document.createElement('img');
                 img.src = c.avatar;
                 img.alt = c.name;
-                img.style.width = '80px';
-                img.style.height = '80px';
+                img.style.width = '50px';
+                img.style.height = '50px';
                 img.style.borderRadius = '50%';
                 img.style.objectFit = 'cover';
                 img.style.display = 'block';
-                img.style.margin = '0 auto 5px auto';
+                img.style.margin = '0 auto 3px auto';
 
-                const name = document.createElement('div');
-                name.textContent = c.name;
-                name.style.fontSize = '0.9em';
-                name.style.fontWeight = 'bold';
+                if (c.githubUrl) {
+                    const link = document.createElement('a');
+                    link.href = c.githubUrl;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.appendChild(img);
+                    card.appendChild(link);
+                } else {
+                    card.appendChild(img);
+                }
 
-                const login = document.createElement('div');
-                login.textContent = c.login;
-                login.style.fontSize = '0.8em';
-                login.style.fontStyle = 'italic';
+                const nameDiv = document.createElement('div');
+                nameDiv.textContent = c.name;
+                nameDiv.style.fontSize = '0.7em';
+                nameDiv.style.fontWeight = 'bold';
+                nameDiv.style.textAlign = 'center';
+                card.appendChild(nameDiv);
 
-                card.appendChild(img);
-                card.appendChild(name);
-                card.appendChild(login);
-                wrapper.appendChild(card);
+                contributorsDiv.appendChild(card);
             });
 
-            firstSlide.appendChild(wrapper);
+            firstSlide.appendChild(contributorsDiv);
         }
-
     } catch (err) {
         console.warn('Could not fetch GitHub contributors:', err);
     }
