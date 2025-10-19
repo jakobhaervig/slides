@@ -28,7 +28,7 @@ jobs:
         run: python -m pip install --upgrade pip
 
       - name: Generate index.html
-        run: python generate_index.py
+        run: python /custom/scripts/generate_index.py
 
       - name: Commit changes
         run: |

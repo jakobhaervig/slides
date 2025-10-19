@@ -72,12 +72,10 @@ with open(output_file, "w") as f:
   </div>
 </div>
 
-  <script src="/reveal.js/dist/reveal.js"></script>
-  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
-  <script src="/reveal.js/plugin/notes/notes.js"></script>
-  <script src="/reveal.js/plugin/math/math.js"></script>
-  <script src="/reveal.js/plugin/highlight/highlight.js"></script>
-  <script src="/init-reveal.js"></script>
+<script type="module">
+  import { initReveal } from '/custom/js/init-reveal.js';
+  initReveal({ hash: false });
+</script>
             
 <script type="module">
   import { mergeFirstColumnOnLoad } from '/custom/js/merge-first-column.js';

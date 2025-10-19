@@ -1,5 +1,11 @@
-window.onload = function() {
-    Reveal.initialize({
+import Reveal from '/reveal.js/dist/reveal.esm.js';
+import RevealZoom from '/reveal.js/plugin/zoom/zoom.esm.js';
+import RevealNotes from '/reveal.js/plugin/notes/notes.esm.js';
+import RevealHighlight from '/reveal.js/plugin/highlight/highlight.esm.js';
+import RevealMath from '/reveal.js/plugin/math/math.esm.js';
+
+export function initReveal(options = {}) {
+    const deck = new Reveal({
         width: 1920,
         height: 1080,
         hash: true,
@@ -29,4 +35,11 @@ window.onload = function() {
             ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
         }
     });
-};
+
+    deck.initialize().then(() => {
+        console.log('Reveal.js initialized with options:', options);
+
+    });
+
+    return deck;
+}

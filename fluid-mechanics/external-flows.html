@@ -15,12 +15,6 @@
   <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
   <div class="reveal">
     <div class="slides">
-      <section>
-        <h3 style="margin-bottom: 0;"><b>Fluid Mechanics</b></h3>
-        <h2 style="margin-top: 0;">External flows</h2>
-        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
-        <h5 style="margin-top: 0px;"><em>Slides by Jakob Hærvig (AAU Energy) and Jacob Andersen (AAU Build)</em></h5>
-      </section>
 
       <!-- Introduction to External Flows - Slide 1 -->
       <section>
@@ -490,17 +484,18 @@
               for many typical geometries and flow conditions
             </p>
             <ul>
-              <li class="fragment" data-fragment-index="1">Tables with force coefficients can be in books, reports, scientific papers etc.</li>
+              <li class="fragment" data-fragment-index="1">Tables with force coefficients can be in books, reports,
+                scientific papers etc.</li>
 
-                  <a class="fragment" data-fragment-index="1" href="https://ia800606.us.archive.org/17/items/FluidDynamicDragHoerner1965/Fluid-dynamic_drag__Hoerner__1965_text.pdf"
-                    target="_blank">
-                    - Hoerner (1965)
-                  </a>
+              <a class="fragment" data-fragment-index="1"
+                href="https://ia800606.us.archive.org/17/items/FluidDynamicDragHoerner1965/Fluid-dynamic_drag__Hoerner__1965_text.pdf"
+                target="_blank">
+                - Hoerner (1965)
+              </a>
             </ul>
           </div>
           <div class="col" style="align-items: center; justify-content: center; display: flex; flex-direction: column;">
-            <img src="img/fig9-29.jpg"
-               style="max-width: 100%; margin-bottom: 10px;">
+            <img src="img/fig9-29.jpg" style="max-width: 100%; margin-bottom: 10px;">
             </p>
           </div>
         </div>
@@ -510,12 +505,13 @@
     </div>
   </div>
 
-  <script src="/reveal.js/dist/reveal.js"></script>
-  <script src="/reveal.js/plugin/zoom/zoom.js"></script>
-  <script src="/reveal.js/plugin/notes/notes.js"></script>
-  <script src="/reveal.js/plugin/math/math.js"></script>
-  <script src="/reveal.js/plugin/highlight/highlight.js"></script>
-  <script src="/init-reveal.js"></script>
+  <script type="module">
+    import { generateFrontpage } from '/custom/js/generate-frontpage.js';
+    import { initReveal } from '/custom/js/init-reveal.js';
+
+    await generateFrontpage();
+    initReveal();
+  </script>
 </body>
 
 </html>
