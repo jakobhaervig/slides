@@ -25,7 +25,7 @@ jobs:
           python-version: '3.x'
 
       - name: Upgrade pip
-        run: python -m pip install --upgrade pip pyyaml
+        run: python -m pip install --upgrade pip pyyaml requests
 
       - name: Generate /contributors/ folder
         run: python custom/scripts/generate_contributor_list.py
