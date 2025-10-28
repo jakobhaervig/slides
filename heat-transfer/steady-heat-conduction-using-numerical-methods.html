@@ -18,32 +18,51 @@
 
       <section>
         <h3 style="margin-bottom: 0;"><b>Heat Transfer</b></h3>
-        <h2 style="margin-top: 0;">Steady heat transfer with the energy balance method</h2>
+        <h2 style="margin-top: 0;">Steady heat conduction using numerical methods</h2>
         <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
       </section>
 
       <section>
-        <h3>Notation for one-dimension problems</h3>
-        <div class="grid">
-          <div class="col-6">
-            <ul>
-              <li>
-                <p>A <b class="definition">1D plane wall</b> is defined as being infinitely long (i.e. heat transfer
-                  only occurs in one direction)</p>
-              </li>
-              <li class="fragment" data-fragment-index="1">It extends from $x=0$ to $x=L$</li>
-              <li class="fragment" data-fragment-index="2">We discretise into $M$ nodes from $m=0$ to $m=M$</li>
-              <li class="fragment" data-fragment-index="3">Distance between nodes is $\Delta x$</li>
-              <li class="fragment" data-fragment-index="4">We form a volume element around each node which naturally
-                also has width $\Delta x$</li>
-            </ul>
+        <h2>Notation for <em>1D</em> problems</h2>
+        <div class="container">
+          <div class="col">
+            <p>A <em>1D plane wall</em> is defined as being infinitely long (i.e. heat transfer
+              only occurs in one direction)</p>
+            <p class="bottom-1"></p>
+            <li class="fragment" data-fragment-index="1"><em>Position</em> is denoted by <em>$x$</em>
+              <ul class="fragment" data-fragment-index="1">
+                <li>$x=0$ at left side of wall</li>
+                <li>$x=L$ at right side of wall</li>
+              </ul>
+            </li>
+            <li class="fragment" data-fragment-index="2"><em>Node number</em> is denoted by <em>$m$</em>
+              <ul class="fragment" data-fragment-index="2">
+                <li>$m=1$ at left side of wall</li>
+                <li>$m=M$ at right side of wall</li>
+              </ul>
+            </li>
+            <li class="fragment" data-fragment-index="3"><em>Volume elements</em> with <em>width $\Delta x$</em>
+              <ul class="fragment" data-fragment-index="3">
+                <li class="fragment" data-fragment-index="4">Properties are assumed constant within each volume element</li>
+                <li class="fragment" data-fragment-index="5">The finer the mesh (smaller $\Delta x$), the more accurate the solution</li>
+              </ul>
+            </li>
+            <p class="bottom-1"></p>
+            <li class="fragment" data-fragment-index="6">Notation:</em>
+              <ul>
+                <li class="fragment" data-fragment-index="6">Temperature at node $m=5$ is $T_5$</li>
+                <li class="fragment" data-fragment-index="7">Density at node $m=5$ is $\rho_5$</li>
+                <li class="fragment" data-fragment-index="8">...</li>
+              </ul>
+            </li>
+
           </div>
-          <div class="col-6">
+          <div class="col">
             <div class="r-stack">
               <img src="img/energy-balance-method-steady/energy-balance-notation_0.svg" height="1000">
-              <img class="fragment" data-fragment-index="4"
+              <img class="fragment" data-fragment-index="3"
                 src="img/energy-balance-method-steady/energy-balance-notation_5.svg" height="1000">
-              <img class="fragment" data-fragment-index="4"
+              <img class="fragment" data-fragment-index="3"
                 src="img/energy-balance-method-steady/energy-balance-notation_6.svg" height="1000">
               <img class="fragment" data-fragment-index="1"
                 src="img/energy-balance-method-steady/energy-balance-notation_1.svg" height="1000">
@@ -57,14 +76,13 @@
           </div>
         </div>
       </section>
-<!--
+
       <section>
-        <h3>The energy balance equation</h3>
-        <div class="grid">
-          <div class="col-6">
-            <ul>
-              <li>We sum up heat transfer to/from volume element:</li>
-            </ul>
+        <h2>The energy balance equation</h2>
+        <div class="container">
+          <div class="col">
+
+            <p>We <em>sum up heat transfer to/from</em> volume element:</p>
             <ul>
               <p>
                 $$
@@ -98,8 +116,9 @@
                 $$
               </p>
             </ul>
+            <p class="bottom-1"></p>
+            <li>For <b class="definition">unsteady heat transfer</b>, e.g. transient:
             <ul class="fragment" data-fragment-index="2">
-              <li>For <b class="definition">unsteady heat transfer</b>, e.g. transient:</li>
               <p>
                 $$
                 \small
@@ -110,8 +129,9 @@
                 $$
               </p>
             </ul>
+            </li>
+            <li>For <b class="definition">steady heat transfer</b>, e.g. no change in time:
             <ul class="fragment" data-fragment-index="3">
-              <li>For <b class="definition">steady heat transfer</b>, e.g. no change in time:</li>
               <p>
                 $$
                 \small
@@ -122,6 +142,7 @@
                 $$
               </p>
             </ul>
+            </li>
             <ul class="fragment" data-fragment-index="4">
               <li>$\dot{G}_\text{element}$ is the heat generation rate in the element (W):</li>
               <p>
@@ -136,34 +157,32 @@
               </ul>
             </ul>
           </div>
-          <div class="col-6">
+          <div class="col">
             <div class="r-stack">
-              <img src="media/energy-balance-method-steady/energy-balance.svg" height="1000">
+              <img src="img/energy-balance-method-steady/energy-balance.svg" height="1000">
             </div>
           </div>
         </div>
       </section>
 
       <section>
-        <h3>Convention for heat transfer direction</h3>
-        <ul>
-          <li>
-            <p>Assumed direction of heat transfer is <b class="definition">irrelevant as long as we are consistent</b>
-            </p>
-          </li>
-        </ul>
-        <div class="grid">
-          <div class="col-6 fragment" data-fragment-index="1">
+        <h2>Convention for heat transfer direction</h2>
+        <p>Assumed direction of heat transfer is <b class="definition">irrelevant as long as we are consistent</b></p>
+
+        <div class="container">
+
+          <div class="col fragment" data-fragment-index="1">
+
             <div class="r-stack">
-              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
-              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
+              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
+              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
             </div>
             $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
           </div>
-          <div class="col-6 fragment" data-fragment-index="2">
+          <div class="col fragment" data-fragment-index="2">
             <div class="r-stack">
-              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
-              <img src="media/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
+              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
+              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
             </div>
             $$\small kA \frac{T_{m-1}-T_m}{\Delta x}+kA\frac{T_{m+1}-T_{m}}{\Delta x} + \dot{g}_m A \Delta x=0$$
           </div>
@@ -178,6 +197,8 @@
       $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
     </div>
     </section>
+
+    <!--
 
     <section>
       <h3>Boundary condition types</h3>
