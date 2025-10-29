@@ -43,8 +43,10 @@
             </li>
             <li class="fragment" data-fragment-index="3"><em>Volume elements</em> with <em>width $\Delta x$</em>
               <ul class="fragment" data-fragment-index="3">
-                <li class="fragment" data-fragment-index="4">Properties are assumed constant within each volume element</li>
-                <li class="fragment" data-fragment-index="5">The finer the mesh (smaller $\Delta x$), the more accurate the solution</li>
+                <li class="fragment" data-fragment-index="4">Properties are assumed constant within each volume element
+                </li>
+                <li class="fragment" data-fragment-index="5">The finer the mesh (smaller $\Delta x$), the more accurate
+                  the solution</li>
               </ul>
             </li>
             <p class="bottom-1"></p>
@@ -117,31 +119,31 @@
               </p>
             </ul>
             <p class="bottom-1"></p>
-            <li>For <b class="definition">unsteady heat transfer</b>, e.g. transient:
-            <ul class="fragment" data-fragment-index="2">
-              <p>
-                $$
-                \small
-                \sum_\text{all surfaces} \dot{Q} +
-                \dot{G}_\text{element}
-                =
-                \frac{\Delta E_\text{element}}{\Delta t}
-                $$
-              </p>
-            </ul>
+            <li class="fragment" data-fragment-index="1">For <em>transient</em> heat transfer (changes in time):
+              <ul class="fragment" data-fragment-index="1">
+                <p>
+                  $$
+                  \small
+                  \sum_\text{all surfaces} \dot{Q} +
+                  \dot{G}_\text{element}
+                  =
+                  \frac{\Delta E_\text{element}}{\Delta t}
+                  $$
+                </p>
+              </ul>
             </li>
-            <li>For <b class="definition">steady heat transfer</b>, e.g. no change in time:
-            <ul class="fragment" data-fragment-index="3">
-              <p>
-                $$
-                \small
-                \sum_\text{all surfaces} \dot{Q} +
-                \dot{G}_\text{element}
-                =
-                0
-                $$
-              </p>
-            </ul>
+            <li class="fragment" data-fragment-index="2">For <em>steady</em> heat transfer (no change in time):
+              <ul class="fragment" data-fragment-index="2">
+                <p>
+                  $$
+                  \small
+                  \sum_\text{all surfaces} \dot{Q} +
+                  \dot{G}_\text{element}
+                  =
+                  0
+                  $$
+                </p>
+              </ul>
             </li>
             <ul class="fragment" data-fragment-index="4">
               <li>$\dot{G}_\text{element}$ is the heat generation rate in the element (W):</li>
@@ -167,82 +169,97 @@
 
       <section>
         <h2>Convention for heat transfer direction</h2>
-        <p>Assumed direction of heat transfer is <b class="definition">irrelevant as long as we are consistent</b></p>
+        <p>Assumed direction of heat transfer is <em>irrelevant as long as we are consistent</em></p>
 
         <div class="container">
-
-          <div class="col fragment" data-fragment-index="1">
+          <div class="col">
 
             <div class="r-stack">
-              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
-              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
+              <img class="fragment" data-fragment-index="1"
+                src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
+              <img class="fragment" data-fragment-index="2"
+                src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
             </div>
-            $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+            <p class="fragment" data-fragment-index="3"> Energy balance on control volume:
+              $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+            </p>
+            <p class="fragment" data-fragment-index="7"> In both cases, it <b>reduces to same expression:</b>
+              $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
+            </p>
           </div>
-          <div class="col fragment" data-fragment-index="2">
+          <div class="col">
             <div class="r-stack">
-              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
-              <img src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
+              <img class="fragment" data-fragment-index="4"
+                src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
+              <img class="fragment" data-fragment-index="5"
+                src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
             </div>
-            $$\small kA \frac{T_{m-1}-T_m}{\Delta x}+kA\frac{T_{m+1}-T_{m}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+            <p class="fragment" data-fragment-index="6"> Energy balance on control volume:
+              $$\small kA \frac{T_{m-1}-T_m}{\Delta x}+kA\frac{T_{m+1}-T_{m}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+            </p>
           </div>
         </div>
-    </div>
-    <ul>
-      <li class="col-6 fragment" data-fragment-index="3">
-        <p>In both cases it reduces to same expression:</p>
-      </li>
-    </ul>
-    <div class="col-6 fragment" data-fragment-index="3">
-      $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
-    </div>
-    </section>
+      </section>
 
-    <!--
+      <section>
+        <h2>The four boundary condition types</h2>
+        <div class="container">
+          <div class="col">
+            <p>We have to specify <b class="definition">boundary conditions</b> on each non-internal node. </p>
+            <p class="bottom-1"></p>
 
-    <section>
-      <h3>Boundary condition types</h3>
-    </section>
+            <li class="fragment" data-fragment-index="0"><em>Four common</em> types of boundary conditions:
+            <p class="bottom-1"></p>
+              <ol>
+                <li class="fragment" data-fragment-index="1">Constant temperature
 
-    <section>
-      <h3>The four boundary condition types</h3>
-      <div class="grid">
-        <div class="col-6">
-          <ul>
-            <li>
-              <p>We have to specify <b class="definition">boundary conditions</b> on each non-internal node. Four types
-                exist:</p>
+
+                </li>
+
+                  <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
+                </ul>
+                <li class="fragment" data-fragment-index="2">Constant heat flux</li>
+                <ul>
+                  <p class="fragment" data-fragment-index="2">
+                    $\dot{Q}_\text{left,surface}=\dot{q}A=c$</p>
+                </ul>
+                <li class="fragment" data-fragment-index="3">Convection</li>
+                <ul>
+                  <p class="fragment" data-fragment-index="3">$\dot{Q}_\text{left,surface}=hA\left(T_\infty-T_0
+                    \right)=c$
+                  </p>
+                </ul>
+                <li class="fragment" data-fragment-index="4">Radiation</li>
+                <ul>
+                  <p class="fragment" data-fragment-index="4">$\dot{Q}_\text{left,surface}=\epsilon \sigma A
+                    \left(T_\text{surr}^4-T_0^4\right)=c$</p>
+                </ul>
+              </ol>
             </li>
-            <ul>
-              <li class="fragment" data-fragment-index="1">1. Constant temperature</li>
-              <ul>
-                <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
-              </ul>
-              <li class="fragment" data-fragment-index="2">2. Constant heat flux</li>
-              <ul>
-                <p class="fragment" data-fragment-index="2">
-                  $\dot{Q}_\text{left,surface}=kA\frac{\text{d}T}{\text{d}x}=c$</p>
-              </ul>
-              <li class="fragment" data-fragment-index="3">3. Convection</li>
-              <ul>
-                <p class="fragment" data-fragment-index="3">$\dot{Q}_\text{left,surface}=hA\left(T_\infty-T_0 \right)=c$
-                </p>
-              </ul>
-              <li class="fragment" data-fragment-index="4">4. Radiation</li>
-              <ul>
-                <p class="fragment" data-fragment-index="4">$\dot{Q}_\text{left,surface}=\epsilon \sigma A
-                  \left(T_\text{surr}^4-T_0^4\right)=c$</p>
-              </ul>
-            </ul>
-          </ul>
-        </div>
-        <div class="col-6 align-right">
-          <div class="r-stack">
-            <img src="media/energy-balance-method-steady/boundary-node.svg" height="1000">
+          </div>
+          <div class="col align-right">
+            <div class="r-stack">
+              <img src="img/energy-balance-method-steady/boundary-node.svg" height="1000">
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section class="example">
+        <h2> <b>Class exercise 1:</b> Small ships in large oceans</h2>
+        <div class="container">
+          <div class="col">
+            dsa
+          </div>
+
+          <div class="col">
+            das
+          </div>
+      </section>
+
+      <!--
+
+    
 
     <section>
       <h3>Incorporating the different boundary conditions</h3>
@@ -741,7 +758,7 @@
   </script>
 </section> -->
 
-  </div>
+    </div>
   </div>
 
   <script type="module">
