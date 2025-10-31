@@ -80,6 +80,92 @@
       </section>
 
       <section>
+        <h2>Two approaches to solving heat conduction problems</h2>
+        <div class="container">
+          <div class="col">
+            <p class="bottom-1 fragment" data-fragment-index="1"><b>Finite difference method</b></p>
+            <li class="bottom-1 fragment" data-fragment-index="3"> Use equation for steady one-dimensional heat
+              conduction as a starting point:
+              <p class="fragment" data-fragment-index="3">
+                $$
+                \small
+                \frac{\partial^2T}{\partial x^2}+\frac{\dot{g}}{k}= 0
+                $$
+              </p>
+            </li>
+            <li class="bottom-1 fragment" data-fragment-index="4"> .. now replace $\frac{\partial^2 T}{\partial x^2}$
+              with finite difference approximations to form algebraic equations
+            </li>
+          </div>
+          <div class="col">
+            <p class="bottom-1 fragment" data-fragment-index="2"><b>Energy balance method</b></p>
+
+            <li class="bottom-1 fragment" data-fragment-index="5"> Start with a general energy balance on small volume
+              elements
+                <img class="fragment" data-fragment-index="5"
+                  src="img/energy-balance-method-steady/energy-balance-1d.jpg" height="200">
+              <p class="bottom-1 fragment" data-fragment-index="6">
+                $$
+                \small
+                \sum_\text{all surfaces} \dot{Q} +
+                \dot{G}_\text{element}
+                =
+                0
+                $$
+            </li>
+          </div>
+      </section>
+
+      <section>
+        <h2>Recalling finite differences..</h2>
+        <div class="container">
+          <div class="col">
+            <p>Consider a function $f$ that depends on $x$. The first derivative is then <em>defined</em> as the slope of the tangent:</p>
+            <p class="singleline-math-larger-font">
+              <span class="fragment" data-fragment-index="1">\( \frac{\text{d}f(x)}{\text{d}x} \)</span>
+              <span class="fragment" data-fragment-index="2">\(= \lim_{\Delta x \to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span>
+            </p>
+            <li class="fragment" data-fragment-index="3">Leaving out the limit, we get an <em>approximate</em> solution:
+            <p class="singleline-math-larger-font">
+              <span class="fragment" data-fragment-index="4">\( \frac{\text{d}f(x)}{\text{d}x} \)</span>
+              <span class="fragment" data-fragment-index="4">\(\approx \frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span>
+            </p>
+            </li>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+              <img src="img/energy-balance-method-steady/finite-difference-approx.jpg" height="600">
+            </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Applying finite differences to our 1D domain</h2>
+        <div class="container">
+          <div class="col">
+            <p>Using node numbering from previous slide, we may write:</p>
+            <p class="singleline-math-larger-font">
+              <span class="fragment" data-fragment-index="1">\( \frac{\text{d}T}{\text{d}x} \)</span>
+              <span class="fragment" data-fragment-index="2">\( \approx \frac{T_{m+1}-T_m}{\Delta x}\)</span>
+            </p>
+            <li class="fragment" data-fragment-index="3">Similarly, the second derivative is defined as:
+            <p class="singleline-math-larger-font">
+              <span class="fragment" data-fragment-index="4">\( \frac{\text{d}^2T}{\text{d}x^2} \)</span>
+              <span class="fragment" data-fragment-index="4">\(= \lim_{\Delta x \to 0} \frac{\frac{\text{d}T}{\text{d}x}\big|_{x+\Delta x}-\frac{\text{d}T}{\text{d}x}\big|_{x}}{\Delta x}\)</span>
+            </p>
+            </li>
+            <li class="fragment" data-fragment-index="5">Leaving out the limit, we get an approximate solution:
+            <p class="singleline-math-larger-font">
+              <span class="fragment" data-fragment-index="6">\( \frac{\text{d}^2T}{\text{d}x^2} \)</span>
+              <span class="fragment" data-fragment-index="6">\( \approx \frac{\frac{T_{m+1}-T_m}{\Delta x}-\frac{T_{m}-T_{m-1}}{\Delta x}}{\Delta x} = \frac{T_{m-1}-2T_m+T_{m+1}}{\Delta x^2}\)</span>
+            </p>
+            </li>
+          </div>
+          <div class="col">
+            <div class="r-stack">
+      </section>
+
+      <section>
         <h2>The energy balance equation</h2>
         <div class="container">
           <div class="col">
@@ -183,7 +269,8 @@
             <p class="fragment" data-fragment-index="3"> Energy balance on control volume:
               $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
             </p>
-            <p class="fragment" data-fragment-index="7"> In both cases, it <b>reduces to same expression:</b>
+            <p class="fragment" data-fragment-index="7"> <b>Conclusion:</b> In both cases, it reduces to <em>the same
+                expression</em>:
               $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
             </p>
           </div>
@@ -209,14 +296,14 @@
             <p class="bottom-1"></p>
 
             <li class="fragment" data-fragment-index="0"><em>Four common</em> types of boundary conditions:
-            <p class="bottom-1"></p>
+              <p class="bottom-1"></p>
               <ol>
                 <li class="fragment" data-fragment-index="1">Constant temperature
 
 
                 </li>
 
-                  <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
+                <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
                 </ul>
                 <li class="fragment" data-fragment-index="2">Constant heat flux</li>
                 <ul>
