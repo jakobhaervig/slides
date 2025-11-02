@@ -63,6 +63,37 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-overlay-element-fg-color: 240, 240, 240;
 }
 
+.color1 {
+  color: var(--haervig-gray) !important;
+}
+.color2 {
+  color: var(--haervig-light-gray) !important;
+}
+.color3 {
+  color: var(--haervig-orange-dark) !important;
+}
+.color4 {
+  color: var(--haervig-orange-light) !important;
+}
+.color5 {
+  color: var(--haervig-blue-dark) !important;
+}
+.color6 {
+  color: var(--haervig-blue-light) !important;
+}
+.color7 {
+  color: var(--haervig-green-dark) !important;
+}
+.color8 {
+  color: var(--haervig-green-light) !important;
+}
+.color9 {
+  color: var(--haervig-pink-dark) !important;
+}
+.color10 {
+  color: var(--haervig-pink-light) !important;
+}
+
 /* CUSTOM THEME BASED ON WHITE */
 .container{
     display: flex;
