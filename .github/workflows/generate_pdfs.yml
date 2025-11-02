@@ -31,22 +31,41 @@ jobs:
           nohup npx http-server . -p 8000 > server.log 2>&1 &
           sleep 5  # give the server time to start
 
-      - name: Convert slides to PDF
-        run: |
-          mkdir -p pdfs
-          ignore_folders=("reveal.js" "__pycache__")
-          for folder in */; do
-            folder=${folder%/}  # remove trailing slash
-            if [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
-              continue
-            fi
-            for file in "$folder"/*.html; do
-              [ -e "$file" ] || continue
-              filename=$(basename "$file" .html)
-              mkdir -p pdfs/"$folder"
-              decktape --chrome-arg="--no-sandbox" reveal "http://127.0.0.1:8000/$folder/$filename.html" "pdfs/$folder/$filename.pdf"
+      # - name: Convert slides to PDF
+      #   run: |
+      #     mkdir -p pdfs
+      #     ignore_folders=("reveal.js" "__pycache__")
+      #     for folder in */; do
+      #       folder=${folder%/}  # remove trailing slash
+      #       if [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+      #         continue
+      #       fi
+      #       for file in "$folder"/*.html; do
+      #         [ -e "$file" ] || continue
+      #         filename=$(basename "$file" .html)
+      #         mkdir -p pdfs/"$folder"
+      #         decktape --chrome-arg="--no-sandbox" reveal "http://127.0.0.1:8000/$folder/$filename.html" "pdfs/$folder/$filename.pdf"
+      #       done
+      #     done
+
+        - name: Convert slides to PDF
+          run: |
+            mkdir -p pdfs
+            ignore_folders=("reveal.js" "__pycache__")
+            for folder in */; do
+              folder=${folder%/}
+              if [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+                continue
+              fi
+              for file in "$folder"/*.html; do
+                [ -e "$file" ] || continue
+                filename=$(basename "$file" .html)
+                mkdir -p pdfs/"$folder"
+                decktape --chrome-arg="--no-sandbox" reveal \
+                  "http://127.0.0.1:8000/$folder/$filename.html?print-pdf" \
+                  "pdfs/$folder/$filename.pdf"
+              done
             done
-          done
 
       - name: Commit and push PDFs
         run: |
