@@ -23,28 +23,29 @@
       </section>
 
       <section>
-        <h2>Why look at <em> numerical methods for heat conduction</em>?</h2>
-        <div class="container">
-          <div class="col">
-            <img class="fragment block semi-fade-out" data-fragment-index="1"
-              src="img/energy-balance-method-steady/chatgpt-0.jpg" width="1000" />
-            <img class="fragment block fade-in-then-semi-out" data-fragment-index="1"
-              src="img/energy-balance-method-steady/chatgpt-1.jpg" width="1000" />
-            <img class="fragment block fade-in-then-semi-out" data-fragment-index="2"
-              src="img/energy-balance-method-steady/chatgpt-2.jpg" width="1000" />
-            <img class="fragment block fade-in-then-semi-out" data-fragment-index="4"
-              src="img/energy-balance-method-steady/chatgpt-4.jpg" width="1000" />
-          </div>
-          <div class="col">
-            <img class="fragment block fade-in-then-semi-out" data-fragment-index="3"
-              src="img/energy-balance-method-steady/chatgpt-3.jpg" width="1000" />
+        <section>
+          <h2>Why look at <em> numerical methods for heat conduction</em>?</h2>
+              <img class="fragment block semi-fade-out" data-fragment-index="1"
+                src="img/energy-balance-method-steady/chatgpt-0.jpg" width="1300" />
+              <img class="fragment block fade-in-then-semi-out" data-fragment-index="1"
+                src="img/energy-balance-method-steady/chatgpt-1.jpg" width="1300" />
+                <p class="bottom-2"></p>
+              <img class="fragment block fade-in-then-semi-out" data-fragment-index="2"
+                src="img/energy-balance-method-steady/chatgpt-2.jpg" width="1300" />
+        </section>
 
-            <img class="fragment block fade-in-then-semi-out" data-fragment-index="5"
-              src="img/energy-balance-method-steady/chatgpt-5.jpg" width="1000" />
-          </div>
-        </div>
+        <section>
+              <img class="fragment block semi-fade-out" data-fragment-index="1"
+                src="img/energy-balance-method-steady/chatgpt-4.jpg" width="1300" />
+              <img class="fragment block fade-in-then-semi-out" data-fragment-index="1"
+                src="img/energy-balance-method-steady/chatgpt-5.jpg" width="1300" />
+        </section>
+
+        <section>
+              <img class="block"
+                src="img/energy-balance-method-steady/chatgpt-3.jpg" width="1300" />
+        </section>
       </section>
-
 
       <section>
         <h2>Two approaches to solve heat conduction problems</h2>
@@ -210,7 +211,7 @@
               <p class="fragment" data-fragment-index="14">The equation for <em>steady one-dimensional heat
                   conduction</em> now becomes:</p>
               <p class="singleline-math bottom-1">
-                <span class="fragment" data-fragment-index="15">\( \displaystyle \frac{T_{m-1}-2T_{m}+T_{m+1}}{\Delta
+                <span class="fragment" data-fragment-index="14">\( \displaystyle \frac{T_{m-1}-2T_{m}+T_{m+1}}{\Delta
                   x^2} + \frac{\dot{g}}{k}= 0 \)</span>
               </p>
 
@@ -499,6 +500,8 @@
           </div>
         </section>
 
+
+
         <section>
           <h2>Incorporating mixed boundary condition types</h2>
           <div class="container">
@@ -522,6 +525,32 @@
               </div>
             </div>
           </div>
+        </section>
+
+        <section>
+          <h2><em>Mirror concept</em> for insulated boundaries (e.g zero heat flux)</h2>
+          <div class="container">
+            <div class="col">
+              <p>Insulated boundary (zero heat flux) can be modelled using <em>mirror nodes</em>:</p>
+
+              <li class="fragment" data-fragment-index="1">For interior nodes:</li>
+                <p class="singleline-math fragment" data-fragment-index="1">
+                  <span class="fragment" data-fragment-index="1">\( \displaystyle \frac{T_{m+1}-2T_m+T_{m-1}}{\Delta x^2} + \frac{\dot{g}}{k} = 0 \)</span>
+                </p>
+
+              <li class="fragment" data-fragment-index="2">For insulated boundaries:</li>
+                <p class="singleline-math fragment" data-fragment-index="2">
+                  <span class="fragment" data-fragment-index="2">\( \displaystyle \frac{T_{1}-2T_0+T_{1}}{\Delta x^2} + \frac{\dot{g}}{k} = 0 \)</span>
+                </p>
+
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/mirror-concept.svg" height="1000">
+              </div>
+            </div>
+
+
         </section>
 
         <section>
