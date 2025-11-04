@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Jakob Hærvig">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="/custom/theme/haervig.css">
+  <link rel="stylesheet" href="/custom/plugins/highlight/haervig.css">
+</head>
+
+<body>
+  <a href="https://slides.jakobhaervig.com" class="back-arrow" title="Back to Home"></a>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h3 style="margin-bottom: 0;"><b>Heat Transfer</b></h3>
+        <h2 style="margin-top: 0;">Transient heat conduction using numerical methods</h2>
+        <h3 style="margin-top: 40px; margin-bottom: 0;"><em>Lecturer: Jakob Hærvig</em></h3>
+      </section>
+
+        <section>
+  <h3>Notation for transient problems</h3>
+  <div class="container">
+    <div class="col">
+      <ul>
+        <li><b class="definition">On space axis </b>$m,n,k$ denote node number in $x,y,z$-directions</li>
+        <ul>
+          <li>Distance between nodes is $\Delta x$</li>
+        </ul>
+        <li class="fragment" data-fragment-index="1"><b class="definition">On time axis </b>$i$ denote node number in $t$-direction (time)</li>
+        <ul>
+          <li class="fragment" data-fragment-index="1">Time between nodes is $\Delta t$</li>
+        </ul>
+        <li class="fragment" data-fragment-index="2">General notation:</li>
+        <p class="fragment" data-fragment-index="2">
+          $$
+          T_{m,n,k}^i
+          $$
+        </p>
+      </ul>
+    </div>
+   <div class="col">
+      <div class="r-stack">
+        <img src="img/energy-balance-method-transient/energy-balance-notation-transient-0.svg" height="1000">
+        <img class="fragment" data-fragment-index="1" src="img/energy-balance-method-transient/energy-balance-notation-transient-1.svg" height="1000">
+        <img class="fragment" data-fragment-index="2" src="img/energy-balance-method-transient/energy-balance-notation-transient-2.svg" height="1000">
+      </div>
+    </div>
+  </div>
+</section>
+
+        <section>
+          <h2>Recalling finite differences from old days 🙂</h2>
+          <div class="container">
+            <div class="col">
+              <p>Consider a function $f$ that depends on $x$. The first derivative is then <em>defined</em> as the slope
+                of the tangent:</p>
+              <p class="singleline-math-larger-font">
+                <span class="fragment" data-fragment-index="1">\( \frac{\text{d}f(x)}{\text{d}x} \)</span>
+                <span class="fragment" data-fragment-index="2">\(= \text{lim}_{\Delta x \to 0} \frac{f(x+\Delta
+                  x)-f(x)}{\Delta x}\)</span>
+              </p>
+              <li class="fragment" data-fragment-index="3">Leaving out the limit, we get an <em>approximate</em>
+                solution:
+                <p class="singleline-math-larger-font">
+                  <span class="fragment" data-fragment-index="4">\( \frac{\text{d}f(x)}{\text{d}x} \)</span>
+                  <span class="fragment" data-fragment-index="4">\(\approx \frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span>
+                </p>
+              </li>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/finite-difference-approx.jpg" height="600">
+              </div>
+            </div>
+        </section>
+
+        <section>
+          <h2>Applying finite differences to our 1D domain</h2>
+          <div class="container">
+
+            <div class="col">
+              <p>Remember, we are looking for: </p>
+              <span class="bottom-1">$$ \frac{\partial^2 T}{\partial x^2} $$</span>
+              <p class="fragment" data-fragment-index="1">We may approximate first derivative <em>at midpoints</em> as:
+              </p>
+              <p class="singleline-math-larger-font bottom-1">
+                <span class="fragment" data-fragment-index="2">\( \frac{\partial T}{\partial x} \big|_{x_{m-1/2}}
+                  \)</span>
+                <span class="fragment" data-fragment-index="3">\( \approx \frac{T_{m}-T_{m-1}}{\Delta x} \)</span>
+                <span class="fragment" data-fragment-index="4">\( ~~~\text{and} ~~~ \)</span>
+                <span class="fragment" data-fragment-index="5">\( \frac{\partial T}{\partial x} \big|_{x_{m+1/2}}
+                  \)</span>
+                <span class="fragment" data-fragment-index="6">\( \approx \frac{T_{m+1}-T_{m}}{\Delta x} \)</span>
+              </p>
+              <p class="fragment" data-fragment-index="7">... now, we can approximate the second derivative using two
+                first-order derivatives:</p>
+              <p class="singleline-math-larger-font bottom-1">
+                <span class="fragment" data-fragment-index="8">\( \frac{\partial^2 T}{\partial x^2} \big|_{x_m}
+                  \)</span>
+                <span class="fragment" data-fragment-index="9">\( \approx \frac{\frac{\partial T}{\partial x}
+                  \big|_{x_{m+1/2}} - \frac{\partial T}{\partial x} \big|_{x_{m-1/2}}}{\Delta x} \)</span>
+                <span class="fragment" data-fragment-index="10">\(= \frac{\frac{T_{m+1}-T_{m}}{\Delta x} -
+                  \frac{T_{m}-T_{m-1}}{\Delta x}}{\Delta x} \)</span>
+              </p>
+              <p class="fragment" data-fragment-index="11">... which reduces to:</p>
+              <p class="singleline-math-larger-font bottom-1">
+                <span class="fragment" data-fragment-index="12">\( \frac{\partial^2 T}{\partial x^2} \big|_{x_m}
+                  \)</span>
+                <span class="fragment" data-fragment-index="13">\( \approx \frac{T_{m-1}-2T_{m}+T_{m+1}}{\Delta x^2}
+                  \)</span>
+              </p>
+              <p class="fragment" data-fragment-index="14">The equation for <em>steady one-dimensional heat
+                  conduction</em> now becomes:</p>
+              <p class="singleline-math bottom-1">
+                <span class="fragment" data-fragment-index="14">\( \displaystyle \frac{T_{m-1}-2T_{m}+T_{m+1}}{\Delta
+                  x^2} + \frac{\dot{g}}{k}= 0 \)</span>
+              </p>
+
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/finite-diff-notation.svg" height="200">
+            </div>
+        </section>
+        <section class="example">
+          <h2> <b>Exercise: Centre temperature in a plate by the finite difference method</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>Consider a aluminium plate of length $L=0.5$ cm and thermal conductivity $k=205$ W/(m·K) in which no
+                heat is generated ($\dot{g}=0$). One side of the plate is maintained at 0 °C by icy water while the
+                other is maintained at 100 °C. Estimate the temperature in the centre at node 1.</p>
+
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/exercise-finite-difference-method-plate.jpg" height="300">
+            </div>
+        </section>
+
+
+      </section>
+
+      <section>
+        <section>
+          <h1>Energy balance method for 1D problems</h1>
+        </section>
+
+        <section>
+          <h2>Notation for <em>1D energy balance</em> problems</h2>
+          <div class="container">
+            <div class="col">
+              <p>A <em>1D plane wall</em> is defined as being infinitely long (i.e. heat transfer
+                only occurs in one direction)</p>
+              <p class="bottom-1"></p>
+              <li class="fragment" data-fragment-index="1"><em>Position</em> is denoted by <em>$x$</em>
+                <ul class="fragment" data-fragment-index="1">
+                  <li>$x=0$ at left side of wall</li>
+                  <li>$x=L$ at right side of wall</li>
+                </ul>
+              </li>
+              <li class="fragment" data-fragment-index="2"><em>Node number</em> is denoted by <em>$m$</em>
+                <ul class="fragment" data-fragment-index="2">
+                  <li>$m=1$ at left side of wall</li>
+                  <li>$m=M$ at right side of wall</li>
+                </ul>
+              </li>
+              <li class="fragment" data-fragment-index="3"><em>Volume elements</em> with <em>width $\Delta x$</em>
+                <ul class="fragment" data-fragment-index="3">
+                  <li class="fragment" data-fragment-index="4">Properties are assumed constant within each volume
+                    element
+                  </li>
+                  <li class="fragment" data-fragment-index="5">The finer the mesh (smaller $\Delta x$), the more
+                    accurate
+                    the solution</li>
+                </ul>
+              </li>
+              <p class="bottom-1"></p>
+              <li class="fragment" data-fragment-index="6">Notation:</em>
+                <ul>
+                  <li class="fragment" data-fragment-index="6">$T_5$: Temperature at $m=5$</li>
+                  <li class="fragment" data-fragment-index="7">$ \rho_5 $: Density at node $m=5$</li>
+                  <li class="fragment" data-fragment-index="8">...</li>
+                </ul>
+              </li>
+
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance-notation_0.svg" height="1000">
+                <img class="fragment" data-fragment-index="3"
+                  src="img/energy-balance-method-steady/energy-balance-notation_5.svg" height="1000">
+                <img class="fragment" data-fragment-index="3"
+                  src="img/energy-balance-method-steady/energy-balance-notation_6.svg" height="1000">
+                <img class="fragment" data-fragment-index="1"
+                  src="img/energy-balance-method-steady/energy-balance-notation_1.svg" height="1000">
+                <img class="fragment" data-fragment-index="2"
+                  src="img/energy-balance-method-steady/energy-balance-notation_2.svg" height="1000">
+                <img class="fragment" data-fragment-index="2"
+                  src="img/energy-balance-method-steady/energy-balance-notation_3.svg" height="1000">
+                <img class="fragment" data-fragment-index="3"
+                  src="img/energy-balance-method-steady/energy-balance-notation_4.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>The energy balance equation for interior nodes</h2>
+          <div class="container">
+            <div class="col">
+
+              <p>We <em>sum up heat transfer to/from</em> volume element:</p>
+              <ul>
+                <p>
+                  $$
+                  \small
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Sum of heat}\\
+                  \text{transfer rate}\\
+                  \text{across surfaces}\\
+                  \text{of volume element}
+                  \end{array}
+                  \right)
+                  +
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of heat}\\
+                  \text{generation}\\
+                  \text{inside the}\\
+                  \text{element}
+                  \end{array}
+                  \right)
+                  =
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of change}\\
+                  \text{of the energy}\\
+                  \text{content of}\\
+                  \text{the element}
+                  \end{array}
+                  \right)
+                  $$
+                </p>
+              </ul>
+              <p class="bottom-1"></p>
+              <li class="fragment" data-fragment-index="1">For <em>steady</em> heat transfer (no change in time):
+                <ul class="fragment" data-fragment-index="1">
+                  <p>
+                    $$
+                    \small
+                    \sum_\text{all surfaces} \dot{Q} +
+                    \dot{G}_\text{element}
+                    =
+                    \frac{\Delta E_\text{element}}{\Delta t}
+                    = 0
+                    $$
+                  </p>
+                </ul>
+              </li>
+              <ul class="fragment" data-fragment-index="4">
+                <li>$\dot{G}_\text{element}$ is the heat generation rate in the element (W):</li>
+                <p>
+                  $$
+                  \dot{G}_\text{element} = \dot{g}V_\text{element}
+                  $$
+                </p>
+              </ul>
+              <ul class="fragment" data-fragment-index="4">
+                <ul>
+                  <li>$\dot{g}$ is the volumetric heat generation rate in the element ($\text{W}/\text{m}^3$)</li>
+                </ul>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Convention for heat transfer direction</h2>
+          <p>Assumed direction of heat transfer is <em>irrelevant as long as we are consistent</em></p>
+
+          <div class="container">
+            <div class="col">
+
+              <div class="r-stack">
+                <img class="fragment" data-fragment-index="1"
+                  src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-0.svg" height="600">
+                <img class="fragment" data-fragment-index="2"
+                  src="img/energy-balance-method-steady/convention-heat-transfer-direction-1-1.svg" height="600">
+              </div>
+              <p class="fragment" data-fragment-index="3"> Energy balance on control volume:
+                $$\small kA \frac{T_{m-1}-T_m}{\Delta x}-kA\frac{T_m-T_{m+1}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+              </p>
+              <p class="fragment" data-fragment-index="7"> <b>Conclusion:</b> In both cases, it reduces to <em>the same
+                  expression</em>:
+                $$\small T_{m-1}-2T_m+T_{m+1}+\frac{\dot{g}_m\Delta x^2}{kA}=0$$
+              </p>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img class="fragment" data-fragment-index="4"
+                  src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-0.svg" height="600">
+                <img class="fragment" data-fragment-index="5"
+                  src="img/energy-balance-method-steady/convention-heat-transfer-direction-2-1.svg" height="600">
+              </div>
+              <p class="fragment" data-fragment-index="6"> Energy balance on control volume:
+                $$\small kA \frac{T_{m-1}-T_m}{\Delta x}+kA\frac{T_{m+1}-T_{m}}{\Delta x} + \dot{g}_m A \Delta x=0$$
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>The four boundary condition types</h2>
+          <div class="container">
+            <div class="col">
+              <p>We have to specify <b class="definition">boundary conditions</b> on each non-internal node. </p>
+              <p class="bottom-1"></p>
+
+              <li class="fragment" data-fragment-index="0"><em>Four common</em> boundary condition types:
+                <p class="bottom-1"></p>
+                <ol>
+                  <li class="fragment" data-fragment-index="1"><em>Constant temperature</em>
+
+
+                  </li>
+
+                  <p class="fragment" data-fragment-index="1">$T_0 = c$</p>
+                  </ul>
+                  <li class="fragment" data-fragment-index="2"><em>Constant heat flux</em></li>
+                  <ul>
+                    <p class="fragment" data-fragment-index="2">
+                      $\dot{Q}_\text{left,surface}=\dot{q}A=c$</p>
+                  </ul>
+                  <li class="fragment" data-fragment-index="3"><em>Convection</em></li>
+                  <ul>
+                    <p class="fragment" data-fragment-index="3">$\dot{Q}_\text{left,surface}=hA\left(T_\infty-T_0
+                      \right)=c$
+                    </p>
+                  </ul>
+                  <li class="fragment" data-fragment-index="4"><em>Radiation</em></li>
+                  <ul>
+                    <p class="fragment" data-fragment-index="4">$\dot{Q}_\text{left,surface}=\epsilon \sigma A
+                      \left(T_\text{surr}^4-T_0^4\right)=c$</p>
+                  </ul>
+                </ol>
+              <li class="fragment" data-fragment-index="5">.. or any combination of type 2, 3 and 4
+              </li>
+              </li>
+            </div>
+            <div class="col align-right">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/boundary-node.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Incorporating the different boundary conditions</h2>
+          <div class="container">
+            <div class="col">
+              <p><b>Type 1</b> (constant temperature):</p>
+              <ul>
+                <li>We simply <em>set the temperature</em> of the node, e.g. $T_0 = c$</li>
+              </ul>
+
+              <p class="fragment" data-fragment-index="1"><b>Type 2-4</b>:</p>
+              <ul>
+                <li class="fragment" data-fragment-index="1">We apply an <em>energy balance</em> on the volume element:
+                </li>
+              </ul>
+              <p class="fragment" data-fragment-index="2">
+                $$
+                \small
+                \begin{aligned} \small
+                \sum_\text{all surfaces} \dot{Q} + \dot{G}_\text{element} = 0,
+                \end{aligned}
+                $$
+              </p>
+              <p class="fragment" data-fragment-index="3">
+                $$\small \dot{Q}_\text{left,surface} + kA
+                \frac{T_1-T_0}{\Delta x}+\dot{g}_0\left(\frac{\Delta x}{2}A\right)=0.$$
+              </p>
+
+              <ul>
+                <li class="fragment" data-fragment-index="4">Expression for $\dot{Q}_\text{left,surface}$ depends on
+                  boundary condition type
+                  type
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/boundary-node.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section>
+          <h2>Incorporating mixed boundary condition types</h2>
+          <div class="container">
+            <div class="col">
+              <p>All BC types (<b class="color6">heat flux</b>, <b class="color8">convection</b> and <b
+                  class="color10">radiation</b>) can easily be added to form mixed types:</p>
+              <p class="singleline-math-font bottom-1">
+                <span class="fragment" data-fragment-index="1">\( \dot{Q}_\text{left,surface}\)</span>
+                <span class="fragment" data-fragment-index="2">\(= \)</span>
+                <span class="fragment color6" data-fragment-index="2">\( \dot{q}_0 A \)</span>
+                <span class="fragment" data-fragment-index="3">\( ~+ ~\)</span>
+                <span class="fragment color8" data-fragment-index="3">\(h A \left(T_\infty-T_0\right) \)</span>
+                <span class="fragment" data-fragment-index="4">\( ~+ ~\)</span>
+                <span class="fragment color10" data-fragment-index="4">\( \epsilon \sigma A
+                  \left(T_\text{surr}^4-T_0^4\right) \)</span>
+              </p>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/boundary-node.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2><em>Mirror concept</em> for insulated boundaries (e.g zero heat flux)</h2>
+          <div class="container">
+            <div class="col">
+              <p>Insulated boundary (zero heat flux) can be modelled using <em>mirror nodes</em>:</p>
+
+              <li class="fragment" data-fragment-index="1">For interior nodes:</li>
+                <p class="singleline-math fragment" data-fragment-index="1">
+                  <span class="fragment" data-fragment-index="1">\( \displaystyle \frac{T_{m+1}-2T_m+T_{m-1}}{\Delta x^2} + \frac{\dot{g}}{k} = 0 \)</span>
+                </p>
+
+              <li class="fragment" data-fragment-index="2">For insulated boundaries:</li>
+                <p class="singleline-math fragment" data-fragment-index="2">
+                  <span class="fragment" data-fragment-index="2">\( \displaystyle \frac{T_{1}-2T_0+T_{1}}{\Delta x^2} + \frac{\dot{g}}{k} = 0 \)</span>
+                </p>
+
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/mirror-concept.svg" height="1000">
+              </div>
+            </div>
+
+
+        </section>
+
+        <section>
+          <h2>Interfaces between different materials</h2>
+          <div class="container">
+            <div class="col">
+              <p>Starting with the general energy balance:</p>
+              <p>
+                $$ \displaystyle
+                \begin{aligned}
+                \sum_\text{all surfaces} \dot{Q} + \dot{G}_\text{element} = 0,
+                \end{aligned}
+                $$
+              </p>
+              <li class="fragment" data-fragment-index="1"> Assuming <em>perfect contact (no air gaps)</em> at the
+                interface, the energy balance becomes:
+              </li>
+              <p class="singleline-math-large-font bottom-1">
+                <span class="fragment" data-fragment-index="2">\( \displaystyle k_1 A \frac{T_{m-1}-T_m}{\Delta x_1} +
+                  k_2 A \frac{T_{m+1}-T_m}{\Delta x_2}\)</span>
+                <span class="fragment" data-fragment-index="3">\(\displaystyle+ \dot{g}_A A \Delta \frac{x}{2} +
+                  \dot{g}_B A \Delta \frac{x}{2}\)</span>
+                <span class="fragment" data-fragment-index="4">\( \displaystyle= 0\)</span>
+              </p>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance-interface-materials.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="example">
+          <h2> <b>Exercise: Centre temperature in a plate by the energy balance method</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>Consider a aluminium plate of length $L=4$ cm and thermal conductivity $k=28$ W/(m·K) in which heat is
+                generated at a rate <br>$\dot{g}=5\cdot 10^6$ W/m³. The left side is maintained at 0°C and the right
+                side is exposed to convection with $h=45$ W/(m²·K) and ambient temperature of $T_\infty=30$°C. Find
+                $T_2$.</p>
+
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/exercise-energy-balance-method-plate.jpg" height="500">
+            </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Energy balance method for 2D (and 3D) problems</h1>
+        </section>
+        <section>
+          <h2>Notation for <em>2D energy balance</em> problems</h2>
+          <div class="container">
+            <div class="col">
+              <p><em>Double subscripts ($m$,$n$)</em> to denote two dimensions (triple for three dimensions)</p>
+              <ul>
+                <li>$m$ used for $x$-direction</li>
+                <li>$n$ used for $y$-direction</li>
+              </ul>
+              <ul>
+                <li class="fragment" data-fragment-index="1">Temperature at node ($m=1$, $n=0$) is written $T_{1,0}$
+                </li>
+                <li class="fragment" data-fragment-index="2">Distances between nodes are $\Delta x$ and $\Delta y$</li>
+                <li class="fragment" data-fragment-index="3">Form volume elements around each node</li>
+                <li class="fragment" data-fragment-index="4">Convert from node number to actual coordinates by:</li>
+                <ul class="fragment" data-fragment-index="4">
+                  <li>$x=m\Delta x$</li>
+                  <li>$y=n\Delta y$</li>
+                </ul>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance-notation-2d-0.svg" height="1000">
+                <img src="img/energy-balance-method-steady/energy-balance-notation-2d-1.svg" height="1000">
+                <img src="img/energy-balance-method-steady/energy-balance-notation-2d-2.svg" height="1000">
+                <img src="img/energy-balance-method-steady/energy-balance-notation-2d-3.svg" height="1000">
+                <img class="fragment" data-fragment-index="2"
+                  src="img/energy-balance-method-steady/energy-balance-notation-2d-4.svg" height="1000">
+                <img class="fragment" data-fragment-index="3"
+                  src="img/energy-balance-method-steady/energy-balance-notation-2d-5.svg" height="1000">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>The energy balance equation for <em>interior nodes</em></h2>
+          <div class="container">
+            <div class="col">
+              <p>We <em>sum up heat transfer to/from</em> volume element:</p>
+              <ul>
+                <p>
+                  $$
+                  \small
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Sum of heat}\\
+                  \text{transfer rate}\\
+                  \text{across surfaces}\\
+                  \text{of volume element}
+                  \end{array}
+                  \right)
+                  +
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of heat}\\
+                  \text{generation}\\
+                  \text{inside the}\\
+                  \text{element}
+                  \end{array}
+                  \right)
+                  =
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of change}\\
+                  \text{of the energy}\\
+                  \text{content of}\\
+                  \text{the element}
+                  \end{array}
+                  \right)
+                  $$
+                </p>
+              </ul>
+
+              <li class="fragment" data-fragment-index="1"> For <em>steady</em> heat transfer (no changes in time):
+                <ul>
+                  <p>
+                    $$
+                    \small
+                    \sum_\text{all surfaces} \dot{Q} +
+                    \dot{G}_\text{element}
+                    =
+                    \frac{\Delta E_\text{element}}{\Delta t}
+                    = 0
+                    $$
+                  </p>
+                </ul>
+              </li>
+
+              <li class="fragment" data-fragment-index="2">Sum up heat transfer to/from volume element:</li>
+              <p class="singleline-math-large-font fragment" data-fragment-index="2">
+                <span>\( \dot{Q}_\text{left,cond} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dot{Q}_\text{right,cond} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dot{Q}_\text{bottom,cond} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dot{Q}_\text{top,cond} \)</span>
+                <span>\( + \)</span>
+                <span>\( \dot{G}_\text{element} \)</span>
+                <span>\( = 0 \)</span>
+              </p>
+
+
+              <ul>
+                <li class="fragment" data-fragment-index="3">.. or in terms of node numbers:</li>
+                <p class="singleline-math-large-font fragment" data-fragment-index="3">
+                  <span>\( \displaystyle k A \frac{T_{m-1,n}-T_{m,n}}{\Delta x}\)</span>
+                  <span>\( + \)</span>
+                  <span>\( \displaystyle k A \frac{T_{m+1,n}-T_{m,n}}{\Delta x}\)</span>
+                  <br class="bottom-1">
+                  <span>\( + \)</span>
+                  <span>\( \displaystyle k A \frac{T_{m,n-1}-T_{m,n}}{\Delta y}\)</span>
+                  <span>\( + \)</span>
+                  <span>\( \displaystyle k A \frac{T_{m,n+1}-T_{m,n}}{\Delta y}\)</span>
+                  <span>\( + \)</span>
+                  <span>\( \dot{g}_{m,n}(\Delta x \Delta y) \)</span>
+                  <span>\( = 0 \)</span>
+                </p>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance-internal-node-2d-0.svg" height="600">
+                <img src="img/energy-balance-method-steady/energy-balance-internal-node-2d-1.svg" height="600">
+                <img class="fragment" data-fragment-index="3"
+                  src="img/energy-balance-method-steady/energy-balance-internal-node-2d-2.svg" height="600">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>The energy balance equation for <em>boundary nodes</em></h2>
+          <div class="container">
+            <div class="col">
+              <p>We <em>sum up heat transfer to/from</em> volume element:</p>
+              <ul>
+                <p>
+                  $$
+                  \small
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Sum of heat}\\
+                  \text{transfer rate}\\
+                  \text{across surfaces}\\
+                  \text{of volume element}
+                  \end{array}
+                  \right)
+                  +
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of heat}\\
+                  \text{generation}\\
+                  \text{inside the}\\
+                  \text{element}
+                  \end{array}
+                  \right)
+                  =
+                  \left(
+                  \begin{array}{ccc}
+                  \text{Rate of change}\\
+                  \text{of the energy}\\
+                  \text{content of}\\
+                  \text{the element}
+                  \end{array}
+                  \right)
+                  $$
+                </p>
+              </ul>
+
+              <ul>
+                <li class="fragment" data-fragment-index="2">For a volume element on the left boundary:</li>
+                <p class="singleline-math-large-font fragment" data-fragment-index="2">
+                  <span class="color4">\( \dot{Q}_\text{left,surface} \)</span>
+                  <span>\( + \)</span>
+                  <span>\( \dot{Q}_\text{right,cond} \)</span>
+                  <span>\( + \)</span>
+                  <span>\( \dot{Q}_\text{bottom,cond} \)</span>
+                  <span>\( + \)</span>
+                  <span>\( \dot{Q}_\text{top,cond} \)</span>
+                  <span>\( + \)</span>
+                  <span>\( \dot{G}_\text{element} \)</span>
+                  <span>\( = 0 \)</span>
+                </p>
+                <li class="fragment" data-fragment-index="3">.. or in terms of node numbers:</li>
+                <p class="singleline-math-large-font fragment" data-fragment-index="3">
+                  <span class="color4">$\displaystyle \dot{Q}_\text{left surface}$</span>
+                  <span class="fragment" data-fragment-index="4">$~+~$</span>
+                  <span class="fragment" data-fragment-index="4">$\displaystyle k\Delta y\frac{T_{1,n}-T_{0,n}}{\Delta
+                    x}$</span>
+                  <span class="fragment" data-fragment-index="5">$~+~$</span>
+                  <span class="fragment" data-fragment-index="5">$\displaystyle k\frac{\Delta
+                    x}{2}\frac{T_{0,n-1}-T_{0,n}}{\Delta y}$</span>
+                  <br>
+                  <span class="fragment" data-fragment-index="6">$~+~$</span>
+                  <span class="fragment" data-fragment-index="6">$\displaystyle k\frac{\Delta
+                    x}{2}\frac{T_{0,n+1}-T_{0,n}}{\Delta y}$</span>
+                  <span class="fragment" data-fragment-index="7">$~+~$</span>
+                  <span class="fragment" data-fragment-index="7">$ \displaystyle \dot{g}_{0,n}(\frac{\Delta x}{2} \Delta
+                    y)$</span>
+                  <span class="fragment" data-fragment-index="8">$~=~$</span>
+                  <span class="fragment" data-fragment-index="8">$0$</span>
+                </p>
+                <li class="fragment" data-fragment-index="9">The expression for <b class="color4">$\dot{Q}_\text{left
+                    surface}$</b> depends on the type of boundary condition</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-steady/energy-balance-boundary-node-2d-0.svg" height="800">
+                <img src="img/energy-balance-method-steady/energy-balance-boundary-node-2d-1.svg" height="800">
+                <img src="img/energy-balance-method-steady/energy-balance-boundary-node-2d-2.svg" height="800">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Handling <em>irregular</em> boundaries</h2>
+          <p>Different approaches to irregular boundaries:</p>
+          <div class="container">
+            <div class="col">
+              <ul>
+                <li class="fragment" data-fragment-index="1"><em>Baseline</em>: Approximate the shape using regular grid (stair-step
+                  approach)</li>
+                <li class="fragment" data-fragment-index="2">Use <em>smaller</em> volume elements near the boundary to better
+                  approximate the shape</li>
+                <li class="fragment" data-fragment-index="3">Use <em>irregular</em> boundary volume elements that conform to the
+                  shape</li>
+              </ul>
+            </div>
+            <div class="col">
+              <img class="fragment" data-fragment-index="1" 
+              src="img/energy-balance-method-steady/irregular-boundary-0.svg" height="400">
+              <img class="fragment" data-fragment-index="2"
+                src="img/energy-balance-method-steady/irregular-boundary-1.svg" height="400">
+              <img class="fragment" data-fragment-index="3"
+                src="img/energy-balance-method-steady/irregular-boundary-2.svg" height="400">
+            </div>
+          </div>
+        </section>
+
+        <section class="example">
+          <h2> <b>Exercise: Steady Two-Dimensional Heat Conduction</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>Determine the temperature at the 15 nodes. Thermal conductivity is $k = 15$ W/m·K, and heat is generated in
+the body at a rate of $\dot{q} = 2 \times 10^6$ W/m³. The left surface of the body is insulated, and the bottom surface is maintained at a uniform temperature of $90^\circ \text{C}$.
+The entire top surface is subjected to convection to ambient air at $T_\infty = 25^\circ \text{C}$
+with a convection coefficient of $h = 80$ W/m²·K, and the right surface is subjected to heat flux at a uniform rate of $\dot{q}_R = 5000$ W/m². The nodal network
+of the problem consists of 15 equally spaced nodes with $\Delta x = \Delta y = 1.2$ cm.</p>
+
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/exercise-energy-balance-method-2d.jpg" height="500">
+            </div>
+        </section>
+      </section>
+
+      </section>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initReveal } from '/custom/js/init-reveal.js';
+    initReveal({ hash: false });
+  </script>
+</body>
+
+</html>

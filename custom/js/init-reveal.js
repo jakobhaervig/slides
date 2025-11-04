@@ -36,6 +36,12 @@ export function initReveal(options = {}) {
         }
     });
 
+    // Expose Reveal deck on window for tooling (e.g., DeckTape) that expects a global
+    // reference to the Reveal API when using ESM builds.
+    if (typeof window !== 'undefined') {
+        window.Reveal = deck;
+    }
+
     deck.initialize().then(() => {
         console.log('Reveal.js initialized with options:', options);
 

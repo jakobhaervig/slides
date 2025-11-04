@@ -12,13 +12,21 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3-dev libatk1.0-dev libatk-bridge2.0-dev libcups2-dev libx11-xcb-dev \
+            libxcomposite-dev libxdamage-dev libxrandr-dev libgbm-dev libpango1.0-dev \
+            libasound2-dev libpangocairo-1.0-0 libxshmfence-dev libxkbcommon-dev
+
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -26,27 +34,68 @@ jobs:
         run: |
           npm install -g decktape http-server
 
-      - name: Start local HTTP server
+      - name: Verify tools
         run: |
-          nohup npx http-server . -p 8000 > server.log 2>&1 &
-          sleep 5  # give the server time to start
+          node -v
+          npm -v
+          # Decktape CLI does not support --version; show first help line instead
+          decktape --help | head -n 1 || true
+          http-server -v
 
-      - name: Convert slides to PDF
+      - name: Generate PDFs (start server and convert)
         run: |
+          set -Eeuo pipefail
+          # Start server in background and ensure it stays for this step
+          npx http-server . -p 8000 -a 127.0.0.1 > server.log 2>&1 &
+          SERVER_PID=$!
+          echo "Started http-server with PID $SERVER_PID"
+          trap 'echo "Stopping server $SERVER_PID"; kill $SERVER_PID || true; sleep 1' EXIT
+
+          # Wait for server to be ready
+          for i in {1..30}; do
+            if curl -sSf http://127.0.0.1:8000/ > /dev/null; then
+              echo "HTTP server is up."
+              break
+            fi
+            echo "Waiting for HTTP server... ($i)"
+            sleep 1
+          done
+          if ! curl -sSf http://127.0.0.1:8000/ > /dev/null; then
+            echo "HTTP server failed to start"
+            echo "--- server.log (first 200 lines) ---"
+            sed -n '1,200p' server.log || true
+            exit 1
+          fi
+
           mkdir -p pdfs
-          ignore_folders=("reveal.js" "__pycache__")
+          shopt -s nullglob
+          IGNORE_FOLDERS=("reveal.js" "__pycache__" ".github" "custom" "pdfs")
           for folder in */; do
             folder=${folder%/}
-            if [[ " ${ignore_folders[*]} " == *" $folder "* ]]; then
+            # Skip hidden and ignored folders
+            [[ "$folder" = .* ]] && continue
+            if [[ " ${IGNORE_FOLDERS[*]} " == *" $folder "* ]]; then
+              echo "Skipping folder: $folder"
               continue
             fi
             for file in "$folder"/*.html; do
-              [ -e "$file" ] || continue
               filename=$(basename "$file" .html)
-              mkdir -p pdfs/"$folder"
-              decktape --chrome-arg="--no-sandbox" reveal \
-                "http://127.0.0.1:8000/$folder/$filename.html?print-pdf" \
-                "pdfs/$folder/$filename.pdf"
+              url="http://127.0.0.1:8000/$folder/$filename.html?print-pdf"
+              outdir="pdfs/$folder"
+              outfile="$outdir/$filename.pdf"
+              echo "Converting $url -> $outfile"
+              mkdir -p "$outdir"
+              if ! timeout 180s decktape \
+                --chrome-arg="--no-sandbox" \
+                --chrome-arg="--disable-dev-shm-usage" \
+                --chrome-arg="--disable-gpu" \
+                --load-pause 5000 \
+                reveal "$url" "$outfile"; then
+                echo "Decktape failed for $file"
+                echo "--- server.log (first 200 lines) ---"
+                sed -n '1,200p' server.log || true
+                exit 1
+              fi
             done
           done
 
