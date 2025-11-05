@@ -94,6 +94,14 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   color: var(--haervig-pink-light) !important;
 }
 
+.color11 {
+  color: #008000 !important;
+}
+
+.color12 {
+  color: #524fa1 !important;
+}
+
 /* CUSTOM THEME BASED ON WHITE */
 .container{
     display: flex;

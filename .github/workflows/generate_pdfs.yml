@@ -1,4 +1,4 @@
-name: Convert Reveal.js slides to PDF
+name: Generate PDFs
 
 permissions:
   contents: write   # allows pushing commits back to the repo

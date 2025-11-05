@@ -1,4 +1,4 @@
-name: Generate Index
+name: Generate index.html
 
 permissions:
   contents: write   # allows pushing commits back to the repo
