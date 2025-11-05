@@ -4,7 +4,7 @@ permissions:
   contents: write   # allows pushing commits back to the repo
 
 on:
-  workflow_dispatch:
+  [push, workflow_dispatch]
 
 jobs:
   generate-pdfs:
@@ -38,29 +38,27 @@ jobs:
         run: |
           node -v
           npm -v
-          # Decktape CLI does not support --version; show first help line instead
           decktape --help | head -n 1 || true
           http-server -v
 
       - name: Generate PDFs (start server and convert)
         run: |
           set -Eeuo pipefail
-          # Start server in background and ensure it stays for this step
-          npx http-server . -p 8000 -a 127.0.0.1 > server.log 2>&1 &
+          npx http-server . -p 8000 -a 127.0.0.1 -c-1 > server.log 2>&1 &
           SERVER_PID=$!
           echo "Started http-server with PID $SERVER_PID"
           trap 'echo "Stopping server $SERVER_PID"; kill $SERVER_PID || true; sleep 1' EXIT
 
           # Wait for server to be ready
           for i in {1..30}; do
-            if curl -sSf http://127.0.0.1:8000/ > /dev/null; then
+            if curl -sSf http://127.0.0.1:8000/ > /dev/null 2>/dev/null; then
               echo "HTTP server is up."
               break
             fi
             echo "Waiting for HTTP server... ($i)"
             sleep 1
           done
-          if ! curl -sSf http://127.0.0.1:8000/ > /dev/null; then
+          if ! curl -sSf http://127.0.0.1:8000/ > /dev/null 2>/dev/null; then
             echo "HTTP server failed to start"
             echo "--- server.log (first 200 lines) ---"
             sed -n '1,200p' server.log || true
@@ -80,29 +78,40 @@ jobs:
             fi
             for file in "$folder"/*.html; do
               filename=$(basename "$file" .html)
-              url="http://127.0.0.1:8000/$folder/$filename.html?print-pdf"
+              url="http://127.0.0.1:8000/$folder/$filename.html"
               outdir="pdfs/$folder"
               outfile="$outdir/$filename.pdf"
               echo "Converting $url -> $outfile"
               mkdir -p "$outdir"
-              if ! timeout 180s decktape \
+              # Truncate server log so we can show only relevant requests for this file
+              : > server.log
+              if ! timeout 120s decktape \
                 --chrome-arg="--no-sandbox" \
                 --chrome-arg="--disable-dev-shm-usage" \
                 --chrome-arg="--disable-gpu" \
-                --load-pause 5000 \
+                --load-pause 6000 \
                 reveal "$url" "$outfile"; then
                 echo "Decktape failed for $file"
                 echo "--- server.log (first 200 lines) ---"
                 sed -n '1,200p' server.log || true
                 exit 1
               fi
+
+              # Show any 404s encountered during rendering to help diagnose missing assets
+              if grep -q "404" server.log 2>/dev/null; then
+                echo "--- Detected 404s while rendering $file ---"
+                grep -n "404" server.log | sed -n '1,200p' || true
+              fi
             done
           done
 
       - name: Commit and push PDFs
         run: |
+          set -Eeuo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Remove transient files that should not interfere with git ops
+          rm -f server.log || true
           git add -f pdfs   # force add in case of .gitignore
 
           # Commit if there are changes
@@ -113,7 +122,11 @@ jobs:
           fi
 
           # Always pull latest remote changes to avoid push conflicts
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main || {
+            echo "git pull --rebase failed; showing status for diagnostics";
+            git status --porcelain || true;
+            exit 1;
+          }
 
           # Push only if there are local commits not on remote
           if ! git diff --quiet origin/main; then
