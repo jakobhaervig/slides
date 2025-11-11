@@ -128,19 +128,23 @@
 
       <section>
         <h3>Explicit and implicit solution methods</h3>
-        <p><em>Question is</em>: How do we advance from time $t$ (timestep $i$) to timestep $t+\Delta t$ (timestep $i+1$)?</p>
+        <p><em>Question is</em>: How do we advance from time $t$ (timestep $i$) to timestep $t+\Delta t$ (timestep
+          $i+1$)?</p>
         <div class="container">
           <div class="col">
             <p class="fragment" data-fragment-index="1"><em class="color11">Explicit</em> method</p>
             <p class="singleline-math fragment" data-fragment-index="3">
-              <span>\(\displaystyle \sum_\text{all surfaces} \textcolor{#008000}{Q^i} + \textcolor{#008000}{\dot{G}_\text{element}^i} \)</span>
+              <span>\(\displaystyle \sum_\text{all surfaces} \textcolor{#008000}{Q^i} +
+                \textcolor{#008000}{\dot{G}_\text{element}^i} \)</span>
               <span>\(\displaystyle =\)</span>
               <span>\(\displaystyle \frac{\rho V_\text{element} c_p (T_m^{i+1}-T_m^i)}{\Delta t} \)</span>
             </p>
-          
+
             <div class="r-stack">
-              <img class="fragment" data-fragment-index="4" src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
-              <img class="fragment" data-fragment-index="5" src="img/energy-balance-method-transient/energy-balance-interior-node-1.svg" height="600">
+              <img class="fragment" data-fragment-index="4"
+                src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
+              <img class="fragment" data-fragment-index="5"
+                src="img/energy-balance-method-transient/energy-balance-interior-node-1.svg" height="600">
             </div>
           </div>
 
@@ -151,103 +155,334 @@
               <span>\(\displaystyle =\)</span>
               <span>\(\displaystyle \frac{\rho V_\text{element} c_p (T_m^{i+1}-T_m^i)}{\Delta t} \)</span>
             </p>
-          
+
             <div class="r-stack">
-              <img class="fragment" data-fragment-index="7" src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
-              <img class="fragment" data-fragment-index="8" src="img/energy-balance-method-transient/energy-balance-interior-node-2.svg" height="600">
+              <img class="fragment" data-fragment-index="7"
+                src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
+              <img class="fragment" data-fragment-index="8"
+                src="img/energy-balance-method-transient/energy-balance-interior-node-2.svg" height="600">
             </div>
           </div>
 
         </div>
-        <p class="fragment" data-fragment-index="9"><em class="color11">Explicit</em>: Use data from current time step $i$ (all known temperatures)</p>
-        <p class="fragment" data-fragment-index="10"><em class="color12">Implicit</em>: Use data from next time step $i+1$ (unknown temperatures)</p>
+        <p class="fragment" data-fragment-index="9"><em class="color11">Explicit</em>: Use data from current time step
+          $i$ (all known temperatures)</p>
+        <p class="fragment" data-fragment-index="10"><em class="color12">Implicit</em>: Use data from next time step
+          $i+1$ (unknown temperatures)</p>
       </section>
 
       <section>
-        <h3><em>Interior nodes</em> using <em class="color11">explicit</em> solution method</h3>
-        <div class="container">
-          <div class="col">
-            <p>Energy balance at interior node:</p>
-            <ul>
-              <div class="singleline-ca">
-                $$\begin{aligned}
-                kA\frac{\textcolor{#008000}{T_{m-1}^i}-\textcolor{#008000}{T_{m}^i}}{\Delta x} + kA\frac{\textcolor{#008000}{T_{m+1}^i}-\textcolor{#008000}{T_{m}^i}}{\Delta x}+
-                \dot{g}_\text{m}^iA\Delta x=\frac{\rho V c_p (T_m^{i+1}-T_m^i)}{\Delta t}
-                \end{aligned}$$
+
+        <section>
+          <h1>Transient heat conduction using the <em>explicit method</em></h1>
+        </section>
+
+        <section id="interior-nodes-explicit">
+          <h3><em>Interior nodes</em> using <em class="color11">explicit</em> solution method</h3>
+          <div class="container">
+            <div class="col">
+              <p>Energy balance at interior node:</p>
+              <ul>
+                <div class="singleline-ca">
+                  $$\begin{aligned}
+                  kA\frac{\textcolor{#008000}{T_{m-1}^i}-\textcolor{#008000}{T_{m}^i}}{\Delta x} +
+                  kA\frac{\textcolor{#008000}{T_{m+1}^i}-\textcolor{#008000}{T_{m}^i}}{\Delta x}+
+                  \dot{g}_\text{m}^iA\Delta x=\frac{\rho V c_p (T_m^{i+1}-T_m^i)}{\Delta t}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="1">Re-arranging and inserting thermal diffusivity
+                  $\alpha=k/(\rho c_p)$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="1">
+                  $$\begin{aligned}
+                  \textcolor{#008000}{T_{m-1}^i}-2\textcolor{#008000}{T_{m}^i}+\textcolor{#008000}{T_{m+1}^i} +
+                  \frac{\dot{g}_m^i \Delta x^2}{k} = \frac{\Delta x^2}{\alpha \Delta t}\left(T_m^{i+1}-T_m^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="2">Inserting mesh Fourier number $\tau=\alpha\Delta t/\Delta
+                  x^2$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="2">
+                  $$\begin{aligned}
+                  \textcolor{#008000}{T_{m-1}^i}-2\textcolor{#008000}{T_{m}^i}+\textcolor{#008000}{T_{m+1}^i} +
+                  \frac{\dot{g}_m^i \Delta x^2}{k} = \frac{1}{\tau}\left(T_m^{i+1}-T_m^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="3">Isolating the only unknown
+                  $\textcolor{#b52025}{T_m^{i+1}}$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="3">
+                  $$\begin{aligned}
+                  \textcolor{#b52025}{T_m^{i+1}} = \tau(T_{m-1}^i+T_{m+1}^i)+(1-2\tau)T_m^i+\tau\frac{\dot{g}_m^i \Delta
+                  x^2}{k}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="4">1 equation for each node with <em>only 1 unknown each</em>
+                  😎</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
+                <img src="img/energy-balance-method-transient/energy-balance-interior-node-1.svg" height="600">
               </div>
-              <li class="fragment" data-fragment-index="1">Re-arranging and inserting thermal diffusivity $\alpha=k/(\rho c_p)$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="1">
-                $$\begin{aligned}
-                \textcolor{#008000}{T_{m-1}^i}-2\textcolor{#008000}{T_{m}^i}+\textcolor{#008000}{T_{m+1}^i} + \frac{\dot{g}_m^i \Delta x^2}{k} = \frac{\Delta x^2}{\alpha \Delta t}\left(T_m^{i+1}-T_m^i\right)
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="2">Inserting mesh Fourier number $\tau=\alpha\Delta t/\Delta x^2$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="2">
-                $$\begin{aligned}
-                \textcolor{#008000}{T_{m-1}^i}-2\textcolor{#008000}{T_{m}^i}+\textcolor{#008000}{T_{m+1}^i} + \frac{\dot{g}_m^i \Delta x^2}{k} = \frac{1}{\tau}\left(T_m^{i+1}-T_m^i\right)
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="3">Isolating the only unknown $\textcolor{#b52025}{T_m^{i+1}}$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="3">
-                $$\begin{aligned}
-                \textcolor{#b52025}{T_m^{i+1}} = \tau(T_{m-1}^i+T_{m+1}^i)+(1-2\tau)T_m^i+\tau\frac{\dot{g}_m^i \Delta x^2}{k}
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="4">1 equation for each node with <em>only 1 unknown each</em> 🤩</li>
-            </ul>
-          </div>
-          <div class="col">
-            <div class="r-stack">
-              <img src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
-              <img src="img/energy-balance-method-transient/energy-balance-interior-node-1.svg" height="600">
             </div>
           </div>
-        </div>
+        </section>
+
+        <section id="boundary-nodes-explicit">
+          <h2>Boundary nodes using <em class="color11">explicit</em> solution method</h2>
+          <div class="container">
+            <div class="col">
+              <p>Energy balance for boundary node with convection:</p>
+              <ul>
+                <div class="singleline-ca">
+                  $$\begin{aligned}
+                  hA(T_\infty-\textcolor{#008000}{T_0^i}) +
+                  kA\frac{\textcolor{#008000}{T_1^i}-\textcolor{#008000}{T_0^i}}{\Delta x}+
+                  \dot{g}_\text{0}^iA\frac{\Delta x}{2}=\frac{\rho V c_p (T_0^{i+1}-T_0^i)}{\Delta t}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="1">Re-arranging and noting thermal diffusivity $\alpha=k/(\rho
+                  c_p)$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="1">
+                  $$\begin{aligned}
+                  \left(\frac{-2h\Delta
+                  x}{k}-2\right)\textcolor{#008000}{T_0^i}+2\textcolor{#008000}{T_{1}^i}+\left(\frac{-2h\Delta
+                  x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{(\Delta x)^2}{\alpha \Delta
+                  t}\left(T_0^{i+1}-T_0^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="2">Defining mesh Fourier number $\tau=\alpha\Delta t/\Delta
+                  x^2$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="2">
+                  $$\begin{aligned}
+                  \left(\frac{-2h\Delta
+                  x}{k}-2\right)\textcolor{#008000}{T_0^i}+2\textcolor{#008000}{T_{1}^i}+\left(\frac{-2h\Delta
+                  x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{1}{\tau}\left(T_0^{i+1}-T_0^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="3">Isolating the only unknown
+                  $\textcolor{#b52025}{T_m^{i+1}}$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="3">
+                  $$\begin{aligned}
+                  \textcolor{#b52025}{T_0^{i+1}} = \left(1-2\tau-2\tau \frac{h \Delta
+                  x}{k}\right)\textcolor{#008000}{T_0^i}+(2\tau)\textcolor{#008000}{T_1^i}+2\tau\frac{h\Delta
+                  x}{k}T_\infty+\frac{\tau\dot{g}_0^i(\Delta x)^2}{k}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="4">1 equation for each boundary node with <em>only 1
+                    unknown</em> 😎</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-transient/energy-balance-boundary-node-0.svg" height="600">
+                <img src="img/energy-balance-method-transient/energy-balance-boundary-node-1.svg" height="600">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="example">
+          <h2> <b>Example: Transient heat conduction in a large plate using the explicit method</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>Consider a large uranium plate of thickness $L=4$ cm, thermal conductivity $k=28$ W/(m·K), and thermal
+                diffusivity <br>$a=12.5 \times 10^{-6}$ m$^2$/s that is initially at a uniform temperature of 200°C.
+                Heat is generated uniformly in the plate at a constant rate of <br>$\dot{g}=5 \times 10^6$ W/m$^3$.
+                <br>At time $t = 0$ s, one side of the plate is brought into contact with iced water and is maintained
+                at 0°C at all times, while the other side is subjected to convection to an environment at
+                $T_\infty=30$°C with a heat transfer coefficient of $h=45$ W/(m$^2$·K).
+              </p>
+              <p class="fragment"><em>Estimate the exposed surface temperature of the plate 2.5 min </em> after start of
+                cooling. Use three equally spaced nodes in the medium, two at the boundaries and one at the middle.</p>
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/exercise-energy-balance-method-plate.jpg" height="500">
+            </div>
+        </section>
+
+        <section>
+          <h2> The stability criterion for the <em class="color11">explicit</em> solution method</h2>
+          <p><b>Observation:</b> Explicit solution method may <em>diverge if time step size is too large</em>!</p>
+          <p><b>Stability criterion: </b>When looking at node $m$, the <em>coefficient in front of $T_m^i$ should be
+              larger than zero</em></p>
+          <p class="bottom-1"></p>
+          <li class="fragment" data-fragment-index="2">Equation for an <em>interior node</em> (<a
+              href="#/interior-nodes-explicit">derived here</a>):
+            <p class="singleline-math-large-font fragment" data-fragment-index="2">
+              <span>\( \displaystyle T_m^{i+1} = \tau(T_{m-1}^i+T_{m+1}^i) \)</span>
+              <span>\(+ \)</span>
+              <span class="color11">\( \displaystyle (1-2\tau) \) </span>
+              <span>\( \displaystyle T_m^i+\tau\frac{\dot{g}_m^i (\Delta x)^2}{k}\)</span>
+            </p>
+            <ul>
+              <li class="fragment" data-fragment-index="3"><em>Criterion becomes</em>:
+                <span class="fragment" data-fragment-index="3">$ \displaystyle 1-2\tau \geq 0$</span>
+                <span class="fragment" data-fragment-index="4">$\quad \rightarrow \quad$ </span>
+                <span class="fragment" data-fragment-index="4">$\displaystyle 1-2(\alpha \Delta t/ \Delta x^2)\geq0$
+                </span>
+                <span class="fragment" data-fragment-index="5">$\quad \rightarrow \quad$ </span>
+                <span class="fragment" data-fragment-index="5">$\displaystyle \Delta t \leq \frac{(\Delta
+                  x)^2}{2\alpha}$</span>
+              </li>
+            </ul>
+          </li>
+          <p class="bottom-2"></p>
+          <li class="fragment" data-fragment-index="6">Equation for a <em>boundary node with convection </em> (<a
+              href="#/boundary-nodes-explicit">derived here</a>):
+
+
+            <p class="singleline-math-large-font fragment" data-fragment-index="6">
+              <span> \( \displaystyle T_0^{i+1} \)</span>
+              <span>\( \displaystyle = \)</span>
+              <span class="color11">\( \displaystyle \left(1-2\tau-2\tau \frac{h \Delta x}{k}\right) \)</span>
+              <span>\( \displaystyle T_0^i + \)</span>
+              <span>\( \displaystyle (2\tau) \)</span>
+              <span>\( \displaystyle T_1^i \)</span>
+              <span>\( \displaystyle + 2\tau\frac{h\Delta x}{k}T_\infty+\frac{\tau\dot{g}_0^i(\Delta x)^2}{k} \)</span>
+            </p>
+            </p>
+            <ul>
+              <li class="fragment" data-fragment-index="7"><em>Criterion becomes:</em>
+                <span class="fragment" data-fragment-index="7"> $ \displaystyle\left(1-2\tau-2\tau \frac{h \Delta
+                  x}{k}\right)\geq 0$</span>
+                <span class="fragment" data-fragment-index="8"> $\quad \rightarrow \quad$ </span>
+                <span class="fragment" data-fragment-index="8"> $\displaystyle \Delta t \leq \frac{(\Delta
+                  x)^2}{2\alpha(1+ \frac{h \Delta x}{k})}$</span>
+              </li>
+            </ul>
+          </li>
+
+        </section>
+
       </section>
 
       <section>
-        <h2>Boundary nodes using <b class="mycolor0">explicit</b> solution method</h2>
-        <div class="grid">
-          <div class="col-6">
-            <ul>
-              <li>Energy balance for boundary node with convection:</li>
-              <div class="singleline-ca">
-                $$\begin{aligned}
-                hA(T_\infty-\textcolor{#008000}{T_0^i}) + kA\frac{\textcolor{#008000}{T_1^i}-\textcolor{#008000}{T_0^i}}{\Delta x}+
-                \dot{g}_\text{0}^iA\frac{\Delta x}{2}=\frac{\rho V c_p (T_0^{i+1}-T_0^i)}{\Delta t}
-                \end{aligned}$$
+        <section>
+          <h1>Transient heat conduction using the <em>implicit method</em></h1>
+        </section>
+
+        <section>
+          <h2>Interior nodes using <em>implicit</em> solution method</h2>
+          <div class="container">
+            <div class="col">
+              <p>Energy balance at interior node:</p>
+              <ul>
+                <div class="singleline-ca">
+                  $$\begin{aligned}
+                  kA\frac{\textcolor{#524fa1}{T_{m-1}^{i+1}}-\textcolor{#524fa1}{T_{m}^{i+1}}}{\Delta x} +
+                  kA\frac{\textcolor{#524fa1}{T_{m+1}^{i+1}}-\textcolor{#524fa1}{T_{m}^{i+1}}}{\Delta x}+
+                  \dot{g}_\text{m}^{i+1}A\Delta x=\frac{\rho V c_p (T_m^{i+1}-T_m^i)}{\Delta t}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="1">Re-arranging:</li>
+                <div class="singleline-ca fragment" data-fragment-index="1">
+                  $$\begin{aligned}
+                  \textcolor{#524fa1}{T_{m-1}^{i+1}}-2\textcolor{#524fa1}{T_{m}^{i+1}}+\textcolor{#524fa1}{T_{m+1}^{i+1}}
+                  + \frac{\dot{q}_m^{i+1} \Delta x^2}{k} = \frac{\Delta x^2}{\alpha \Delta
+                  t}\left(T_m^{i+1}-T_m^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="2">Using $\tau=\alpha\Delta t/\Delta x^2$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="2">
+                  $$\begin{aligned}
+                  \textcolor{#524fa1}{T_{m-1}^{i+1}}-2\textcolor{#524fa1}{T_{m}^{i+1}}+\textcolor{#524fa1}{T_{m+1}^{i+1}}
+                  + \frac{\dot{q}_m^{i+1} \Delta x^2}{k} = \frac{1}{\tau}\left(T_m^{i+1}-T_m^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="3">Seperating the 3 unknowns
+                  $\textcolor{#b52025}{T_{m-1}^{i+1}}$, $\textcolor{#b52025}{T_m^{i+1}}$ and
+                  $\textcolor{#b52025}{T_{m+1}^{i+1}}$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="3">
+                  $$\begin{aligned}
+                  \tau\textcolor{#b52025}{T_{m-1}^{i+1}} - (1+2\tau) \textcolor{#b52025}{T_m^{i+1}} + \tau
+                  \textcolor{#b52025}{T_{m+1}^{i+1}} + \tau \frac{\dot{g}_m^{i+1}\Delta x^2}{k} + T_m^i = 0
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="4">Can't solve each equation individually <em>because each
+                    equation has three unknowns</em>, $T_{m-1}^{i+1}$, $T_m^{i+1}$, and $T_{m+1}^{i+1}$ 😒</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-transient/energy-balance-interior-node-0.svg" height="600">
+                <img src="img/energy-balance-method-transient/energy-balance-interior-node-2.svg" height="600">
               </div>
-              <li class="fragment" data-fragment-index="1">Re-arranging and noting thermal diffusivity $\alpha=k/(\rho c_p)$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="1">
-                $$\begin{aligned}
-                \left(\frac{-2h\Delta x}{k}-2\right)\textcolor{#008000}{T_0^i}+2\textcolor{#008000}{T_{1}^i}+\left(\frac{-2h\Delta x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{(\Delta x)^2}{\alpha \Delta t}\left(T_0^{i+1}-T_0^i\right)
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="2">Defining mesh Fourier number $\tau=\alpha\Delta t/\Delta x^2$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="2">
-                $$\begin{aligned}
-                \left(\frac{-2h\Delta x}{k}-2\right)\textcolor{#008000}{T_0^i}+2\textcolor{#008000}{T_{1}^i}+\left(\frac{-2h\Delta x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{1}{\tau}\left(T_0^{i+1}-T_0^i\right)
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="3">Isolating the only unknown $\textcolor{#b52025}{T_m^{i+1}}$:</li>
-              <div class="singleline-ca fragment" data-fragment-index="3">
-                $$\begin{aligned}
-                \textcolor{#b52025}{T_0^{i+1}} = \left(1-2\tau-2\tau \frac{h \Delta x}{k}\right)\textcolor{#008000}{T_0^i}+(2\tau)\textcolor{#008000}{T_1^i}+2\tau\frac{h\Delta x}{k}T_\infty+\frac{\tau\dot{g}_0^i(\Delta x)^2}{k}
-                \end{aligned}$$
-              </div>
-              <li class="fragment" data-fragment-index="4">1 equation for each boundary node with 1 unknown &#128513</li>
-            </ul>
-          </div>
-          <div class="col-6">
-            <div class="r-stack">
-              <img src="media/energy-balance-method-transient/energy-balance-boundary-node-0.svg" height="600">
-              <img src="media/energy-balance-method-transient/energy-balance-boundary-node-1.svg" height="600">
             </div>
           </div>
-        </div>
+        </section>
+
+        <section>
+          <h2>Boundary nodes using <em>implicit</em> solution method</h2>
+          <div class="container">
+            <div class="col">
+              <p>Energy balance at boundary node with convection:</p>
+              <ul>
+                <div class="singleline-ca">
+                  $$\begin{aligned}
+                  hA(T_\infty-\textcolor{#524fa1}{T_0^{i+1}}) +
+                  kA\frac{\textcolor{#524fa1}{T_1^{i+1}}-\textcolor{#524fa1}{T_0^{i+1}}}{\Delta x}+
+                  \dot{g}_\text{m}^{i+1}A\frac{\Delta x}{2}=\frac{\rho V c_p (T_0^{i+1}-T_0^i)}{\Delta t}
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="1">Re-arranging:</li>
+                <div class="singleline-ca fragment" data-fragment-index="1">
+                  $$\begin{aligned}
+                  \left(\frac{-2h\Delta
+                  x}{k}-2\right)\textcolor{#524fa1}{T_0^{i+1}}+2\textcolor{#524fa1}{T_{1}^{i+1}}+\left(\frac{2h\Delta
+                  x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{(\Delta x)^2}{\alpha \Delta
+                  t}\left(T_0^{i+1}-T_0^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="2">Defining $\tau=\alpha\Delta t/\Delta x^2$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="2">
+                  $$\begin{aligned}
+                  \left(\frac{-2h\Delta
+                  x}{k}-2\right)\textcolor{#524fa1}{T_0^{i+1}}+2\textcolor{#524fa1}{T_{1}^{i+1}}+\left(\frac{2h\Delta
+                  x}{k}\right)T_\infty+\dot{g}_0^i\frac{(\Delta x)^2}{k} = \frac{1}{\tau}\left(T_0^{i+1}-T_0^i\right)
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="3">Seperating the 2 unknowns $\textcolor{#b52025}{T_0^{i+1}}$
+                  and $\textcolor{#b52025}{T_1^{i+1}}$:</li>
+                <div class="singleline-ca fragment" data-fragment-index="3">
+                  $$\begin{aligned}
+                  \left(-1-2\tau-2\tau \frac{h \Delta
+                  x}{k}\right)\textcolor{#b52025}{T_0^{i+1}}+(2\tau)\textcolor{#b52025}{T_1^{i+1}}+2\tau\frac{h\Delta
+                  x}{k}T_\infty+\tau \frac{\dot{g}_0^{i+1}(\Delta x)^2}{k}+T_0^i=0
+                  \end{aligned}$$
+                </div>
+                <li class="fragment" data-fragment-index="4">Can't solve each equation individually <em>because each
+                    equation has two unknowns</em>, $T_0^{i+1}$ and $T_1^{i+1}$ 😒</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="r-stack">
+                <img src="img/energy-balance-method-transient/energy-balance-boundary-node-0.svg" height="600">
+                <img src="img/energy-balance-method-transient/energy-balance-boundary-node-2.svg" height="600">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="example">
+          <h2> <b>Example: Transient heat conduction in a large plate using the implicit method</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>Consider a large uranium plate of thickness $L=4$ cm, thermal conductivity $k=28$ W/(m·K), and thermal
+                diffusivity <br>$a=12.5 \times 10^{-6}$ m$^2$/s that is initially at a uniform temperature of 200°C.
+                Heat is generated uniformly in the plate at a constant rate of <br>$\dot{g}=5 \times 10^6$ W/m$^3$.
+                <br>At time $t = 0$ s, one side of the plate is brought into contact with iced water and is maintained
+                at 0°C at all times, while the other side is subjected to convection to an environment at
+                $T_\infty=30$°C with a heat transfer coefficient of $h=45$ W/(m$^2$·K).
+              </p>
+              <p class="fragment"><em>Estimate the exposed surface temperature of the plate 2.5 min </em> after start of
+                cooling. Use three equally spaced nodes in the medium, two at the boundaries and one at the middle.</p>
+            </div>
+            <div class="col">
+              <img src="img/energy-balance-method-steady/exercise-energy-balance-method-plate.jpg" height="500">
+            </div>
+        </section>
+
       </section>
-
-
 
     </div>
   </div>
