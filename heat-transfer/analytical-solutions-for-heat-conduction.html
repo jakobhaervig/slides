@@ -23,37 +23,32 @@
       </section>
 
       <section>
-        <h3>Why/why not analytical solutions?</h3>
+        <h2>Why/why not analytical solutions?</h2>
         <div class="container">
           <div class="col">
+            <p><b>Limitations</b></p>
             <ul>
-              <li>Limitations</li>
+              <li>Limited to <em>simplified geometries:</em></li>
               <ul>
-                <li>Limited to <b class="definition">simplified geometries:</b></li>
-                <ul>
-                  <li>Infinitely long plane wall</li>
-                  <li>Infinitely long cylinder</li>
-                  <li>Perfect sphere</li>
-                </ul>
-                <li class="fragment" data-fragment-index="1">Limited to <b class="definition">simple conditions with
-                    thermal symmetry:</b></li>
-                <ul class="fragment" data-fragment-index="1">
-                  <li>Uniform and temperature-independent properties</li>
-                  <li>Only convection on boundary with constant heat transfer coefficient, e.g. no heat generation
-                    inside, radiation on boundary etc</li>
-                  <li>Uniform initial temperature</li>
-                </ul>
+                <li>Infinitely long plane wall</li>
+                <li>Infinitely long cylinder</li>
+                <li>Perfect sphere</li>
+              </ul>
+              <li class="fragment" data-fragment-index="1">Limited to <em>simple conditions with
+                  thermal symmetry:</em></li>
+              <ul class="fragment" data-fragment-index="1">
+                <li>Uniform and temperature-independent properties</li>
+                <li>Only convection on boundary with constant heat transfer coefficient, e.g. no heat generation
+                  inside, radiation on boundary etc</li>
+                <li>Uniform initial temperature</li>
               </ul>
             </ul>
             <ul>
-              <li class="fragment" data-fragment-index="2">Reasons to apply</li>
-              <ul>
-                <li class="fragment" data-fragment-index="2"><b class="definition">Fast to compute</b>, e.g. doing
-                  millions of evaluations</li>
-                <li class="fragment" data-fragment-index="3"><b class="definition">Yield exact results</b>, e.g.
-                  excellent for verifying numerical codes</li>
-              </ul>
-            </ul>
+              <p class="fragment" data-fragment-index="3"><b>Reasons to apply</b></p>
+              <li class="fragment" data-fragment-index="4">Super <em>fast</em> to compute, e.g. doing millions of
+                evaluations</li>
+              <li class="fragment" data-fragment-index="5">Yield <em>exact results</em>, e.g.
+                excellent for verifying numerical codes</li>
           </div>
           <div class="col">
             <div class="r-stack">
@@ -65,34 +60,23 @@
 
       <section
         data-background-iframe="https://openterrace.github.io/openterrace-python/user-guide/verification-and-validation/verification/">
-        <!--   <div style="position: absolute; width: 75%; box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-    <h2 style="color:white">Visit <a style="color:white" href="https://openterrace.github.io/openterrace-python">openterrace.github.io/openterrace-python</a></h2>
-    <h2 style="color:white">for more info</h2>
-  </div> -->
       </section>
 
       <section>
-        <h3>Starting point of analytical solutions</h3>
+        <h2>Starting point of analytical solutions</h2>
         <div class="container">
           <div class="col">
-            <ul>
-              <li>Partial differential equation:</li>
-              <div>
-                $$
-                \frac{\partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T(x,t)}{\partial t}
-                $$
-              </div>
-            </ul>
+            <p>Partial differential equation:</p>
+            <div class="singleline-la">
+              $$
+              \frac{\partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T(x,t)}{\partial t}
+              $$
+            </div>
             <ul>
               <li class="fragment" data-fragment-index="1">Boundary conditions:</li>
               <ul>
                 <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="1">At $x=0$:</p>
-                  <p class="fragment" data-fragment-index="1">
-                    $$
-                    ~\hspace{20pt}
-                    $$
-                  </p>
+                  <span class="fragment" data-fragment-index="1">At <em>$x=0$</em>:</span>
                   <p class="fragment" data-fragment-index="1">
                     $$
                     \frac{\partial T(0,t)}{\partial x} = 0
@@ -100,12 +84,7 @@
                   </p>
                 </div>
                 <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="2">At $x=L$:</p>
-                  <p class="fragment" data-fragment-index="2">
-                    $$
-                    ~\hspace{20pt}
-                    $$
-                  </p>
+                  <p class="fragment" data-fragment-index="2">At <em>$x=L$</em>:</p>
                   <p class="fragment" data-fragment-index="2">
                     $$
                     - k A \frac{\partial T(L,t)}{\partial x} = h A \left(T(L,t)-T_\infty\right)
@@ -118,7 +97,7 @@
               <li class="fragment" data-fragment-index="3">Initial condition:</li>
               <ul>
                 <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="3">At $t=0$:</p>
+                  <p class="fragment" data-fragment-index="3">At <em>$t=0$</em>:</p>
                   <p class="fragment" data-fragment-index="3">
                     $$
                     ~\hspace{20pt}
@@ -148,431 +127,204 @@
       </section>
 
       <section>
-        <h3>Introduction of non-dimensional variables</h3>
+        <h2>Introduction of non-dimensional variables</h2>
         <div class="container">
           <div class="col">
+            <p>Convert problem into <em>non-dimensional</em> form to <em>reduce number of variables</em></p>
             <ul>
-              <li>Convert problem into non-dimensional form to reduce number of variables</li>
-              <ul>
-                <li class="fragment" data-fragment-index="2">Non-dimensional temperature:</li>
-                <div class="singleline-la fragment" data-fragment-index="2">
-                  $$
-                  \theta(x,t) = \frac{T(x,t)-T_\infty}{T_i-T_\infty}
-                  $$
-                </div>
-                <li class="fragment" data-fragment-index="3">Non-dimensional position:</li>
-                <div class="singleline-la fragment" data-fragment-index="3">
-                  $$
-                  X = \frac{x}{L}
-                  $$
-                </div>
-                <li class="fragment" data-fragment-index="4">Non-dimensional heat transfer coefficient (Biot number):
-                </li>
-                <div class="singleline-la fragment" data-fragment-index="4">
-                  $$
-                  \text{Bi} = \frac{hL}{k}
-                  $$
-                </div>
-                <li class="fragment" data-fragment-index="5">Non-dimensional time (Fourier number):</li>
-                <div class="singleline-la fragment" data-fragment-index="5">
-                  $$
-                  \tau = \frac{\alpha t}{L^2}
-                  $$
-                </div>
-              </ul>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h3>Re-casting problem in non-dimensional form</h3>
-        <div class="container">
-          <div class="col">
-            <ul>
-              <li>Starting from original partial differential equation:</li>
-              <div class="singleline-la">
+              <li class="fragment" data-fragment-index="2">Non-dimensional temperature:</li>
+              <div class="singleline-la fragment" data-fragment-index="2">
                 $$
-                \frac{\partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T(x,t)}{\partial T}
+                \theta(x,t) = \frac{T(x,t)-T_\infty}{T_i-T_\infty}
                 $$
               </div>
-              <li class="fragment" data-fragment-index="2">Inserting definitions of non-dimensional numbers:</li>
-              <ul>
-                <li class="fragment" data-fragment-index="3">Inserting $X=x/L$:</li>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="3">
-                    $$
-                    \frac{\partial^2 T(X,t)}{\partial (X\cdot L)^2} = \frac{1}{\alpha} \frac{\partial T(X,t)}{\partial
-                    t}
-                    $$
-                  </p>
-                  <p class="fragment" data-fragment-index="4">
-                    $$
-                    ~\Leftrightarrow ~
-                    $$
-                  </p>
-                  <p class="fragment" data-fragment-index="4">
-                    $$
-                    \frac{\partial^2 T(X,t)}{\partial X^2} = \frac{L^2}{\alpha} \frac{\partial T(X,t)}{\partial t}
-                    $$
-                  </p>
-                </div>
-                <li class="fragment" data-fragment-index="5">Inserting Fourier number $\tau=\alpha t/L^2$:</li>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="5">
-                    $$
-                    \frac{\partial^2 T(X,\tau)}{\partial (X\cdot L)^2} = \frac{\partial T(X,\tau)}{\partial \tau}
-                    $$
-                  </p>
-                </div>
-                <li class="fragment" data-fragment-index="6">Inserting $\theta=\frac{T-T_\infty}{T_i-T_\infty}$:</li>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="6">
-                    $$
-                    \frac{\partial^2 \theta(X,\tau)}{\partial (X\cdot L)^2} = \frac{\partial \theta(X,\tau)}{\partial
-                    \tau}
-                    $$
-                  </p>
-                </div>
-              </ul>
+              <li class="fragment" data-fragment-index="3">Non-dimensional position:</li>
+              <div class="singleline-la fragment" data-fragment-index="3">
+                $$
+                X = \frac{x}{L}
+                $$
+              </div>
+              <li class="fragment" data-fragment-index="4">Non-dimensional heat transfer coefficient (Biot number):
+              </li>
+              <div class="singleline-la fragment" data-fragment-index="4">
+                $$
+                \text{Bi} = \frac{hL}{k}
+                $$
+              </div>
+              <li class="fragment" data-fragment-index="5">Non-dimensional time (Fourier number):</li>
+              <div class="singleline-la fragment" data-fragment-index="5">
+                $$
+                \tau = \frac{\alpha t}{L^2}
+                $$
+              </div>
             </ul>
           </div>
         </div>
       </section>
 
       <section>
-        <h3>Final formulation in non-dimensional form</h3>
+        <h2>Re-casting problem in non-dimensional form</h2>
         <div class="container">
           <div class="col">
+            <p><em>Starting</em> from original partial differential equation:</p>
+            <p class="singleline-math-larger-font">\( \frac{\partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha}
+              \frac{\partial T(x,t)}{\partial t} \)</p>
+            <p class="fragment"><em>Then</em>, inserting definitions of non-dimensional numbers:</p>
             <ul>
-              <li>Partial differential equation:</li>
-              <div class="singleline-la">
-                <p>
-                  $$
-                  \frac{\partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T(x,t)}{\partial T}
-                  $$
-                </p>
-                <p class="definition fragment" data-fragment-index="1">
-                  $$
-                  ~\Rightarrow ~
-                  $$
-                </p>
-                <p class="definition fragment" data-fragment-index="1">
-                  $$
-                  \frac{\partial^2 \theta(X,\tau)}{\partial X^2} = \frac{\partial T(X,\tau)}{\partial \tau}
-                  $$
-                </p>
+              <li class="fragment">Inserting $X=x/L$:</li>
+              <p>
+                <span class="fragment singleline-math-larger-font">\( \frac{\partial^2 T(X,t)}{\partial (X\cdot L)^2} =
+                  \frac{1}{\alpha} \frac{\partial T(X,t)}{\partial t} \)</span>
+                <span class="fragment singleline-math-larger-font">\( \Rightarrow \)</span>
+                <span class="fragment singleline-math-larger-font">\( \frac{\partial^2 T(X,t)}{\partial X^2} =
+                  \frac{L^2}{\alpha} \frac{\partial T(X,t)}{\partial t} \)</span>
+              </p>
+              <li class="fragment">Inserting Fourier number $\tau=\alpha t/L^2$:</li>
+              <p>
+                <span class="fragment singleline-math-larger-font">\( \frac{\partial^2 T(X,\tau)}{\partial X^2} =
+                  \frac{\partial T(X,\tau)}{\partial \tau} \)</span>
+              </p>
+              <li class="fragment">Inserting non-dimensional temperature $\displaystyle
+                \theta=\frac{T-T_\infty}{T_i-T_\infty}$:</li>
+              <p>
+                <span class="fragment singleline-math-larger-font">\( \frac{\partial^2 \theta(X,\tau)}{\partial X^2} =
+                  \frac{\partial \theta(X,\tau)}{\partial \tau} \)</span>
+              </p>
+            </ul>
+            <p class="fragment singleline-math-larger-font"><em>Equation now transformed</em> to non-dimensional form
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Final formulation in non-dimensional form</h2>
+        <div class="container">
+          <div class="col">
+            <p>Partial differential equation:</p>
+            <div class="singleline-math-larger-font">
+              $$
+              \frac{\displaystyle \partial^2 T(x,t)}{\partial x^2} = \frac{1}{\alpha} \frac{\partial T(x,t)}{\partial t}
+              $$
+            </div>
+            <p>Boundary conditions:</p>
+            <ul>
+              <div>
+                <span>\(\displaystyle x=0\):</span>
+                <span>\(\displaystyle \quad \frac{\partial T(0,t)}{\partial x} = 0\)</span>
+                <p class="bottom-1"></p>
+                <span>\(\displaystyle x=L\):</span>
+                <span>\(\displaystyle \quad -k \frac{\partial T(L,t)}{\partial x} = h(T(L,t)-T_\infty)\)</span>
               </div>
             </ul>
+            <p>Initial conditions:</p>
             <ul>
-              <li class="fragment" data-fragment-index="2">Boundary conditions:</li>
-              <ul>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="2">At $x=0$:</p>
-                  <p class="fragment" data-fragment-index="2">
-                    $$
-                    ~\hspace{20pt}
-                    $$
-                  </p>
-                  <p class="fragment" data-fragment-index="2">
-                    $$
-                    \frac{\partial T(0,t)}{\partial x} = 0
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="3">
-                    $$
-                    ~\Rightarrow ~
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="3">
-                    $$
-                    \frac{\partial \theta(0,\tau)}{\partial X} = 0
-                    $$
-                  </p>
-                </div>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="4">At $x=L$:</p>
-                  <p class="fragment" data-fragment-index="4">
-                    $$
-                    ~\hspace{20pt}
-                    $$
-                  </p>
-                  <p class="fragment" data-fragment-index="4">
-                    $$
-                    -k \frac{\partial T(L,t)}{\partial x} = h(T(L,t)-T_\infty)
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="5">
-                    $$
-                    ~\Rightarrow ~
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="5">
-                    $$
-                    \frac{\partial \theta(1,\tau)}{\partial X} = -\text{Bi}\theta(1,\tau)
-                    $$
-                  </p>
-                </div>
-              </ul>
-            </ul>
-            <ul>
-              <li class="fragment" data-fragment-index="6">Initial condition:</li>
-              <ul>
-                <div class="singleline-la">
-                  <p class="fragment" data-fragment-index="6">At $t=0$:</p>
-                  <p class="fragment" data-fragment-index="6">
-                    $$
-                    ~\hspace{20pt}
-                    $$
-                  </p>
-                  <p class="fragment" data-fragment-index="6">
-                    $$
-                    T(x,0)=T_i
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="7">
-                    $$
-                    ~\Rightarrow ~
-                    $$
-                  </p>
-                  <p class="definition fragment" data-fragment-index="7">
-                    $$
-                    \theta(X,0)=1
-                    $$
-                  </p>
-                </div>
-              </ul>
-            </ul>
-            <ul>
-              <div class="singleline-la">
-                <p class="fragment" data-fragment-index="8">9 variables: $T$, $x$, $L$, $t$, $k$, $\alpha$, $h$, $T_i$,
-                  $T_\infty$</p>
-                <p class="definition fragment" data-fragment-index="9">
-                  $$
-                  ~\Rightarrow ~
-                  $$
-                </p>
-                <p class="definition fragment" data-fragment-index="9">
-                  Now only 4 variables: $\theta$, $X$, $\text{Bi}$, $\tau$
-                </p>
+              <div>
+                <span>\(\displaystyle t=0\):</span>
+                <span>\(\displaystyle \quad T(x,0) = T_i\)</span>
               </div>
+            </ul>
+            <p>Original problem:</p>
+            <ul>
+              <li>9 variables: \(T\), \(x\), \(L\), \(t\), \(k\), \(\alpha\), \(h\), \(T_i\), \(T_\infty\)</li>
+            </ul>
+
+          </div>
+          <div class="col">
+            <p><em>Non-dimensional</em> partial differential equation:</p>
+            <div class="singleline-math-larger-font">
+              $$
+              \frac{\partial^2 \theta(X,\tau)}{\partial X^2} = \frac{\partial T(X,\tau)}{\partial \tau}
+              $$
+            </div>
+            <p><em>Non-dimensional</em> boundary conditions:</p>
+            <ul>
+              <div>
+                <span>\(X=0\):</span>
+                <span>\(\displaystyle \quad \frac{\partial \theta(0,\tau)}{\partial X} = 0\)</span>
+                <p class="bottom-1"></p>
+                <span>\(X=1\):</span>
+                <span>\(\displaystyle \quad \frac{\partial \theta(1,\tau)}{\partial X} = -\text{Bi}\theta(1,\tau)\)
+              </div>
+            </ul>
+            <p><em>Non-dimensional</em> initial conditions:</p>
+            <ul>
+              <div>
+                <span>\(\tau=0\):</span>
+                <span>\(\displaystyle \quad \theta(X,0) = 1\)</span>
+              </div>
+            </ul>
+            <p><em>Non-dimensional</em> transformed problem:</p>
+            <ul>
+              <li><b>Only 4 variables:</b> \(\theta\), \(X\), \(\text{Bi}\), \(\tau\)</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section>
-        <h3>A look at the solution for a plane wall</h3>
-        <ul>
-          <li>Analytical solution:</li>
-          <div class="singleline-la">
-            <p>
-              $$
-              \theta = \sum_{n=1}^\infty \frac{4 \text{sin} \lambda_n}{2\lambda_n+\text{sin}(2\lambda_n)}e^{-\lambda_n^2
-              \tau} \text{cos}\left(\frac{\lambda_n x}{L}\right)
-              $$
-            </p>
-            <p>
-              $$
-              ~\hspace{20pt}
-              $$
-            </p>
+        <h2>A look at the solution for a plane wall</h2>
+        <div class="container">
+          <div class="col">
+            <p>Analytical solution:</p>
+            <div>
+              <span class="singleline-math-larger-font">\(\displaystyle \theta = \sum_{n=1}^\infty \frac{4 \text{sin}
+                \lambda_n}{2\lambda_n+\text{sin}(2\lambda_n)}e^{-\lambda_n^2
+                \tau} \text{cos}\left(\frac{\lambda_n x}{L}\right) \)</span>
+            </div>
             <p class="fragment" data-fragment-index="0">
               where $\lambda_n$ are the roots of: $\lambda_n \text{tan}\lambda_n = \text{Bi}$
             </p>
+
           </div>
-          <li class="fragment" data-fragment-index="1">Complicated because of:</li>
-          <ul>
-            <li class="fragment" data-fragment-index="2">The infinite sum ($\textcolor{#008000}{n=1}$,
-              $\textcolor{#524fa1}{n=2}$, $\textcolor{#00bbd6}{n=3}$ ...)</li>
-            <div class="singleline-la">
-              <p class="fragment" data-fragment-index="2">
-                $$
-                \theta = \textcolor{#008000}{\frac{4 \text{sin}
+          <div class="col">
+            <p class="fragment" data-fragment-index="1">which we can expand as:</p>
+            <div class="fragment" data-fragment-index="1">
+              <span>\( \displaystyle \theta = \textcolor{#008000}{\frac{4 \text{sin}
                 \lambda_1}{2\lambda_1+\text{sin}(2\lambda_1)}e^{-\lambda_1^2 \tau} \text{cos}\left(\frac{\lambda_1
                 x}{L}\right)} + \textcolor{#524fa1}{\frac{4 \text{sin}
                 \lambda_2}{2\lambda_2+\text{sin}(2\lambda_2)}e^{-\lambda_2^2 \tau} \text{cos}\left(\frac{\lambda_2
                 x}{L}\right)} + \textcolor{#00bbd6}{\frac{4 \text{sin}
                 \lambda_3}{2\lambda_3+\text{sin}(2\lambda_3)}e^{-\lambda_3^2 \tau} \text{cos}\left(\frac{\lambda_3
-                x}{L}\right)} + ...
-                $$
-              </p>
+                x}{L}\right)} + ...\)
+              </span>
             </div>
-            <li class="fragment" data-fragment-index="3">Roots of trigonometric function
-              ($\textcolor{#008000}{\lambda_1}$, $\textcolor{#524fa1}{\lambda_2}$, $\textcolor{#00bbd6}{\lambda_3}$ ...)
-              found here (e.g. for $\text{Bi}=2$):</li>
-          </ul>
-        </ul>
+          </div>
+
+
+        </div>
+        <P class="bottom-1"></P>
         <div class="r-stack">
-          <img class="fragment" data-fragment-index="3" src="img\analytical-solutions-heat-conduction/roots.svg"
+          <img class="fragment" data-fragment-index="2" src="img\analytical-solutions-heat-conduction/roots.svg"
             height="500">
         </div>
       </section>
 
-      <section>
-        <h3>Example (centre temperature in insulation)</h3>
-        <ul>
-          <li><b class='definition'>Problem: </b>Find the centre temperature in a 10 cm thick layer of insulation after
-            30 minutes. Initially its temperature is 10$^\circ$C and at time $t=0$ s it's suddenly exposed to an ambient
-            temperature of $25^\circ$C on one side.</li>
-        </ul>
+      <section class="example">
+        <h2><b>Example: centre temperature in insulation</b></h2>
         <div class="container">
           <div class="col">
-            <ul>
-              <li class="fragment" data-fragment-index="1"><b class='definition'>Properties: </b></li>
-              <ul class="fragment" data-fragment-index="1">
-                <li>Plate half thickness, $L=0.05$ m</li>
-                <li>Initial temperature, $T_i=10^\circ$C</li>
-                <li>Ambient temperature, $T_\infty=25^\circ$C</li>
-                <li>Heat transfer coefficient, $h=20$ W/(m$^2$K)</li>
-                <li>Thermal conductivity, $k=0.05$ W/(m K)</li>
-                <li>Thermal diffusivity, $\alpha=3\cdot 10^{-7}$ m$^2$/s</li>
-              </ul>
-              <li class="fragment" data-fragment-index="2"><b class='definition'>Solution: </b>It's a plane wall, so
-                analytical solution is:</li>
-              <div class="singleline-la fragment" data-fragment-index="2">
-                <p>
-                  $$
-                  \theta = \sum_{n=1}^\infty \frac{4 \text{sin}
-                  \lambda_n}{2\lambda_n+\text{sin}(2\lambda_n)}e^{-\lambda_n^2 \tau} \text{cos}\left(\frac{\lambda_n
-                  x}{L}\right)
-                  $$
-                </p>
-                <p>
-                  $$
-                  ~\hspace{20pt}
-                  $$
-                </p>
-                <p class="fragment" data-fragment-index="2">
-                  where $\lambda_n$ are the roots of: $\lambda_n \text{tan}\lambda_n = \text{Bi}$
-                </p>
-              </div>
-              <li class="fragment" data-fragment-index="3">Let's calculate up to $n=3$ and because $x=0$ in the centre,
-                we get:</li>
-              <div class="singleline-la fragment" data-fragment-index="3">
-                <p>
-                  $$
-                  \theta = \frac{4 \text{sin} \lambda_1}{2\lambda_1+\text{sin}(2\lambda_1)}e^{-\lambda_1^2 \tau} +
-                  \frac{4 \text{sin} \lambda_2}{2\lambda_2+\text{sin}(2\lambda_2)}e^{-\lambda_2^2 \tau} + \frac{4
-                  \text{sin} \lambda_3}{2\lambda_3+\text{sin}(2\lambda_3)}e^{-\lambda_3^2 \tau}
-                  $$
-                </p>
-              </div>
-              <li class="fragment" data-fragment-index="4">Calculate $\tau$:</li>
-              <div class="singleline-la fragment" data-fragment-index="4">
-                <p>
-                  $$
-                  \tau = \frac{\alpha t}{L^2} = \frac{3\cdot 10^{-7}\text{ m}^2/\text{s} \cdot 1800 \text{
-                  s}}{0.05\text{ m}} = 0.216
-                  $$
-                </p>
-              </div>
+          <p>Find the centre temperature in a 10 cm thick layer of insulation after
+            30 minutes. Initially, its temperature is 10$^\circ$C and at time $t=0$ s it's suddenly exposed to an ambient
+            temperature of $25^\circ$C on one side. Assume its properties are:
+          </p>
+            <ul class="fragment">
+              <li>Plate half thickness, $L=0.05$ m</li>
+              <li>Initial temperature, $T_i=10^\circ$C</li>
+              <li>Ambient temperature, $T_\infty=25^\circ$C</li>
+              <li>Heat transfer coefficient, $h=20$ W/(m$^2$K)</li>
+              <li>Thermal conductivity, $k=0.05$ W/(m K)</li>
+              <li>Thermal diffusivity, $\alpha=3\cdot 10^{-7}$ m$^2$/s</li>
             </ul>
           </div>
           <div class="col">
             <img src="img\analytical-solutions-heat-conduction/rockwool.png" height="600">
           </div>
+        </div>
       </section>
 
       <section>
-        <h3>Example (centre temperature in insulation)</h3>
-        <div class="container">
-          <div class="col">
-            <ul>
-              <li>Find $\lambda_1$, $\lambda_2$ and $\lambda_3$ as the first 3 roots in $\lambda_n \text{tan}(\lambda_n)
-                = \text{Bi}=h~L/k$</li>
-            </ul>
-            <pre class="fragment">
-    <code data-trim data-noescape data-line-numbers="3-7|9|10-13|15-17">
-  clc, clear all, close all
-
-      h = 20;
-      k = 0.05;
-      L = 0.05;
-      Bi = h*L/k;
-      fcn=@(lambda)lambda.*tan(lambda)-Bi;
-
-      fplot(fcn,[0,10])
-      xlabel('\lambda_n')
-      ylabel('Biot number, Bi')
-      grid on
-      ylim([-5 5])
-
-      for n = 1:3
-        lambda(n) = fzero(fcn,(n-1)*pi+[0 pi/2])
-      end
-</code>
-</pre>
-            <pre class="fragment">
-  <code no-line-numbers>
-  lambda = [1.4961    4.4915    7.4954]
-  </code>
-</pre>
-          </div>
-          <div class="col">
-            <div class="r-stack">
-              <img class="fragment" src="img\analytical-solutions-heat-conduction/example-roots-matlab.svg"
-                height="800">
-            </div>
-          </div>
-      </section>
-
-      <section>
-        <h3>Example (centre temperature in insulation)</h3>
-        <ul>
-          <li>Now we got $\lambda_1$, $\lambda_2$ and $\lambda_3$ in:</li>
-          <div class="singleline-la">
-            <p>
-              $$
-              \theta = \frac{4 \text{sin} \lambda_1}{2\lambda_1+\text{sin}(2\lambda_1)}e^{-\lambda_1^2 \tau} + \frac{4
-              \text{sin} \lambda_2}{2\lambda_2+\text{sin}(2\lambda_2)}e^{-\lambda_2^2 \tau} + \frac{4 \text{sin}
-              \lambda_3}{2\lambda_3+\text{sin}(2\lambda_3)}e^{-\lambda_3^2 \tau}
-              $$
-            </p>
-          </div>
-          <li class="fragment" data-fragment-index="1">Now considering each term:</li>
-          <div class="singleline-la fragment" data-fragment-index="1">
-            <p>
-              $$
-              \theta_1 = \frac{4 \text{sin} \lambda_1}{2\lambda_1+\text{sin}(2\lambda_1)}e^{-\lambda_1^2 \tau}=0.7831
-              $$
-            </p>
-          </div>
-          <div class="singleline-la fragment" data-fragment-index="2">
-            <p>
-              $$
-              \theta_2 = \frac{4 \text{sin} \lambda_2}{2\lambda_2+\text{sin}(2\lambda_2)}e^{-\lambda_2^2 \tau}=-0.0053
-              $$
-            </p>
-          </div>
-          <div class="singleline-la fragment" data-fragment-index="3">
-            <p>
-              $$
-              \theta_3 = \frac{4 \text{sin} \lambda_3}{2\lambda_3+\text{sin}(2\lambda_3)}e^{-\lambda_3^2
-              \tau}=1.2848\cdot 10^{-6}
-              $$
-            </p>
-          </div>
-          <li class="fragment" data-fragment-index="4">$\theta_2$ and $\theta_3$ are <b class='definition'>really
-              small</b> compared to $\theta_1$, e.g. $\theta\approx \theta_1$:</li>
-          <div class="singleline-la fragment" data-fragment-index="5">
-            <p>
-              $$
-              T(0,1800) \approx \theta_1 (T_i-T_\infty)+T_\infty=13.25^\circ\text{C}
-              $$
-            </p>
-          </div>
-          <div class="singleline-la fragment" data-fragment-index="6">
-            <p>
-              $$
-              $$
-            </p>
-          </div>
-        </ul>
-      </section>
-
-      <section>
-        <h3>One-term approximations</h3>
+        <h2>One-term approximations</h2>
         <ul>
           <li>Assume all terms for $n\geq 2$ <b class="definition">to be zero</b>, e.g.
             $\textcolor{#524fa1}{\theta_2=0}$, $\textcolor{#00bbd6}{\theta_3=0}$ ...</li>
@@ -593,7 +345,6 @@
           </li>
         </ul>
       </section>
-
     </div>
   </div>
 

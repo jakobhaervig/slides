@@ -23,18 +23,19 @@
       </section>
 
       <section>
-        <h3>What is the lumped system assumption and why?</h3>
+        <h2>What is the lumped system assumption and why?</h2>
         <div class="container">
           <div class="col">
             <p>Most heat transfer problems are complex because temperature <em>varies with both space and time</em></p>
-              <li class="fragment" data-fragment-index="1">In <b>lumped systems</b>, temperature <em>only varies with time (not space)</em>
-                <p class="singleline-math-font">
-                  <span class="fragment" data-fragment-index="2">\(\quad T=f(x,y,z,t)\)</span>
-                  <span class="fragment" data-fragment-index="3">\(\quad \rightarrow \quad\)</span>
-                  <span class="fragment" data-fragment-index="3">\(\quad T=f(t)\)</span>
-                </p>
-                <li class="fragment" data-fragment-index="5">Significantly <em>simplifies</em> the analysis!
-              </li>
+            <li class="fragment" data-fragment-index="1">In <b>lumped systems</b>, temperature <em>only varies with time
+                (not space)</em>
+              <p class="singleline-math-font">
+                <span class="fragment" data-fragment-index="2">\(\quad T=f(x,y,z,t)\)</span>
+                <span class="fragment" data-fragment-index="3">\(\quad \rightarrow \quad\)</span>
+                <span class="fragment" data-fragment-index="3">\(\quad T=f(t)\)</span>
+              </p>
+            <li class="fragment" data-fragment-index="5">Significantly <em>simplifies</em> the analysis!
+            </li>
             </li>
           </div>
           <div class="col">
@@ -55,7 +56,7 @@
       </section>
 
       <section>
-        <h3>Starting point of lumped system analysis</h3>
+        <h2>Starting point of lumped system analysis</h2>
         <div class="container">
           <div class="col">
             <p>Consider a body of arbitrary shape with</p>
@@ -83,7 +84,7 @@
       </section>
 
       <section>
-        <h3>Derivation of the lumped system equation</h3>
+        <h2>Derivation of the lumped system equation</h2>
         <div class="container">
           <div class="col">
             <p>Energy transferred to body during $\text{d}t$:</p>
@@ -97,13 +98,16 @@
               <span>\(\dot{Q}=h A_s (T_\infty-T) \text{d}t = \rho V c_p \text{d}(T-T_\infty)\)</span>
             </p>
             <p class="fragment" data-fragment-index="5">..Re-arranging:</p>
-            <p class="singleline-math-larger-font fragment" data-fragment-index="6">$$ \frac{\text{d}(T-T_\infty)}{T-T_\infty} = -\frac{h
+            <p class="singleline-math-larger-font fragment" data-fragment-index="6">$$
+              \frac{\text{d}(T-T_\infty)}{T-T_\infty} = -\frac{h
               A_s}{\rho V c_p} \text{d}t$$</p>
-            <p class="fragment" data-fragment-index="7">Now, intergrate from $t=0$ where $T=T_i$ to  $t$ at which $T=T(t)$:</p>
+            <p class="fragment" data-fragment-index="7">Now, intergrate from $t=0$ where $T=T_i$ to $t$ at which
+              $T=T(t)$:</p>
             <p class="singleline-math-larger-font fragment" data-fragment-index="8">
               \( \displaystyle\text{ln}\frac{T(t)-T_\infty}{T_i-T_\infty} = -\frac{h A_s}{\rho V c_p}t\)
             </p>
-            <p class="fragment" data-fragment-index="9">Exponential on both sides gives <b>lumped system equation</b>:</p>
+            <p class="fragment" data-fragment-index="9">Exponential on both sides gives <b>lumped system equation</b>:
+            </p>
             <p class="singleline-math-larger-font fragment" data-fragment-index="10">
               \( \displaystyle \frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t}\)
             </p>
@@ -119,19 +123,23 @@
       </section>
 
       <section>
-        <h3>The <em>time constant</em> for lumped systems</h3>
+        <h2>The <em>time constant</em> for lumped systems</h2>
         <div class="container">
           <div class="col">
             <p>Introducing $b=hA_s/(\rho V c_p)$, we obtain:</p>
             <p>
-            <span class="singleline-math-larger-font fragment" data-fragment-index="1"> \( \displaystyle \frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t} = \text{e}^{-bt}\)</span>
+              <span class="singleline-math-larger-font fragment" data-fragment-index="1"> \( \displaystyle
+                \frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t} = \text{e}^{-bt}\)</span>
             </p>
-            <p class="fragment" data-fragment-index="2">The <em>time constant ($1/b$)</em> describes the rate at which the
-                system approaches the surrounding temperature $T_\infty$</p>
-              <ul>
-                <li class="fragment" data-fragment-index="4"><em>Large $b$</em>: Temperature approaches $T_\infty$ quickly</li>
-                <li class="fragment" data-fragment-index="5"><em>Small $b$</em>: Temperature approaches $T_\infty$ slowly</li>
-              </ul>
+            <p class="fragment" data-fragment-index="2">The <em>time constant ($1/b$)</em> describes the rate at which
+              the
+              system approaches the surrounding temperature $T_\infty$</p>
+            <ul>
+              <li class="fragment" data-fragment-index="4"><em>Large $b$</em>: Temperature approaches $T_\infty$ quickly
+              </li>
+              <li class="fragment" data-fragment-index="5"><em>Small $b$</em>: Temperature approaches $T_\infty$ slowly
+              </li>
+            </ul>
           </div>
           <div class="col">
             <div class="fragment" data-fragment-index="3">
@@ -142,21 +150,24 @@
       </section>
 
       <section>
-        <h3>Validity of lumped system assumption</h3>
+        <h2>Validity of lumped system assumption</h2>
         <div class="container">
           <div class="col">
             <p>We define a <em>Biot number</em></p>
-              <div class="singleline-math-larger-font fragment" data-fragment-index="1">
-                $$
-                \text{Bi}=h L_c/k
-                $$
-              </div>
-              <ul>
-                <li class="fragment" data-fragment-index="1">with the characteristic length $L_c=V/A_s$</li>
-              </ul>
-            <p class="fragment" data-fragment-index="2">If <b>$\text{Bi}=0$</b>: lumped system assumption is <b>exact</b> </p>
-            <p class="fragment" data-fragment-index="3">If <b>$\text{Bi}\leq 0.1$</b>: lumped system assumption is <b>resonable accurate</b></p>
-            <p class="fragment" data-fragment-index="4">If <b>$\text{Bi}> 0.1$</b>: lumped system assumption is <b>inaccurate</b></p>
+            <div class="singleline-math-larger-font fragment" data-fragment-index="1">
+              $$
+              \text{Bi}=h L_c/k
+              $$
+            </div>
+            <ul>
+              <li class="fragment" data-fragment-index="1">with the characteristic length $L_c=V/A_s$</li>
+            </ul>
+            <p class="fragment" data-fragment-index="2">If <b>$\text{Bi}=0$</b>: lumped system assumption is
+              <b>exact</b> </p>
+            <p class="fragment" data-fragment-index="3">If <b>$\text{Bi}\leq 0.1$</b>: lumped system assumption is
+              <b>resonable accurate</b></p>
+            <p class="fragment" data-fragment-index="4">If <b>$\text{Bi}> 0.1$</b>: lumped system assumption is
+              <b>inaccurate</b></p>
 
           </div>
           <div class="col">
@@ -165,18 +176,20 @@
         </div>
       </section>
 
-        <section class="example">
-          <h2> <b>Exercise: Fast temperature measurements with thermocouples</b> </h2>
-          <div class="container">
-            <div class="col">
-              <p>The temperature of a gas stream is to be measured by a thermocouple. The thermocouple junction can be approximated as a 1 mm diameter sphere. 
-                The junction properties are $k=35$ W/m·K, $\rho=8500$ kg/m$^3$ and $c_p=320$ J/kg·K. <br>How quickly can the thermocouple respond to changes in temperature when the convective heat transfer coefficient between
-the junction and the gas is $h=210$ W/m$^2$·K?</p>
-            </div>
-            <div class="col">
-              <img src="img/lumped-system-analysis/thermocouple.jpg" height="500">
-            </div>
-        </section>
+      <section class="example">
+        <h2> <b>Example: Fast temperature measurements with thermocouples</b> </h2>
+        <div class="container">
+          <div class="col">
+            <p>The temperature of a gas stream is to be measured by a thermocouple. The thermocouple junction can be
+              approximated as a 1 mm diameter sphere.
+              The junction properties are $k=35$ W/m·K, $\rho=8500$ kg/m$^3$ and $c_p=320$ J/kg·K. <br>How quickly can
+              the thermocouple respond to changes in temperature when the convective heat transfer coefficient between
+              the junction and the gas is $h=210$ W/m$^2$·K?</p>
+          </div>
+          <div class="col">
+            <img src="img/lumped-system-analysis/thermocouple.jpg" height="500">
+          </div>
+      </section>
 
     </div>
   </div>
@@ -188,64 +201,3 @@ the junction and the gas is $h=210$ W/m$^2$·K?</p>
 </body>
 
 </html>
-
-<!-- <section>
-  <span class="menu-title" style="display: none">Quiz</span>
-  <script data-quiz>
-    quiz = {
-            "info": {
-                    "name":    "Quiz",
-                    "main":    "Test your knowledge about lumped system analysis"
-            },
-            "questions": [
-                    {
-                            "q": "What is lumped system analysis?",
-                            "a": [
-                                    {"option": "An approach to solve steady-state heat transfer problems", "correct": false},
-                                    {"option": "An approach to solve trasient heat transfer problems", "correct": true}
-                            ],
-                            "correct": "<p><span>That's right!</span> It's a simplified way to calculate transient heat transfer to objects that can be classied as lumped.</p>",
-                            "incorrect": "<p><span>Wrong!</span> It's only valid for transient heat transfer problems.</p>" // no comma here
-                          },
-                    {
-                            "q": "What is the criteria for it to be valid?",
-                            "a": [
-                                    {"option": "Biot number below 0.1",     "correct": true},
-                                    {"option": "Biot number between 0.1 and 1",      "correct": false},
-                                    {"option": "Biot number above 1",     "correct": false} // no comma here
-                            ],
-                            "correct": "<p><span>That's right!</span> The lumped system assumption is only valid when the Biot number is below 0.1. The Biot number is a measure of the ratio of conduction resistance inside the body to convection resistance at the surface of the body. A value of 0.1 means heat is transferred much faster inside the object compared to heat transfer rate at the surface.</p>",
-                            "incorrect": "<p><span>That's wrong!</span> The lumped system assumption is only valid when the Biot number is below 0.1. The Biot number is a measure of the ratio of conduction resistance inside the body to convection resistance at the surface of the body. A value of 0.1 means heat is transferred much faster inside the object compared to heat transfer rate at the surface.</p>"
-                    },
-                    {
-                            "q": "In what medium is the lumped system analysis more likely to be applicable?",
-                            "a": [
-                                    {"option": "Water",     "correct": false},
-                                    {"option": "Air",      "correct": true} // no comma here
-                            ],
-                            "correct": "<p><span>That's right!</span> Because the heat transfer coefficient is smaller in air, heat has 'more' time to distribute inside the body, which makes the lumped system analysis more likely to be applicable for objects surrounded by air.</p>",
-                            "incorrect": "<p><span>That's wrong!</span> Because the heat transfer coefficient is smaller in air, heat has 'more' time to distribute inside the body, which makes the lumped system analysis more likely to be applicable for objects surrounded by air.</p>"
-                    },
-                    {
-                            "q": "For which solid is the lumped system analysis more likely to be applicable?",
-                            "a": [
-                                    {"option": "An actual apple", "correct": false},
-                                    {"option": "A golden apple of the same size", "correct": true} // no comma here
-                            ],
-                            "correct": "<p><span>That's right!</span> A golden apple has a much higher thermal conductivity than an actual apple. As a result heat transfers much quicker, which results in a lower Biot number for the golden apple.</p>",
-                            "incorrect": "<p><span>That's wrong!</span> A golden apple has a much higher thermal conductivity than an actual apple. As a result heat transfers much quicker, which results in a lower Biot number for the golden apple.</p>"
-                    },
-                    {
-                            "q": "Consider a hot baked potato on a plate. The temperature of the potato is observed to drop by 4°C during the first minute. At which rate will the temperature drop during a second one minute later in time?",
-                            "a": [
-                                    {"option": "Faster", "correct": false},
-                                    {"option": "Slower", "correct": true},
-                                    {"option": "Same rate", "correct": false} // no comma here            
-                            ],
-                            "correct": "<p><span>That's right!</span> It's the temperature difference between the potato and the surroundings that determine the rate of heat transfer. As the temperature approaches the surrounding's temperature, the rate of heat transfer will decrease and approach 0 assymptotically.</p>",
-                            "incorrect": "<p><span>That's right!</span> It's the temperature difference between the potato and the surroundings that determine the rate of heat transfer. As the temperature approaches the surrounding's temperature, the rate of heat transfer will decrease and approach 0 assymptotically.</p>"
-                    },
-            ]
-    }
-  </script>
-</section> -->
