@@ -26,21 +26,16 @@
         <h3>What is the lumped system assumption and why?</h3>
         <div class="container">
           <div class="col">
-            <ul>
-              <li>Most heat transfer problems are complex because temperature varies in both with time and space</li>
-              <ul>
-                <li class="fragment" data-fragment-index="1">In <b class='definition'>lumped systems</b>, temperature <b
-                    class='definition'>only varies with time and not space</b></li>
-              </ul>
-              <div class="singleline-ca">
-                <p class="fragment" data-fragment-index="2">$$T=f(x,y,z,t)$$</p>
-                <p class="fragment" data-fragment-index="3">$$~\longrightarrow T=f(t)$$</p>
-              </div>
-            </ul>
-            <ul>
-              <li class="fragment" data-fragment-index="5">Applying the lumped system assumption <b
-                  class='definition'>significantly simplifies</b> the analysis</li>
-            </ul>
+            <p>Most heat transfer problems are complex because temperature <em>varies with both space and time</em></p>
+              <li class="fragment" data-fragment-index="1">In <b>lumped systems</b>, temperature <em>only varies with time (not space)</em>
+                <p class="singleline-math-font">
+                  <span class="fragment" data-fragment-index="2">\(\quad T=f(x,y,z,t)\)</span>
+                  <span class="fragment" data-fragment-index="3">\(\quad \rightarrow \quad\)</span>
+                  <span class="fragment" data-fragment-index="3">\(\quad T=f(t)\)</span>
+                </p>
+                <li class="fragment" data-fragment-index="5">Significantly <em>simplifies</em> the analysis!
+              </li>
+            </li>
           </div>
           <div class="col">
             <div class="fragment" data-fragment-index="4">
@@ -63,19 +58,10 @@
         <h3>Starting point of lumped system analysis</h3>
         <div class="container">
           <div class="col">
-            <ul>
-              <li>Consider a body of arbitrary shape with:</li>
-              <ul>
-                <li>Mass $m$</li>
-                <li>Volume $V$</li>
-                <li>Density $\rho$</li>
-                <li>Specific heat capacity $c_p$</li>
-                <li>Initial internal temperature $T_i$</li>
-              </ul>
-            </ul>
+            <p>Consider a body of arbitrary shape with</p>
+
             <ul class="fragment" data-fragment-index="2">
-              <li>
-                At time $t=0$ the body is exposed to convective heat transfer from the outside:</li>
+              <li>At time $t=0$ the body is exposed to convective heat transfer from the outside:</li>
               <ul>
                 <li>Surrounding temperature $T_\infty$</li>
                 <li>Heat transfer coefficient $h$</li>
@@ -100,35 +86,27 @@
         <h3>Derivation of the lumped system equation</h3>
         <div class="container">
           <div class="col">
-            <ul>
-              <li>Energy transferred to body during $\text{d}t$:</li>
-              <div class="singleline-ca">
-                <p>$$h A_s (T_\infty-T) \text{d}t = m c_p \text{d}T$$</p>
-                <p class="fragment" data-fragment-index="2">$$~=\rho V c_p \text{d}T$$</p>
-              </div>
-              <li class="fragment" data-fragment-index="3">Because $T_\infty$ is constant, we may expand $\text{d}T$:
-              </li>
-              <div class="singleline-ca">
-                <p class="fragment" data-fragment-index="3">$$ h A_s (T_\infty-T) \text{d}t$$</p>
-                <p class="fragment" data-fragment-index="4">$$~= -h A_s (T-T_\infty) \text{d}t$$</p>
-                <p class="fragment" data-fragment-index="5">$$~= \rho V c_p \text{d}(T-T_\infty)$$</p>
-              </div>
-              <li class="fragment" data-fragment-index="6">..Re-arranging:</li>
-              <div class="singleline-ca">
-                <p class="fragment" data-fragment-index="6">$$ \frac{\text{d}(T-T_\infty)}{T-T_\infty} = -\frac{h
-                  A_s}{\rho V c_p} \text{d}t$$</p>
-              </div>
-              <li class="fragment" data-fragment-index="7">
-                Now, intergrating from $t=0$ where $T=T_i$ to any time $t$ at which $T=T(t)$ we get:
-              </li>
-              <div class="singleline-ca">
-                <p class="fragment" data-fragment-index="7">$$\text{ln}\frac{T(t)-T_\infty}{T_i-T_\infty} = -\frac{h
-                  A_s}{\rho V c_p}t$$</p>
-              </div>
-              <li class="fragment" data-fragment-index="8">Exponential on both sides gives <b class='definition'>lumped
-                  system equation</b>: $$\frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t}$$
-              </li>
-            </ul>
+            <p>Energy transferred to body during $\text{d}t$:</p>
+            <p class="singleline-math-larger-font fragment" data-fragment-index="1">
+              <span>\(\dot{Q}=h A_s (T_\infty-T) \text{d}t \)</span>
+              <span class="fragment" data-fragment-index="2">\(= m c_p \text{d}T\)</span>
+              <span class="fragment" data-fragment-index="3">\( =\rho V c_p \text{d}T\)</span>
+            </p>
+            <p>Because $T_\infty$ is constant, we may expand $\text{d}T$:</p>
+            <p class="singleline-math-larger-font fragment" data-fragment-index="4">
+              <span>\(\dot{Q}=h A_s (T_\infty-T) \text{d}t = \rho V c_p \text{d}(T-T_\infty)\)</span>
+            </p>
+            <p class="fragment" data-fragment-index="5">..Re-arranging:</p>
+            <p class="singleline-math-larger-font fragment" data-fragment-index="6">$$ \frac{\text{d}(T-T_\infty)}{T-T_\infty} = -\frac{h
+              A_s}{\rho V c_p} \text{d}t$$</p>
+            <p class="fragment" data-fragment-index="7">Now, intergrate from $t=0$ where $T=T_i$ to  $t$ at which $T=T(t)$:</p>
+            <p class="singleline-math-larger-font fragment" data-fragment-index="8">
+              \( \displaystyle\text{ln}\frac{T(t)-T_\infty}{T_i-T_\infty} = -\frac{h A_s}{\rho V c_p}t\)
+            </p>
+            <p class="fragment" data-fragment-index="9">Exponential on both sides gives <b>lumped system equation</b>:</p>
+            <p class="singleline-math-larger-font fragment" data-fragment-index="10">
+              \( \displaystyle \frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t}\)
+            </p>
           </div>
           <div class="col">
             <div class="r-stack">
@@ -141,27 +119,23 @@
       </section>
 
       <section>
-        <h3>The time constant for lumped systems</h3>
+        <h3>The <em>time constant</em> for lumped systems</h3>
         <div class="container">
           <div class="col">
-            <ul>
-              <li>Introducing $b=hA_s/(\rho V c_p)$, we obtain:</li>
-              <div class="singleline-ca">
-                <p>$$\frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t} = \text{e}^{-bt}$$</p>
-              </div>
-              <li class="fragment" data-fragment-index="2">The time constant ($1/b$) describes the rate at which the
-                system approaches the surrounding temperature $T_\infty$</li>
+            <p>Introducing $b=hA_s/(\rho V c_p)$, we obtain:</p>
+            <p>
+            <span class="singleline-math-larger-font fragment" data-fragment-index="1"> \( \displaystyle \frac{T(t)-T_\infty}{T_i-T_\infty} = \text{e}^{-\frac{h A_s}{\rho V c_p}t} = \text{e}^{-bt}\)</span>
+            </p>
+            <p class="fragment" data-fragment-index="2">The <em>time constant ($1/b$)</em> describes the rate at which the
+                system approaches the surrounding temperature $T_\infty$</p>
               <ul>
-                <li class="fragment" data-fragment-index="3"><b class='definition'>Large $b$ value</b>, system
-                  approaches surrounding temperature <b class='definition'>quickly</b></li>
-                <li class="fragment" data-fragment-index="3"><b class='definition'>Small $b$ value</b>, system
-                  approaches surrounding temperature <b class='definition'>slowly</b></li>
+                <li class="fragment" data-fragment-index="4"><em>Large $b$</em>: Temperature approaches $T_\infty$ quickly</li>
+                <li class="fragment" data-fragment-index="5"><em>Small $b$</em>: Temperature approaches $T_\infty$ slowly</li>
               </ul>
-            </ul>
           </div>
           <div class="col">
             <div class="fragment" data-fragment-index="3">
-              <img src="media/lumped-system-analysis/lumped-time-constants.svg" height="800">
+              <img src="img/lumped-system-analysis/lumped-time-constants.svg" height="800">
             </div>
           </div>
         </div>
@@ -169,11 +143,10 @@
 
       <section>
         <h3>Validity of lumped system assumption</h3>
-        <div class="grid">
+        <div class="container">
           <div class="col">
-            <ul>
-              <li>We define a <b class='definition'>Biot number:</b></li>
-              <div>
+            <p>We define a <em>Biot number</em></p>
+              <div class="singleline-math-larger-font fragment" data-fragment-index="1">
                 $$
                 \text{Bi}=h L_c/k
                 $$
@@ -181,15 +154,10 @@
               <ul>
                 <li class="fragment" data-fragment-index="1">with the characteristic length $L_c=V/A_s$</li>
               </ul>
-            </ul>
-            <ul>
-              <li class="fragment" data-fragment-index="2">If $\text{Bi}=0$: lumped system assumption is <b
-                  class='definition'>exact</b></li>
-              <li class="fragment" data-fragment-index="2">If $\text{Bi}\leq 0.1$: lumped system assumption is <b
-                  class='definition'>resonable accurate</b></li>
-              <li class="fragment" data-fragment-index="2">If $\text{Bi}> 0.1$: lumped system assumption is <b
-                  class='definition'>inaccurate</b></li>
-            </ul>
+            <p class="fragment" data-fragment-index="2">If <b>$\text{Bi}=0$</b>: lumped system assumption is <b>exact</b> </p>
+            <p class="fragment" data-fragment-index="3">If <b>$\text{Bi}\leq 0.1$</b>: lumped system assumption is <b>resonable accurate</b></p>
+            <p class="fragment" data-fragment-index="4">If <b>$\text{Bi}> 0.1$</b>: lumped system assumption is <b>inaccurate</b></p>
+
           </div>
           <div class="col">
             <img src="img/lumped-system-analysis/arbitrary-body-biot-number.svg" height="600">
@@ -197,10 +165,18 @@
         </div>
       </section>
 
-      <section>
-        <h3>Example</h3>
-        <iframe width="1440" height="810" src="https://www.youtube.com/embed/NaYRxVOR-x8"></iframe>
-      </section>
+        <section class="example">
+          <h2> <b>Exercise: Fast temperature measurements with thermocouples</b> </h2>
+          <div class="container">
+            <div class="col">
+              <p>The temperature of a gas stream is to be measured by a thermocouple. The thermocouple junction can be approximated as a 1 mm diameter sphere. 
+                The junction properties are $k=35$ W/m·K, $\rho=8500$ kg/m$^3$ and $c_p=320$ J/kg·K. <br>How quickly can the thermocouple respond to changes in temperature when the convective heat transfer coefficient between
+the junction and the gas is $h=210$ W/m$^2$·K?</p>
+            </div>
+            <div class="col">
+              <img src="img/lumped-system-analysis/thermocouple.jpg" height="500">
+            </div>
+        </section>
 
     </div>
   </div>
